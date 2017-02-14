@@ -80,10 +80,10 @@ class User {
 
     function formcreate($target){ /*ceci est le formulaire de création de compte*/
     	?><form action="<?php echo $target; ?>" method="post">
-    		<label for"nom">Nom d'utilisateur :</label>
-    		<input type="text" name="nom" />
-    		<label for="email">Email</label>
-			<input type="email" name="email" />
+    		<label for"nom">Nom d'utilisateur :</label><br />
+    		<input type="text" name="nom" /><br />
+    		<label for="email">Email</label><br />
+			<input type="email" name="email" /><br />
             <input type="hidden" name="password" value="<?php echo 'default_password'; ?>">
             <label for="permission">permission</label><br />
                 <select name="permission" id="permission">
@@ -91,7 +91,7 @@ class User {
                    <option value="admin">admin</option>
                 </select>   
             
-			<input type="submit" name="créer" value="S'incrire" />
+			<input type="submit" name="submit" value="Créer" /><br />
     	</form><?php
     }
 
