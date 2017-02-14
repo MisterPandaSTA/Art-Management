@@ -1,6 +1,6 @@
 <?php
 /* --------------- */
-/* index.php */
+/*    index.php    */
 /* --------------- */
 
 require_once('include/includes.php');

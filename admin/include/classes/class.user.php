@@ -62,15 +62,17 @@ class User {
         return $this->permission;
     }
     
-    function createUser(){
+    function createUser($hash){
         if(empty($this->id_utilisateur)) { /*si je n'ai pas d'id alors je créer une nouvelle entré dans la table avec les informations transmisent dans le formulaire*/
-        	$hash = user::hashage($_POST['password']);
-            $res = sql("INSERT INTO utilisateur (nom, prenom, email, mot_de_passe, permission) 
-                VALUES ('".addslashes($this->nom)."',
+        	/*$hash = user::hashage(default_password);*/
+
+            $res = sql("INSERT INTO utilisateur (`id_utilisateur`, `nom`, `prenom`, `email`, `password`, `permission`) 
+                VALUES ('NULL','".addslashes($this->nom)."',
                 '".addslashes($this->prenom)."',
     			'".addslashes($this->email)."',
-    			NULL,
+    			'".$hash."',
     			'".addslashes($this->permission)."';");
+            var_dump($hash);
     		if($res !== FALSE) /*si ça retourne autre chose que FALSE alors je détermine l'ID et je retour TRUE*/{
     			$this->id_utilisateur = $res;
     			return TRUE;

@@ -9,9 +9,9 @@ if(isset($_POST['nom']) && ($_POST['prenom']))/*Si je reçois un $_POST['nom'], 
 	$user->setPrenom($_POST['prenom']);
 	$user->setEmail($_POST['email']);
 	// $user->setPassword($_POST['password']);
-	// $hash = user::hashage($_POST['password']);
+	$hash = user::hashage(default_password);
 	$user->setPermission($_POST['permission']);
-	$create = $user->createUser();
+	$create = $user->createUser($hash);
 }
 
 

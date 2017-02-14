@@ -1,3 +1,5 @@
+<?php
+
 function sql($request) {
     $db = new mysqli(sql_server, sql_user, sql_password, sql_database);
     $resultat = $db->query($request);
