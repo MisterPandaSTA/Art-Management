@@ -3,6 +3,16 @@
 require_once('include/includes.php');
 
 
+if(isset($_POST['nom']) && ($_POST['prenom']))/*Si je reçois un $_POST['nom'], alors je crèer une nouvelle entré dans la table User avec les informations données*/{
+	$user = new User ();
+	$user->setNom($_POST['nom']);
+	$user->setPrenom($_POST['prenom']);
+	$user->setEmail($_POST['email']);
+	// $user->setPassword($_POST['password']);
+	// $hash = user::hashage($_POST['password']);
+	$user->setPermission($_POST['permission']);
+	$create = $user->createUser();
+}
 
 
 if(isset($error)) /*si j'ai un $erreur alors je créer un nouveau formulaire*/ {

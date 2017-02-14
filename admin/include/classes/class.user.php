@@ -30,11 +30,11 @@ class User {
         return $this->id_utilisateur;
     }
     
-    function setName($nom) {
+    function setNom($nom) {
         $this->nom = $nom;
     }
     
-    function getName() {
+    function getNom() {
         return $this->nom;
     }
     
@@ -42,7 +42,7 @@ class User {
         $this->prenom = $prenom;
     }
     
-    function getPrenom () {
+    function getPrenom() {
         return $this->prenom;
     }
     
@@ -50,7 +50,7 @@ class User {
         $this->email = $email;
     }
     
-    function getEmail () {
+    function getEmail() {
         return $this->email;
     }
     
@@ -58,16 +58,19 @@ class User {
         $this->permission = $permission;
     }
     
-    function getPermission () {
+    function getPermission() {
         return $this->permission;
     }
     
     function createUser(){
         if(empty($this->id_utilisateur)) { /*si je n'ai pas d'id alors je créer une nouvelle entré dans la table avec les informations transmisent dans le formulaire*/
+        	$hash = user::hashage($_POST['password']);
             $res = sql("INSERT INTO utilisateur (nom, prenom, email, mot_de_passe, permission) 
                 VALUES ('".addslashes($this->nom)."',
                 '".addslashes($this->prenom)."',
-    			'".addslashes($this->email)."';");
+    			'".addslashes($this->email)."',
+    			NULL,
+    			'".addslashes($this->permission)."';");
     		if($res !== FALSE) /*si ça retourne autre chose que FALSE alors je détermine l'ID et je retour TRUE*/{
     			$this->id_utilisateur = $res;
     			return TRUE;
@@ -80,8 +83,10 @@ class User {
 
     function formcreate($target){ /*ceci est le formulaire de création de compte*/
     	?><form action="<?php echo $target; ?>" method="post">
-    		<label for"nom">Nom d'utilisateur :</label><br />
+    		<label for"nom">Nom :</label><br />
     		<input type="text" name="nom" /><br />
+    		<label for"nom">Prénom :</label><br />
+    		<input type="text" name="prenom" /><br />
     		<label for="email">Email</label><br />
 			<input type="email" name="email" /><br />
             <input type="hidden" name="password" value="<?php echo 'default_password'; ?>">
@@ -101,10 +106,10 @@ class User {
     <input type="email" name="email" />
     <label for="oldpass">Ancien mot de passe :</label>
     <input type="password" name="oldpass" />
-    <label for="password1">Nouveau Mot de passe :</label>
-    <input type="password" name="password1" />
-    <label for="password2">Veuillez retapper votre nouveau mot de passe :</label>
-    <input type="password" name="password2" />
+    <label for="newpass">Nouveau Mot de passe :</label>
+    <input type="password" name="newpass" />
+    <label for="newpass2">Veuillez retapper votre nouveau mot de passe :</label>
+    <input type="password" name="newpass2" />
     </form><?php
     }
 
@@ -128,9 +133,7 @@ class User {
 		session_destroy();
 		session_start();
 		header('Location: index.php');
-	}
-
-}          
+	}         
 
 
     /*----------------
@@ -139,7 +142,7 @@ class User {
 
     ----------------*/
 
-    function bcrypt($password) {
+   static function hashage($password) {
         
         $hash = password_hash($password,PASSWORD_BCRYPT,["cost" => cost]);
         
@@ -153,19 +156,21 @@ class User {
 
     }
 
-function updatePassword($oldpass, $newpass) {
-    if(empty($this->id_utilisateur)){
-            return FALSE;
-        }
-    else{
-        $res = sql("SELECT password FROM utilisateur WHERE id_utilisateur ='".$this->id."';");
-        $passtest = $res[0]['password'];
-        if (password_verify($oldpass, $passtest)){
-            $res = sql("UPDATE utilisateur set password = '".bcrypt($newpass)."' WHERE id_utilisateur='".$this->id_utilisateur."';");
-        }
-        else /*sinon je retourn FALSE*/{
-            return FALSE;
-        }
-    }
+	function updatePassword($oldpass, $newpass) {
+	    if(empty($this->id_utilisateur)){
+	            return FALSE;
+	        }
+	    else{
+	        $res = sql("SELECT password FROM utilisateur WHERE id_utilisateur ='".$this->id."';");
+	        $passtest = $res[0]['password'];
+	        if (password_verify($oldpass, $passtest)){
+	            $res = sql("UPDATE utilisateur set password = '".hashage($newpass)."' WHERE id_utilisateur='".$this->id_utilisateur."';");
+	        }
+	        else /*sinon je retourn FALSE*/{
+	            return FALSE;
+	        }
+	    }
+	}
+}
 
-} 
+
