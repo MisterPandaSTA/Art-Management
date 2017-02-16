@@ -62,16 +62,53 @@ class User {
         return $this->permission;
     }
     
+    /*----------------
+
+     Fonction Bcrypt
+
+    ----------------*/
+
+   static function hashage($password) {
+        
+        $hash = password_hash($password,PASSWORD_BCRYPT,["cost" => cost]);
+        
+        if($hash == true){
+            return $hash;
+        }
+        else{
+            echo 'erreur de hachage';
+            return FALSE;
+        }
+
+    }
+
+    function updatePassword($oldpass, $newpass) {
+        if(empty($this->id_utilisateur)){
+                return FALSE;
+            }
+        else{
+            $res = sql("SELECT password FROM utilisateur WHERE id_utilisateur ='".$this->id."';");
+            $passtest = $res[0]['password'];
+            if (password_verify($oldpass, $passtest)){
+                $res = sql("UPDATE utilisateur set password = '".hashage($newpass)."' WHERE id_utilisateur='".$this->id_utilisateur."';");
+            }
+            else /*sinon je retourn FALSE*/{
+                return FALSE;
+            }
+        }
+    }
+
+
     function createUser($hash){
         if(empty($this->id_utilisateur)) { /*si je n'ai pas d'id alors je créer une nouvelle entré dans la table avec les informations transmisent dans le formulaire*/
         	/*$hash = user::hashage(default_password);*/
 
-            $res = sql("INSERT INTO utilisateur (`id_utilisateur`, `nom`, `prenom`, `email`, `password`, `permission`) 
-                VALUES ('NULL','".addslashes($this->nom)."',
+            $res = sql("INSERT INTO utilisateur (`nom`, `prenom`, `email`, `password`, `permission`) 
+                VALUES ('".addslashes($this->nom)."',
                 '".addslashes($this->prenom)."',
     			'".addslashes($this->email)."',
     			'".$hash."',
-    			'".addslashes($this->permission)."';");
+    			'".addslashes($this->permission)."');");
             var_dump($hash);
     		if($res !== FALSE) /*si ça retourne autre chose que FALSE alors je détermine l'ID et je retour TRUE*/{
     			$this->id_utilisateur = $res;
@@ -82,6 +119,7 @@ class User {
     		}
     	}
     }
+
 
     function formcreate($target){ /*ceci est le formulaire de création de compte*/
     	?><form action="<?php echo $target; ?>" method="post">
@@ -138,41 +176,7 @@ class User {
 	}         
 
 
-    /*----------------
 
-     Fonction Bcrypt
-
-    ----------------*/
-
-   static function hashage($password) {
-        
-        $hash = password_hash($password,PASSWORD_BCRYPT,["cost" => cost]);
-        
-        if($hash == true){
-            return $hash;
-        }
-        else{
-            echo 'erreur de hachage';
-            return FALSE;
-        }
-
-    }
-
-	function updatePassword($oldpass, $newpass) {
-	    if(empty($this->id_utilisateur)){
-	            return FALSE;
-	        }
-	    else{
-	        $res = sql("SELECT password FROM utilisateur WHERE id_utilisateur ='".$this->id."';");
-	        $passtest = $res[0]['password'];
-	        if (password_verify($oldpass, $passtest)){
-	            $res = sql("UPDATE utilisateur set password = '".hashage($newpass)."' WHERE id_utilisateur='".$this->id_utilisateur."';");
-	        }
-	        else /*sinon je retourn FALSE*/{
-	            return FALSE;
-	        }
-	    }
-	}
 }
 
 

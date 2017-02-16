@@ -10,7 +10,7 @@ function sql($request) {
     - un objet de la classe mysqli_result pour une requête SELECT 
     - http://php.net/manual/fr/class.mysqli-result.php
     */
-    
+    echo $db->error;
     
     if($resultat === FALSE) {
         return FALSE;
