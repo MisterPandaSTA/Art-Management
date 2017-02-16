@@ -129,7 +129,6 @@ class User {
     		<input type="text" name="prenom" /><br />
     		<label for="email">Email</label><br />
 			<input type="email" name="email" /><br />
-            <input type="hidden" name="password" value="<?php echo 'default_password'; ?>">
             <label for="permission">permission</label><br />
                 <select name="permission" id="permission">
                    <option value="utilisateur">utilisateur</option>
