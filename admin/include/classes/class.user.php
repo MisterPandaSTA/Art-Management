@@ -109,7 +109,7 @@ class User {
     			'".addslashes($this->email)."',
     			'".$hash."',
     			'".addslashes($this->permission)."');");
-            var_dump($hash);
+            
     		if($res !== FALSE) /*si ça retourne autre chose que FALSE alors je détermine l'ID et je retour TRUE*/{
     			$this->id_utilisateur = $res;
     			return TRUE;
