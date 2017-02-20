@@ -7,20 +7,22 @@ require_once('include/includes.php');
 
 if(isset($_POST['email'])) /*si je reçois un $_POST['courriel'] par le formulaire, l'utilise la function login qui va tester les informations fournis par le formulaire*/ {
 	$login = user::login($_POST['email'],$_POST['password']);
+
 	if($login !== FALSE) /*si la fonction retourne autre chose que FALSE, alors une connection est établi*/{
-		$_SESSION['id'] = $login;
+
+		$_SESSION['id'] = $login['0'];
+		$_SESSION['permission']= $login['1'];
+
 	}
 	else /* sinon ce message d'erreur s'affiche*/{
 		echo "L'adresse et/ou le mot de passe ne correspondent pas à notre base de données";
 	}
 }
 if(isset($_SESSION['id']))/*si j'ai un $_SESSION['id'] alors je revois l'utilisateur vers index.php*/ {
-	header('Location:dashboard.php'); 
+	header('Location:dashboard.php');
+	
 }
 else {
-
-
-
 ?>
 
 <img src="">(logo)</img>

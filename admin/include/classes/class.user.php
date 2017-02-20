@@ -156,11 +156,19 @@ class User {
     // Fonction Login
 
     static function login($email, $password){
-        $res = sql("SELECT id_utilisateur, password FROM utilisateur WHERE email = '$email';");
-        $passtest = $res[0]['password'];
+        $res = sql("SELECT id_utilisateur, password, permission FROM utilisateur WHERE email = '$email';");
+        $passtest = $res[0]['password']; 
         if (password_verify($password, $passtest)) {
-            return $res[0]['id_utilisateur'];
-        }
+            if ($password !== default_password){
+                $id_user = $res[0]['id_utilisateur'];
+                $permission = $res[0]['permission'];
+                return array($id_user, $permission);
+            }
+            else {
+                $id_user = $res[0]['id_utilisateur'];
+                return array($id_user);   
+            }        
+        } 
         else /*sinon je retourn FALSE*/{
             return FALSE;
         }
