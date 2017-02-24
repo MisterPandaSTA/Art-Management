@@ -7,11 +7,11 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
 	require_once('SideBar.php');
 	echo 'ici cest pour les user normaux !';
-	var_dump($_SESSION['permission']);
+	
 
 	if($_SESSION['permission'] == 'admin' )
 	{
-		var_dump($_SESSION['permission']);
+		
 		echo 'ya que les admins qui voies ça !';
 	}
 	
@@ -25,6 +25,6 @@ else {
 <?php
 
 }
-
+require_once('footer.php');
 ?>
 

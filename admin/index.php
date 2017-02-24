@@ -25,16 +25,20 @@ if(isset($_SESSION['id']))/*si j'ai un $_SESSION['id'] alors je revois l'utilisa
 else {
 ?>
 
-<img src="">(logo)</img>
+<body>
 
-<form method="post" action="index.php">
-	<label for="email">Votre email</label>
-	<input type="email" name="email" placeholder="default@quelque.chose">
-	<label for="password">Votre mot de passe</label>
-	<input type="password" name="password">
-	<input type="submit" value="Valider">
-</form>
+	<img src="">(logo)</img>
+
+	<form method="post" action="index.php">
+		<label for="email">Votre email</label>
+		<input type="email" name="email" placeholder="default@quelque.chose">
+		<label for="password">Votre mot de passe</label>
+		<input type="password" name="password">
+		<input type="submit" value="Valider">
+	</form>
 
 <?php
+
+require_once('footer.php');
 }
 ?>

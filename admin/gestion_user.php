@@ -1,6 +1,9 @@
-<?php
-if(isset()){
-	require_once('include/includes.php');
+<?php	
+
+require_once('include/includes.php');
+
+if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
+
 	require 'include/PHPMailer/PHPMailerAutoload.php';
 
 	if(isset($_POST['nom']) && ($_POST['prenom']))/*Si je reçois un $_POST['nom'], alors je crèer une nouvelle entré dans la table User avec les informations données*/{
@@ -53,13 +56,13 @@ if(isset()){
 	}
 }
 else {
-	echo 'Vous n\'avez pas accès au contenu de cette page. Vous allez être redirigé vers la page princinpale.
-		<script>
-			function RedirectionJavascript(){
-				document.location.href="http://manouvellepage.com"; 
-			}
-		</script>';
+	?>
+	<body onLoad="setTimeout('RedirectLogin()', 5000)">
+		<div onLoad="setTimeout('RedirectLogin()', 5000)">Vous n'avez pas accès au contenue de cette page, dans 5 secondes vous allez être redirigé vers <a href="http://localhost/git/art_management/admin/index.php">la page de connexion</a></div>
+	<?php
+
 }
 
+	require_once('footer.php');
 
 ?>
