@@ -52,7 +52,7 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 	}
 	else /*sinon j'affiche un formulaire vierge*/ {  
 		$new_user = new user();
-		$new_user->formcreate('gestion_user.php');
+		$new_user->formCreate('gestion_user.php');
 	}
 }
 else {

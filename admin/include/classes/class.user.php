@@ -87,7 +87,7 @@ class User {
 
     // formulaire de création d'utilisateur
 
-    function formcreate($target){ /*ceci est le formulaire de création de compte*/
+    function formCreate($target){ /*ceci est le formulaire de création de compte*/
     	?><form action="<?php echo $target; ?>" method="post">
     		<label for"nom">Nom :</label><br />
     		<input type="text" name="nom" /><br />
@@ -107,7 +107,7 @@ class User {
 
      //formulaire de gestion d'utilisateur
 
-    function formgestion($target){ /*ceci est le formulaire de création de compte*/
+    function formGestion($target){ /*ceci est le formulaire de création de compte*/
         ?><form action="<?php echo $target; ?>" method="post">
             <label for"nom">Nom :</label><br />
             <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /><br />
@@ -127,7 +127,7 @@ class User {
 
     // formulaire modification de l'utilisateur
 
-    function modform($target){ /* ceci est le formulaire de modification de compte pour l'user*/
+    function modForm($target){ /* ceci est le formulaire de modification de compte pour l'user*/
     ?><form action="<?php echo $target; ?>" method="post">
      <label for"nom">Votre nom :</label><br />
     <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /><br />
@@ -174,6 +174,39 @@ class User {
 		header('Location: index.php');
 	}         
 
+    // fonction update user
+
+    function modUser($id){
+        $res = sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
+            premon = '".addslashes($this->prenom)."',
+            email = '".addslashes($this->email)."' WHERE id_utilisateur='".$id."';");
+        if($res !== FALSE){
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+
+    }
+
+    // fonction update gestion user
+
+    function gestionUser($id) {
+        $res = sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
+            premon = '".addslashes($this->prenom)."',
+            email = '".addslashes($this->email)."',
+            permission = '".addslashes($this->permission)"' 
+            WHERE id_utilisateur='".$id."';"
+            );
+        if($res !== FALSE){
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+
+    }
+
 /*----------------
 
      Fonction Bcrypt
@@ -195,14 +228,16 @@ class User {
     }
 
     function updatePassword($oldpass, $newpass, $id) {
-        if(empty($this->id_utilisateur)){
+        if(empty($id)){
                 return FALSE;
             }
         else{
-            $res = sql("SELECT password FROM utilisateur WHERE id_utilisateur ='".$id."';");
+            $res = sql("SELECT password, permission FROM utilisateur WHERE id_utilisateur ='".$id."';");
             $passtest = $res[0]['password'];
             if (password_verify($oldpass, $passtest)){
                 $res = sql("UPDATE utilisateur set password = '".hashage($newpass)."' WHERE id_utilisateur='".$id."';");
+                $_SESSION['permission'] = $res[0]['permission'];
+                return $_SESSION['permission'];
             }
             else /*sinon je retourn FALSE*/{
                 return FALSE;

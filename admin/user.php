@@ -3,7 +3,7 @@
 require_once('include/includes.php');
 require_once('header.php');
 
-if(isset($_SESSION['id']) && $_SESSION['permission'])
+if(isset($_SESSION['id']))
 {	
 
 	require_once('SideBar.php');
@@ -13,12 +13,19 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 		$user->setNom($_POST['nom']);
 		$user->setPrenom($_POST['prenom']);
 		$user->setEmail($_POST['email']);
-		$updatepwd = $user->($_POST['oldpassword'],$_POST['newpassword']);
-		if(isset($_POST['oldpassword']))
+		$updata = $user->modUser($_SESSION['id']);
+
+		if(isset($_POST['oldpassword'] && $_SESSION['newpass'] && $_SESSION['newpass2'])) {
+
+			$updatepwd = $user->updatePassword($_POST['oldpassword'],$_POST['newpassword'],$_SESSION['id']);
+		}
+	}
+	if ($updata !== FALSE || $updatepwd !== FALSE){
+		echo 'Les informations de votre compte ont étaient mises à jours.';
 	}
 	else {
 	$modif = new User($_SESSION['id']);
-	$modif->modform('user.php');
+	$modif->modForm('user.php');
 	}
 }
 else { 
