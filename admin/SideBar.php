@@ -4,6 +4,7 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
 	?>
 	<ul>
+		<li><a href="dashboard.php">Dashboard</a></li>
 		<li><a href="artiste.php">Artistes</a></li>
 		<li><a href="oeuvre.php">Oeuvres</a></li>
 		<li><a href="exposition.php">Expositions</a></li>

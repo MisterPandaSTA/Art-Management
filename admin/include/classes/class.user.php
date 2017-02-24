@@ -195,7 +195,7 @@ class User {
         $res = sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
             premon = '".addslashes($this->prenom)."',
             email = '".addslashes($this->email)."',
-            permission = '".addslashes($this->permission)"' 
+            permission = '".addslashes($this->permission)."' 
             WHERE id_utilisateur='".$id."';"
             );
         if($res !== FALSE){
