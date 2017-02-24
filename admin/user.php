@@ -9,8 +9,11 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 	require_once('SideBar.php');
 
 	if(isset($_POST['email'])) {
-
-
+		$user = new User ();
+		$user->setNom($_POST['nom']);
+		$user->setPrenom($_POST['prenom']);
+		$user->setEmail($_POST['email']);
+		$updatepwd = $user->($_POST['oldpassword'],$_POST['newpassword']);
 		if(isset($_POST['oldpassword']))
 	}
 	else {

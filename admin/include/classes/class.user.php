@@ -194,15 +194,15 @@ class User {
 
     }
 
-    function updatePassword($oldpass, $newpass) {
+    function updatePassword($oldpass, $newpass, $id) {
         if(empty($this->id_utilisateur)){
                 return FALSE;
             }
         else{
-            $res = sql("SELECT password FROM utilisateur WHERE id_utilisateur ='".$this->id."';");
+            $res = sql("SELECT password FROM utilisateur WHERE id_utilisateur ='".$id."';");
             $passtest = $res[0]['password'];
             if (password_verify($oldpass, $passtest)){
-                $res = sql("UPDATE utilisateur set password = '".hashage($newpass)."' WHERE id_utilisateur='".$this->id_utilisateur."';");
+                $res = sql("UPDATE utilisateur set password = '".hashage($newpass)."' WHERE id_utilisateur='".$id."';");
             }
             else /*sinon je retourn FALSE*/{
                 return FALSE;
