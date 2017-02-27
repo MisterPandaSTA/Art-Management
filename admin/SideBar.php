@@ -15,13 +15,14 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 	{
 	?>
 		<li><a href="gestion_user.php">Gestion Utilisateurs</a></li>
+		
 	<?php
 	}
 
 	?>
 	</ul>
 	<ul>
-		<li><a href="user.php">modifier profil</a></li>
+		<li><a href="user.php">modifier profil</a></li><li><a href="logout.php">Déconnexion</a></li>
 	</ul>
 	<?php
 }

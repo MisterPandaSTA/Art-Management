@@ -11,7 +11,7 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 		$user->setNom($_POST['nom']);
 		$user->setPrenom($_POST['prenom']);
 		$user->setEmail($_POST['email']);
-		$hash = hashage(default_password);
+		$hash = user::hashage(default_password);
 		$user->setPermission($_POST['permission']);
 		$create = $user->createUser($hash);
 		$mail = new PHPMailer;

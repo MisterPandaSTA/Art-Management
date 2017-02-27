@@ -97,6 +97,7 @@ class User {
 			<input type="email" name="email" /><br />
             <label for="permission">permission</label><br />
                 <select name="permission" id="permission">
+                   <option value="inactif">inactif</option>
                    <option value="utilisateur">utilisateur</option>
                    <option value="admin">admin</option>
                 </select>   
@@ -117,6 +118,7 @@ class User {
             <input type="email" name="email" value="<?php echo $this->getEmail(); ?>" /><br />
             <label for="permission">permission</label><br />
                 <select name="permission" id="permission">
+                   <option value="inactif">inactif</option>
                    <option value="utilisateur">utilisateur</option>
                    <option value="admin">admin</option>
                 </select>   
@@ -131,7 +133,7 @@ class User {
     ?><form action="<?php echo $target; ?>" method="post">
      <label for"nom">Votre nom :</label><br />
     <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /><br />
-    <label for"nom">Votre prénom :</label><br />
+    <label for"prenom">Votre prénom :</label><br />
     <input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" /><br />
     <label for="email">Votre email</label><br />
     <input type="email" name="email" value="<?php echo $this->getEmail(); ?>" /><br />
@@ -178,7 +180,7 @@ class User {
 
     function modUser($id){
         $res = sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
-            premon = '".addslashes($this->prenom)."',
+            prenom = '".addslashes($this->prenom)."',
             email = '".addslashes($this->email)."' WHERE id_utilisateur='".$id."';");
         if($res !== FALSE){
             return TRUE;
@@ -232,12 +234,16 @@ class User {
                 return FALSE;
             }
         else{
-            $res = sql("SELECT password, permission FROM utilisateur WHERE id_utilisateur ='".$id."';");
+            $res = sql("SELECT id_utilisateur, password, permission FROM utilisateur WHERE id_utilisateur ='".$id."';");
             $passtest = $res[0]['password'];
             if (password_verify($oldpass, $passtest)){
-                $res = sql("UPDATE utilisateur set password = '".hashage($newpass)."' WHERE id_utilisateur='".$id."';");
-                $_SESSION['permission'] = $res[0]['permission'];
-                return $_SESSION['permission'];
+                $res = sql("UPDATE utilisateur set password = '".user::hashage($newpass)."' WHERE id_utilisateur='".$id."';");
+                if($res !== FALSE) {
+                    $id_user = $res[0]['id_utilisateur'];
+                    $permission = $res[0]['permission'];
+                    echo ' c\'est bon';
+                    return array($id_user, $permission);
+                }
             }
             else /*sinon je retourn FALSE*/{
                 return FALSE;

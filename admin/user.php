@@ -15,18 +15,21 @@ if(isset($_SESSION['id']))
 		$user->setEmail($_POST['email']);
 		$updata = $user->modUser($_SESSION['id']);
 
-		if(isset($_POST['oldpassword'] && $_SESSION['newpass'] && $_SESSION['newpass2'])) {
+		if(isset($_POST['oldpass']) && ($_POST['newpass']) == ($_POST['newpass2'])) {
 
-			$updatepwd = $user->updatePassword($_POST['oldpassword'],$_POST['newpassword'],$_SESSION['id']);
+			$updatepwd = $user->updatePassword($_POST['oldpass'],$_POST['newpass'],$_SESSION['id']);
+		}	
+		elseif($updata == TRUE || $updatepwd == TRUE){
+	
+		$_SESSION['id'] = $login['0'];
+		$_SESSION['permission']= $login['1'];
 		}
-	}
-	if ($updata !== FALSE || $updatepwd !== FALSE){
-		echo 'Les informations de votre compte ont étaient mises à jours.';
 	}
 	else {
 	$modif = new User($_SESSION['id']);
 	$modif->modForm('user.php');
 	}
+
 }
 else { 
 
