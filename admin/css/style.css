@@ -51,19 +51,23 @@
 
 .sidebar
 {
-  width: 180px;
+  width: 230px;
   height: 100%;
 }
 
 .sidenav
 {
- background-color: #6C6C6C;
- height: 100%;
+  background-color: #6C6C6C;
+  width: 200px;
+  padding-top: 20px;
+  position: absolute;
+  top: 73px;
+  bottom: 0;
 }
 
 .logo_sidebar
 {
-  max-width: 100%; 
+  width: 200px; 
   height: 73px;
 }
 
@@ -73,6 +77,26 @@
   padding: 0;
 }
 
+.sidenav li
+{
+  margin-bottom: 20px; 
+}
+
+.sidenav a
+{
+  color: #fff;
+  font-size: 1.2em;
+  padding: 6px;
+  text-decoration: none;
+
+}
+
+.sidenav a span
+{
+  width: 10px;
+  margin-right: 20px;
+  margin-left: 5px; 
+}
 
 /*------------------------ 
     topbar.php (partout)

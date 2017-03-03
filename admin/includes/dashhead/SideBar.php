@@ -10,7 +10,7 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 		<div class="sidenav">
 			
 			<ul class="ul_sidebar">
-				<li><a href="dashboard.php"><i class="fa fa-tachometer"></i>Dashboard</a></li>
+				<li><a href="dashboard.php"><span class="fa fa-tachometer"></span>Dashboard</a></li>
 				<li><a href="artiste.php"><span class="fa fa-camera"></span>Artistes</a></li>
 				<li><a href="oeuvre.php"><span class="fa fa-picture-o"></span>Oeuvres</a></li>
 				<li><a href="exposition.php"><span class="fa fa-calendar"></span>Expositions</a></li>
@@ -20,7 +20,7 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 			if($_SESSION['permission'] == 'admin' )
 			{
 			?>
-				<li><a href="gestion_user.php"><span class="fa fa-users"></span>Gestion Utilisateurs</a></li>
+				<li><a href="gestion_user.php"><span class="fa fa-users"></span>Utilisateurs</a></li>
 				
 			<?php
 			}

@@ -24,7 +24,7 @@ if(isset($_SESSION['id']))/*si j'ai un $_SESSION['id'] alors je revois l'utilisa
 }
 else {
 
-require_once ('header.php');
+require_once ('includes/dashhead/header.php');
 ?>
 
 <div class="container">
