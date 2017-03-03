@@ -1,13 +1,11 @@
 <?php
 
-require_once('include/includes.php');
-require_once('header.php');
+require_once('includes/classconfig.php');
+
+require_once('includes/dashhead.php');
 
 if(isset($_SESSION['id']))
 {	
-
-	require_once('SideBar.php');
-
 	if(isset($_POST['email'])) {
 		$user = new User ();
 		$user->setNom($_POST['nom']);

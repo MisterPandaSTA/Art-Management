@@ -1,14 +1,11 @@
 <?php
 
-require_once('include/includes.php');
-require_once('header.php');
+require_once('includes/classconfig.php');
+require_once('includes/dashhead.php');
 
 if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
 	
-	
-	
-	require_once('SideBar.php');
 	
 	
 
@@ -20,7 +17,7 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 	
 }
 else { 
-	echo 'Vous n\'êtes pas autorisé à accéder à cette page vous allez être rediriger sur la page de connection.';
+	echo 'Vous n\'êtes pas autorisé à accéder à cette page vous allez être rediriger sur la page de connexion.';
 
 ?>
 <body onLoad="setTimeout('RedirectLogin()', 5000)">

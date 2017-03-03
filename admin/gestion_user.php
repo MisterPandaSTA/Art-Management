@@ -1,10 +1,11 @@
 <?php	
 
-require_once('include/includes.php');
+require_once('includes/classconfig.php');
 
 if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 
-	require 'include/PHPMailer/PHPMailerAutoload.php';
+	require_once('includes/dashhead.php');
+	require 'includes/PHPMailer/PHPMailerAutoload.php';
 
 	if(isset($_POST['nom']) && ($_POST['prenom']))/*Si je reçois un $_POST['nom'], alors je crèer une nouvelle entré dans la table User avec les informations données*/{
 		$user = new User ();
@@ -36,7 +37,7 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 	 			echo 'Mailer Error: ' . $mail->ErrorInfo;
 			} 
 			else {
-	    		echo '<p>L\'inscription a bien été réalisé. Un email a été envoyé au nouvelle utilisateur. </p>';
+	    		echo '<p>L\'inscription a bien été réalisé. Un email a été envoyé au nouvel utilisateur. </p>';
 			}	
 	}
 
