@@ -151,18 +151,20 @@ class User {
 
     static function login($email, $password){
         $res = sql("SELECT id_utilisateur, password, permission FROM utilisateur WHERE email = '$email';");
-        $passtest = $res[0]['password']; 
-        if (password_verify($password, $passtest)) {
-            if ($password !== default_password){
-                $id_user = $res[0]['id_utilisateur'];
-                $permission = $res[0]['permission'];
-                return array($id_user, $permission);
-            }
-            else {
-                $id_user = $res[0]['id_utilisateur'];
-                return array($id_user);   
-            }        
-        } 
+        if (!empty($res)) {
+            $passtest = $res[0]['password']; 
+            if (password_verify($password, $passtest)) {
+                if ($password !== default_password){
+                    $id_user = $res[0]['id_utilisateur'];
+                    $permission = $res[0]['permission'];
+                    return array($id_user, $permission);
+                }
+                else {
+                    $id_user = $res[0]['id_utilisateur'];
+                    return array($id_user);   
+                }        
+            } 
+        }    
         else /*sinon je retourn FALSE*/{
             return FALSE;
         }
@@ -183,6 +185,7 @@ class User {
             prenom = '".addslashes($this->prenom)."',
             email = '".addslashes($this->email)."' WHERE id_utilisateur='".$id."';");
         if($res !== FALSE){
+             echo ' c\'est bon';
             return TRUE;
         }
         else{
@@ -241,7 +244,7 @@ class User {
                 if($res !== FALSE) {
                     $id_user = $res[0]['id_utilisateur'];
                     $permission = $res[0]['permission'];
-                    echo ' c\'est bon';
+                   
                     return array($id_user, $permission);
                 }
             }

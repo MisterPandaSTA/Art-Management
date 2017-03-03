@@ -15,7 +15,7 @@ if(isset($_POST['email'])) /*si je reçois un $_POST['courriel'] par le formulai
 
 	}
 	else /* sinon ce message d'erreur s'affiche*/{
-		echo "L'adresse et/ou le mot de passe ne correspondent pas à notre base de données";
+		$msg_soucis = "L'adresse et/ou le mot de passe ne correspondent pas à notre base de données";
 	}
 }
 if(isset($_SESSION['id']))/*si j'ai un $_SESSION['id'] alors je revois l'utilisateur vers index.php*/ {
@@ -23,19 +23,52 @@ if(isset($_SESSION['id']))/*si j'ai un $_SESSION['id'] alors je revois l'utilisa
 	
 }
 else {
+
+require_once ('header.php');
 ?>
 
-<body>
+<div class="container">
 
-	<img src="">(logo)</img>
+<div class="row login">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    	<div class="col-xs-10 col-xs-offset-1 ">
+    		<img src="images/test.svg" id="logo"></img>
+    	</div>
+    </div>
+</div>
+<div class="row login">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+		<form role="form" method="post" action="index.php">
+			<fieldset>
+				<h2>Veuillez vous identifier</h2>
+				<hr class="colorgraph">
+				<div class="form-group">
+                    <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Votre adresse mail">
+				</div>
+				<div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Votre mot de passe">
+				</div>
+				<div class="form-group">
+                    <?php if(isset($msg_soucis)) { echo $msg_soucis; } ?>
+				</div>
+				<div class="row">
+					<div class="button-checkbox col-xs-3 col-sm-3 col-xs-offset-6 col-sm-offset-8">
+						<a href="" id="mdpoublie" class="btn btn-link">Mot de passe oublié ?</a>	
+					</div>
+				</div>
+				<hr class="colorgraph">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                        <input type="submit" class="btn btn-lg btn-success btn-block" value="Connexion">
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
 
-	<form method="post" action="index.php">
-		<label for="email">Votre email</label>
-		<input type="email" name="email" placeholder="default@quelque.chose">
-		<label for="password">Votre mot de passe</label>
-		<input type="password" name="password">
-		<input type="submit" value="Valider">
-	</form>
+</div>
+
 
 <?php
 

@@ -3,27 +3,43 @@
 if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
 	?>
-	<ul>
-		<li><a href="dashboard.php">Dashboard</a></li>
-		<li><a href="artiste.php">Artistes</a></li>
-		<li><a href="oeuvre.php">Oeuvres</a></li>
-		<li><a href="exposition.php">Expositions</a></li>
-		<li><a href="statistique.php">Statistiques</a></li>
-	<?php
+	<div>
+		<img src="images/test.svg" class="logo_sidebar"></img>
+		<ul class="ul_sidebar">
+			<li><a href="dashboard.php"><span class="fa fa-tachometer"><span>Dashboard</a></li>
+			<li><a href="artiste.php"><span class="fa fa-camera"></span>Artistes</a></li>
+			<li><a href="oeuvre.php"><span class="fa fa-picture-o"></span>Oeuvres</a></li>
+			<li><a href="exposition.php"><span class="fa fa-calendar"></span>Expositions</a></li>
+			<li><a href="statistique.php"><span class="fa fa-bar-chart"></span>Statistiques</a></li>
+		<?php
 
-	if($_SESSION['permission'] == 'admin' )
-	{
-	?>
-		<li><a href="gestion_user.php">Gestion Utilisateurs</a></li>
-		
-	<?php
-	}
+		if($_SESSION['permission'] == 'admin' )
+		{
+		?>
+			<li><a href="gestion_user.php"><span class="fa fa-users"></span>Gestion Utilisateurs</a></li>
+			
+		<?php
+		}
 
-	?>
-	</ul>
-	<ul>
-		<li><a href="user.php">modifier profil</a></li><li><a href="logout.php">Déconnexion</a></li>
-	</ul>
+		?>
+		</ul>
+		<ul class="ul_sidebar">
+			<li><a href="user.php">profil</a></li>
+			<li><a href="logout.php">Déconnexion</a></li>
+		</ul>
+	</div>	
 	<?php
 }
 
+/*
+
+
+
+
+
+ 
+
+
+
+
+*/

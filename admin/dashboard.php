@@ -5,14 +5,17 @@ require_once('header.php');
 
 if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
+	
+	
+	
 	require_once('SideBar.php');
-	echo 'ici cest pour les user normaux !';
+	
 	
 
 	if($_SESSION['permission'] == 'admin' )
 	{
 		
-		echo 'ya que les admins qui voies ça !';
+		
 	}
 	
 }

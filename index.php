@@ -5,15 +5,12 @@
 <head>
 </head>
 <body>
-<form action="" method="POST">
-<label for="nom">Nom :</label>
-<input type="text" name="nom">
-<label for="prenom">Prenom :</label>
-<input type="text" name="prenom">
-<label for="email">Email:</label>
-<input type="text" name="email">
-<label for="password">Mot de passe :</label>
-<input type="password" name="password">
+
+<nav>
+	<li><a href="admin/index.php">Admin</a></li>
+</nav>
+
+
 </form>
 
 </body>
