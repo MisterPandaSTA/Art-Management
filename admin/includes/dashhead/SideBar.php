@@ -4,6 +4,7 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
 	
 ?>
+<body>
 <div class="flex">
 	<div class="sidebar">	
 		<img src="images/test.svg" class="logo_sidebar"></img>

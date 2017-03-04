@@ -151,9 +151,9 @@ class Oeuvre {
     function syncDb() {
         if(empty($this->id_oeuvre)){
             //Si $this->id est vide, on fait un INSERT
-            $res= sql("INSERT INTO oeuvre (id_oeuvre,nom,type_oeuvre,dimensions,poids,
+            $res= sql("INSERT INTO oeuvre (nom,type_oeuvre,dimensions,poids,
                 description_oeuvre,date_creation,livraison)
-                      VALUES (NULL,'".$this->nom."','".$this->type_oeuvre."','".$this->dimensions."','".$this->poids."','".$this->description_oeuvre."','".$this->date_creation."','".$this->livraison."')");
+                      VALUES ('".$this->nom."','".$this->type_oeuvre."','".$this->dimensions."','".$this->poids."','".$this->description_oeuvre."','".$this->date_creation."','".$this->livraison."')");
               
 
             if($res!==FALSE){
