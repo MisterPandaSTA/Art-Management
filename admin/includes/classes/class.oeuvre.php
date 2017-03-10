@@ -184,18 +184,6 @@ class Oeuvre {
         }
 
     }
-        /* connexion */
-
-        static function connect ($user,$password){
-            $res=sql("SELECT id_utilisateur FROM utilisateur WHERE nom='$user' AND password='$password'");
-
-        if($res!==FALSE && count($res)==1){
-            return $res[0]['id'];
-        }
-        else {
-            return FALSE;
-            }
-        }
 
 
     /* affichage de la liste des oeuvres */

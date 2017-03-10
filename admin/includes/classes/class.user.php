@@ -150,14 +150,15 @@ class User {
     // Fonction Login
 
     static function login($email, $password){
-        $res = sql("SELECT id_utilisateur, password, permission FROM utilisateur WHERE email = '$email';");
+        $res = sql("SELECT id_utilisateur, prenom, password, permission FROM utilisateur WHERE email = '$email';");
         if (!empty($res)) {
             $passtest = $res[0]['password']; 
             if (password_verify($password, $passtest)) {
                 if ($password !== default_password){
                     $id_user = $res[0]['id_utilisateur'];
                     $permission = $res[0]['permission'];
-                    return array($id_user, $permission);
+                    $prenom = $res[0]['prenom'];
+                    return array($id_user, $permission, $prenom);
                 }
                 else {
                     $id_user = $res[0]['id_utilisateur'];
@@ -238,15 +239,15 @@ class User {
              return FALSE;
         }
         else{
-            $res = sql("SELECT id_utilisateur, password, permission FROM utilisateur WHERE id_utilisateur ='".$id."';");
+            $res = sql("SELECT id_utilisateur, prenom, password, permission FROM utilisateur WHERE id_utilisateur ='".$id."';");
             $passtest = $res[0]['password'];
             if (password_verify($oldpass, $passtest)){
                 $res = sql("UPDATE utilisateur set password = '".user::hashage($newpass)."' WHERE id_utilisateur='".$id."';");
                 if($res !== FALSE) {
                     $id_user = $res[0]['id_utilisateur'];
                     $permission = $res[0]['permission'];
-                   
-                    return array($id_user, $permission);
+                    $prenom = $res[0]['prenom'];
+                    return array($id_user, $permission, $prenom);
                 }
             }
             else /*sinon je retourn FALSE*/{

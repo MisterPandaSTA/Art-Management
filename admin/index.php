@@ -11,7 +11,8 @@ if(isset($_POST['email'])) /*si je reçois un $_POST['courriel'] par le formulai
 	if($login !== FALSE) /*si la fonction retourne autre chose que FALSE, alors une connection est établi*/{
 
 		$_SESSION['id'] = $login['0'];
-		$_SESSION['permission']= $login['1'];
+		$_SESSION['permission'] = $login['1'];
+		$_SESSION['prenom'] = $login['2'];
 
 	}
 	else /* sinon ce message d'erreur s'affiche*/{
