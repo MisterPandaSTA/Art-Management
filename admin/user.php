@@ -20,7 +20,8 @@ if(isset($_SESSION['id']))
 		elseif($updata == TRUE || $updatepwd == TRUE){
 	
 		$_SESSION['id'] = $login['0'];
-		$_SESSION['permission']= $login['1'];
+		$_SESSION['permission'] = $login['1'];
+		$_SESSION['prenom'] = $login['2'];
 		}
 	}
 	else {

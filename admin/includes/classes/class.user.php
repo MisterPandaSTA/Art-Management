@@ -108,14 +108,24 @@ class User {
 
      //formulaire de gestion d'utilisateur
 
-    function formGestion($target){ /*ceci est le formulaire de création de compte*/
+   static function listGestion($startNb=0, $nbElmts=10){ /*ceci est la liste des formulaires de modification des comptes*/
+        $res = sql("
+            SELECT *
+            FROM utilisateur
+            ORDER BY nom 
+            LIMIT ".$startNb.",".$nbElmts." ;"
+            );
+        /*print_r($res);*/
+        return $res;
+    }
+    static function formGestion($target){
         ?><form action="<?php echo $target; ?>" method="post">
             <label for"nom">Nom :</label><br />
-            <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /><br />
+            <input type="text" name="nom" value="<?php echo $form->getNom(); ?>" /><br />
             <label for"nom">Prénom :</label><br />
-            <input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" /><br />
+            <input type="text" name="prenom" value="<?php echo $form->getPrenom(); ?>" /><br />
             <label for="email">Email</label><br />
-            <input type="email" name="email" value="<?php echo $this->getEmail(); ?>" /><br />
+            <input type="email" name="email" value="<?php echo $form->getEmail(); ?>" /><br />
             <label for="permission">permission</label><br />
                 <select name="permission" id="permission">
                    <option value="inactif">inactif</option>
@@ -124,6 +134,8 @@ class User {
                 </select>   
             
             <input type="submit" name="submit" value="Modifier" /><br />
+            <button>Réinitialiser</button>
+            <button>Suppr</button>
         </form><?php
     }    
 
