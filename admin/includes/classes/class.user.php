@@ -118,14 +118,14 @@ class User {
         /*print_r($res);*/
         return $res;
     }
-    static function formGestion($target){
+    function formGestion($target){
         ?><form action="<?php echo $target; ?>" method="post">
             <label for"nom">Nom :</label><br />
-            <input type="text" name="nom" value="<?php echo $form->getNom(); ?>" /><br />
+            <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /><br />
             <label for"nom">Prénom :</label><br />
-            <input type="text" name="prenom" value="<?php echo $form->getPrenom(); ?>" /><br />
+            <input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" /><br />
             <label for="email">Email</label><br />
-            <input type="email" name="email" value="<?php echo $form->getEmail(); ?>" /><br />
+            <input type="email" name="email" value="<?php echo $this->getEmail(); ?>" /><br />
             <label for="permission">permission</label><br />
                 <select name="permission" id="permission">
                    <option value="inactif">inactif</option>

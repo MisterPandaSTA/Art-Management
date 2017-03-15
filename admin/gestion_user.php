@@ -9,7 +9,7 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 
 	$modif = User::listGestion(0, 10);
 	foreach($modif as $form) {
-		$f = new User();
+		$f = new User($form['id_utilisateur']);
 		$f->formGestion('gestion_user.php');
 	}
 }
