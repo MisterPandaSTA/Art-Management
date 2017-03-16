@@ -89,20 +89,20 @@ class User {
 
     function formCreate($target){ /*ceci est le formulaire de création de compte*/
     	?><form action="<?php echo $target; ?>" method="post">
-    		<label for"nom">Nom :</label><br />
-    		<input type="text" name="nom" /><br />
-    		<label for"nom">Prénom :</label><br />
-    		<input type="text" name="prenom" /><br />
-    		<label for="email">Email</label><br />
-			<input type="email" name="email" /><br />
-            <label for="permission">permission</label><br />
+    		<label for"nom">Nom :</label>
+    		<input type="text" name="nom" />
+    		<label for"nom">Prénom :</label>
+    		<input type="text" name="prenom" />
+    		<label for="email">Email</label>
+			<input type="email" name="email" />
+            <label for="permission">permission</label>
                 <select name="permission" id="permission">
                    <option value="inactif">inactif</option>
                    <option value="utilisateur">utilisateur</option>
                    <option value="admin">admin</option>
                 </select>   
             
-			<input type="submit" name="submit" value="Créer" /><br />
+			<input type="submit" name="submit" value="Créer" />
     	</form><?php
     }
 
@@ -120,20 +120,20 @@ class User {
     }
     function formGestion($target){
         ?><form action="<?php echo $target; ?>" method="post">
-            <label for"nom">Nom :</label><br />
-            <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /><br />
-            <label for"nom">Prénom :</label><br />
-            <input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" /><br />
-            <label for="email">Email</label><br />
-            <input type="email" name="email" value="<?php echo $this->getEmail(); ?>" /><br />
-            <label for="permission">permission</label><br />
+            <label for"nom">Nom :</label>
+            <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" />
+            <label for"nom">Prénom :</label>
+            <input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" />
+            <label for="email">Email</label>
+            <input type="email" name="email" value="<?php echo $this->getEmail(); ?>" />
+            <label for="permission">permission</label>
                 <select name="permission" id="permission">
-                   <option value="inactif">inactif</option>
-                   <option value="utilisateur">utilisateur</option>
-                   <option value="admin">admin</option>
+                   <option value="inactif" <?php if( $this->getPermission() == "inactif") { echo 'selected' ;} ?>' >inactif</option>
+                   <option value="utilisateur" <?php if( $this->getPermission() == "utilisateur") { echo 'selected' ;} ?>>utilisateur</option>
+                   <option value="admin" <?php if( $this->getPermission() == "admin") { echo 'selected' ;} ?>>admin</option>
                 </select>   
             
-            <input type="submit" name="submit" value="Modifier" /><br />
+            <input type="submit" name="submit" value="Modifier" />
             <button>Réinitialiser</button>
             <button>Suppr</button>
         </form><?php

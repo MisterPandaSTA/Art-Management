@@ -98,6 +98,206 @@
   margin-left: 5px; 
 }
 
+/* test nouvelle sidebar */
+
+.row{
+    margin-left:0px;
+    margin-right:0px;
+}
+
+#wrapper {
+    padding-left: 70px;
+    transition: all .4s ease 0s;
+    height: 100%
+}
+
+#sidebar-wrapper {
+    margin-left: -150px;
+    left: 0px;
+    width: 150px;
+    background: #222;
+    position: fixed;
+    height: 100%;
+    z-index: 10000;
+    transition: all .4s ease 0s;
+}
+
+.sidebar-nav {
+    display: block;
+    width: 150px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar_nav 
+{
+    margin-left: -70px;
+    height: 80px;
+}
+
+#page-content-wrapper {
+    padding-left: 0;
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+}
+#wrapper.active, section.active {
+    padding-left: 150px;
+}
+
+#wrapper-bouton {
+    padding-left: 0;
+}
+
+#wrapper.active #sidebar-wrapper {
+    left: 150px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+}
+
+#sidebar_menu {
+    height: 80px;
+    border-bottom-width: 2px;
+    border-top-width: 2px;
+    padding-top: 0px;
+}
+
+#sidebar_menu li a, .sidebar-nav li a {
+    color: #999;
+    text-decoration: none;
+    width: 150px;
+    background: #252525;
+    border-top: 2px solid #373737;
+    border-bottom: 2px solid #1A1A1A;
+    -webkit-transition: background .5s;
+    -moz-transition: background .5s;
+    -o-transition: background .5s;
+    -ms-transition: background .5s;
+    transition: background .5s;
+}
+
+.btn-menu {
+    top: 73px; 
+    left: 0px;
+    bottom: 0px;
+    width: 15px;
+    background: #222;
+    position: fixed;
+    z-index: 10000;
+}
+
+#menu-toggle
+{
+    height: 80px;
+    border-bottom-width: 2px;
+    border-top-width: 2px;
+    padding-top: 0px;
+}
+
+#menu-toggle:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    text-decoration: none;
+}
+
+#menu-toggle div
+{
+    width: 100px;
+}
+
+.sidebar_name {
+    padding-top: 25px;
+    color: #fff;
+    opacity: .7;
+}
+
+.sidebar-nav li {
+  line-height: 40px;
+  text-indent: 20px;
+}
+
+.sidebar-nav li a {
+  color: #999999;
+  display: flex;
+  flex-wrap: nowrap;
+  text-decoration: none;
+}
+
+.sidebar-nav li a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+  text-decoration: none;
+}
+
+.sidebar-brand:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+  text-decoration: none;    
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 80px;
+  line-height: 80px;
+  font-size: 18px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+#main_icon
+{
+    float:right;
+    padding-right: 15px;
+    padding-top: 33px;
+}
+.sub_icon
+{
+    float:right;
+    padding-right: 65px;
+    padding-top:10px;
+}
+.content-header {
+    height: 65px;
+    line-height: 65px;
+}
+
+.content-header h1 {
+    margin: 0;
+    margin-left: 20px;
+    line-height: 65px;
+    display: inline-block;
+}
+
+.div_nav
+{
+    width: 100px;
+}
+
+.fa-span
+{
+    width: 50px;
+    margin-top: 12px
+}
+
+.li-logo
+{
+    justify-content: center;
+}
+
+
 /*------------------------ 
     topbar.php (partout)
 -------------------------*/
