@@ -88,7 +88,7 @@ class User {
     // formulaire de création d'utilisateur
 
     function formCreate($target){ /*ceci est le formulaire de création de compte*/
-    	?><form action="<?php echo $target; ?>" method="post">
+    	?><form id="formCreate" action="<?php echo $target; ?>" method="post">
     		<label for"nom">Nom :</label>
     		<input type="text" name="nom" />
     		<label for"nom">Prénom :</label>
@@ -102,7 +102,7 @@ class User {
                    <option value="admin">admin</option>
                 </select>   
             
-			<input type="submit" name="submit" value="Créer" />
+			<input id="create" type="submit" name="submit" value="Créer" />
     	</form><?php
     }
 
@@ -119,7 +119,7 @@ class User {
         return $res;
     }
     function formGestion($target){
-        ?><form action="<?php echo $target; ?>" method="post">
+        ?><form id="formGestion"  method="post">
             <label for"nom">Nom :</label>
             <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" />
             <label for"nom">Prénom :</label>
@@ -132,11 +132,17 @@ class User {
                    <option value="utilisateur" <?php if( $this->getPermission() == "utilisateur") { echo 'selected' ;} ?>>utilisateur</option>
                    <option value="admin" <?php if( $this->getPermission() == "admin") { echo 'selected' ;} ?>>admin</option>
                 </select>   
-            
-            <input type="submit" name="submit" value="Modifier" />
+            <input type="hidden" name="id_user" value="<?php echo $this->getId(); ?>" />
+        </form>
+            <a id="modifier" href="" name="modifier" >Modifier</a>
             <button>Réinitialiser</button>
             <button>Suppr</button>
-        </form><?php
+
+            <!-- <input type="submit" name="submit" value="Modifier" id="modifier"/> -->
+            
+            <!-- <button id="#modifier">Modifier</button> -->
+            
+        <?php
     }    
 
     // formulaire modification de l'utilisateur
