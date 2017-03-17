@@ -40,10 +40,11 @@ $(document).ready(function () {
 -------------------------*/
 $(document).ready(function () {
 	$('#create').click(function(){
-		var nom = $("#formCreate input[name='nom']")[0].value;
-		var prenom= $("#forCreate input[name='prenom']")[0].value;
-		var email = $("#formCreate input[name='email']")[0].value;	
-		var permission  = $("#formCreate select[name='']")[0].value;
+		var nom = $("#formCreate input[name='nom']").val();
+		alert(nom);
+		var prenom= $("#forCreate input[name='prenom']").value;
+		var email = $("#formCreate input[name='email']").value;	
+		var permission  = $("#formCreate select[name='select']").value;
 		if(nom.trim() != '') {
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcCreateUser.php",
