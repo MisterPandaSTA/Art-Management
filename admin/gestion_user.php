@@ -5,7 +5,7 @@ require_once('includes/classconfig.php');
 if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 
 	$create = new User();
-	$create->formCreate('gestion_user.php');
+	$create->formCreate('');
 
 	$modif = User::listGestion(0, 10);
 	foreach($modif as $form) {

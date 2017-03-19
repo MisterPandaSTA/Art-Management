@@ -119,27 +119,28 @@ class User {
         return $res;
     }
     function formGestion($target){
-        ?><form id="formGestion"  method="post">
+        ?><form class="formGestion" action="<?php echo $target; ?>"  method="post">
             <label for"nom">Nom :</label>
             <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" />
-            <label for"nom">Prénom :</label>
+            <label for"prenom">Prénom :</label>
             <input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" />
             <label for="email">Email</label>
             <input type="email" name="email" value="<?php echo $this->getEmail(); ?>" />
             <label for="permission">permission</label>
                 <select name="permission" id="permission">
-                   <option value="inactif" <?php if( $this->getPermission() == "inactif") { echo 'selected' ;} ?>' >inactif</option>
+                   <option value="inactif" <?php if( $this->getPermission() == "inactif") { echo 'selected' ;} ?> >inactif</option>
                    <option value="utilisateur" <?php if( $this->getPermission() == "utilisateur") { echo 'selected' ;} ?>>utilisateur</option>
                    <option value="admin" <?php if( $this->getPermission() == "admin") { echo 'selected' ;} ?>>admin</option>
                 </select>   
             <input type="hidden" name="id_user" value="<?php echo $this->getId(); ?>" />
-        </form>
-            <a id="modifier" href="" name="modifier" >Modifier</a>
-            <button>Réinitialiser</button>
-            <button>Suppr</button>
+            <input class="action" type="hidden" name="action" value="" />
 
+            <input type="submit" class="modifier" name="submit" value="Modifier" />
+            <button class="reset">Réinitialiser</button>
+            <button class="delete">Suppr</button>
+        </form>
             <!-- <input type="submit" name="submit" value="Modifier" id="modifier"/> -->
-            
+            <!-- <a id="modifier" href="#" name="modifier" >Modifier</a> -->
             <!-- <button id="#modifier">Modifier</button> -->
             
         <?php
@@ -200,35 +201,43 @@ class User {
     // fonction update user
 
     function modUser($id){
-        $res = sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
-            prenom = '".addslashes($this->prenom)."',
-            email = '".addslashes($this->email)."' WHERE id_utilisateur='".$id."';");
-        if($res !== FALSE){
-             echo ' c\'est bon';
-            return TRUE;
-        }
-        else{
+        if(empty($id)) {
             return FALSE;
         }
-
+        else{ 
+            $res = sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
+                prenom = '".addslashes($this->prenom)."',
+                email = '".addslashes($this->email)."' WHERE id_utilisateur='".$id."';");
+            if($res !== FALSE){
+                 echo ' c\'est bon';
+                return TRUE;
+            }
+            else{
+                return FALSE;
+            }
+        }
     }
 
     // fonction update gestion user
 
     function gestionUser($id) {
-        $res = sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
-            premon = '".addslashes($this->prenom)."',
-            email = '".addslashes($this->email)."',
-            permission = '".addslashes($this->permission)."' 
-            WHERE id_utilisateur='".$id."';"
-            );
-        if($res !== FALSE){
-            return TRUE;
-        }
-        else{
+        if(empty($id)) {
             return FALSE;
         }
-
+        else{
+            $res= sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
+                prenom = '".addslashes($this->prenom)."',
+                email = '".addslashes($this->email)."',
+                permission = '".addslashes($this->permission)."' 
+                WHERE id_utilisateur='".$id."';"
+                );
+            if($res !== FALSE){
+                return TRUE;
+            }
+            else{
+                return FALSE;
+            }
+        }
     }
 
 /*----------------
@@ -274,6 +283,49 @@ class User {
         }
     }
 
+
+
+/* ---------------
+    reset mdp
+-----------------*/
+
+    function resetPass($id) {
+
+        if(empty($id)) {
+            return FALSE;
+        }
+        else {
+            $res = sql("UPDATE utilisateur set password = '".user::hashage(default_password)."' WHERE id_utilisateur ='".$id."';");
+
+            if($res !== FALSE){
+                return TRUE;
+            }
+            else{
+                return FALSE;
+            }
+        }
+    }
+
+ /* ---------------
+    Delete User
+
+ -----------------*/
+
+    function deleteUser($id) {
+
+        if(empty($id)) {
+            return FALSE;
+        }
+        else {
+            $res = sql("DELETE FROM utilisateur WHERE id_utilisateur ='".$id."';");
+
+            if($res !== FALSE){
+                return TRUE;
+            }
+            else{
+                return FALSE;
+            }
+        }
+    }
+
 }
-
-

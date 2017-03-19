@@ -41,11 +41,13 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$('#create').click(function(){
 		var nom = $("#formCreate input[name='nom']").val();
-		alert(nom);
-		var prenom= $("#forCreate input[name='prenom']").value;
-		var email = $("#formCreate input[name='email']").value;	
-		var permission  = $("#formCreate select[name='select']").value;
-		if(nom.trim() != '') {
+		console.log(nom);
+		var prenom = $("#formCreate input[name='prenom']").val();
+		console.log(prenom);
+		var email = $("#formCreate input[name='email']").val();
+		console.log(email);	
+		var permission = $("#formCreate select[name='permission']").val();
+		console.log(permission);		
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcCreateUser.php",
 				method: 'POST',
@@ -53,8 +55,7 @@ $(document).ready(function () {
 						nom : nom,
 						prenom : prenom,
 						email : email,
-						permission : permission,
-						id_user : id_user
+						permission : permission
 						
 					},
 				success : function (response) {
@@ -84,24 +85,38 @@ $(document).ready(function () {
 					console.log('Requête Ajax exécutée');
 				}
 			});	
-		}
+		
 	});
 });
 
 
 
 $(document).ready(function () {
-	$('#modifier').click(function(){
-		var nom = $("#formGestion input[name='title']")[0].value;
-		var prenom= $('#forGestion textarea')[0].value;
-
-
-
-		if(titre.trim() != '') {
+	$('.modifier').click(function(){
+		$(".action").val('modifier');
+		var nom = $(".formGestion input[name='nom']").val();
+		console.log(nom);
+		var prenom = $(".formGestion input[name='prenom']").val();
+		console.log(prenom);
+		var email = $(".formGestion input[name='email']").val();
+		console.log(email);	
+		var permission = $(".formGestion select[name='permission']").val();
+		console.log(permission);
+		var id_user = $(".formGestion input[name='id_user']").val();
+		console.log(id_user);
+		var action = $(".formGestion input[name='action']").val();
+		console.log(action);		
 			$.ajax({
-				url: "funcModUser.php",
+				url: "includes/AjaxPhpfunctions/funcModUser.php",
 				method: 'POST',
-				data : data,
+				data : {
+						nom : nom,
+						prenom : prenom,
+						email : email,
+						permission : permission,
+						id_user : id_user,
+						action : action
+					},
 				success : function (response) {
 					console.log(response);
 					if(response == 'error' ) {
@@ -128,8 +143,93 @@ $(document).ready(function () {
 				complete : function () {
 					console.log('Requête Ajax exécutée');
 				}
-			});
-		}		
+			});		
+	});
+});
+
+$(document).ready(function () {
+	$(".reset").click(function (){
+		$(".action").val('reset');
+		var id_user = $(".formGestion input[name='id_user']").val();
+		var action = $(".formGestion input[name='action']").val();
+		console.log(action);
+		$.ajax({
+			url: "includes/AjaxPhpfunctions/funcModUser.php",
+			method: 'POST',
+			data: {
+					id_user : id_user,
+					action : action
+			},
+			success : function (response) {
+					console.log(response);
+					if(response == 'error' ) {
+						// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
+						alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
+						ajaxResponse = false;
+					}
+					else if (response == 'ok') {
+						// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
+						console.log('Cycle achevé et mis à jours');
+						ajaxResponse = true;
+					}
+					else {
+						// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
+						/*actualCycleId = parseInt(response);
+						ajaxResponse = parseInt(response);*/
+
+						ajaxResponse = parseInt(response,10);
+					}
+			},
+			error: function () {
+				alert('Désolé, une erreur est survenue lors de de la requête ajax');
+			},
+			complete : function () {
+				console.log('Requête Ajax exécutée');
+			} 
+		});
+	});
+});
+
+$(document).ready(function () {
+	$(".delete").click(function (){
+		$(".action").val('delete');
+		var id_user = $(".formGestion input[name='id_user']").val();
+		var action = $(".formGestion input[name='action']").val();
+		console.log(action);
+		$.ajax({
+			url: "includes/AjaxPhpfunctions/funcModUser.php",
+			method: 'POST',
+			data: {
+					id_user : id_user,
+					action : action
+			},
+			success : function (response) {
+					console.log(response);
+					if(response == 'error' ) {
+						// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
+						alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
+						ajaxResponse = false;
+					}
+					else if (response == 'ok') {
+						// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
+						console.log('Cycle achevé et mis à jours');
+						ajaxResponse = true;
+					}
+					else {
+						// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
+						/*actualCycleId = parseInt(response);
+						ajaxResponse = parseInt(response);*/
+
+						ajaxResponse = parseInt(response,10);
+					}
+			},
+			error: function () {
+				alert('Désolé, une erreur est survenue lors de de la requête ajax');
+			},
+			complete : function () {
+				console.log('Requête Ajax exécutée');
+			}		
+		});
 	});
 });
 
