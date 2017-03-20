@@ -11,6 +11,7 @@
 		$hash = user::hashage(default_password);
 		$user->setPermission($post['permission']);
 		$create = $user->createUser($hash);
+		var_dump($_POST['nom']);
 	/*	$mail = new PHPMailer;
 		$mail->isSMTP();
 		$mail->CharSet = "utf-8";
