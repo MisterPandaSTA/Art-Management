@@ -91,7 +91,7 @@ class User {
     	?><form id="formCreate" action="<?php echo $target; ?>" method="post">
     		<label for"nom">Nom :</label>
     		<input type="text" name="nom" />
-    		<label for"nom">Prénom :</label>
+    		<label for"prenom">Prénom :</label>
     		<input type="text" name="prenom" />
     		<label for="email">Email</label>
 			<input type="email" name="email" />

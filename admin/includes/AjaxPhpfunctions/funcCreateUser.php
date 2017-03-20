@@ -1,15 +1,15 @@
 <?php
 
 	require_once('../classconfig.php');
-	require 'includes/PHPMailer/PHPMailerAutoload.php';
+	/*require 'includes/PHPMailer/PHPMailerAutoload.php';*/
 
 	/*if(isset($_POST['nom']) && ($_POST['prenom']))Si je reçois un $_POST['nom'], alors je crèer une nouvelle entré dans la table User avec les informations données{*/
 		$user = new User ();
-		$user->setNom($_POST['nom']);
-		$user->setPrenom($_POST['prenom']);
-		$user->setEmail($_POST['email']);
+		$user->setNom($post['nom']);
+		$user->setPrenom($post['prenom']);
+		$user->setEmail($post['email']);
 		$hash = user::hashage(default_password);
-		$user->setPermission($_POST['permission']);
+		$user->setPermission($post['permission']);
 		$create = $user->createUser($hash);
 	/*	$mail = new PHPMailer;
 		$mail->isSMTP();

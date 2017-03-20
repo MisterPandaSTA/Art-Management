@@ -41,11 +41,14 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$('#create').click(function(){
 		var nom = $("#formCreate input[name='nom']").val();
-		alert(nom);
-		var prenom= $("#forCreate input[name='prenom']").value;
-		var email = $("#formCreate input[name='email']").value;	
-		var permission  = $("#formCreate select[name='select']").value;
-		if(nom.trim() != '') {
+		console.log(nom);
+		var prenom = $("#formCreate input[name='prenom']").val();
+		console.log(prenom);
+		var email = $("#formCreate input[name='email']").val();
+		console.log(email);	
+		var permission = $("#formCreate select[name='permission']").val();
+		console.log(permission);
+		
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcCreateUser.php",
 				method: 'POST',
@@ -54,8 +57,6 @@ $(document).ready(function () {
 						prenom : prenom,
 						email : email,
 						permission : permission,
-						id_user : id_user
-						
 					},
 				success : function (response) {
 					console.log(response);
@@ -84,7 +85,7 @@ $(document).ready(function () {
 					console.log('Requête Ajax exécutée');
 				}
 			});	
-		}
+		
 	});
 });
 
