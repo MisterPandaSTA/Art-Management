@@ -3,15 +3,42 @@
 require_once('includes/classconfig.php');
 
 if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
+	require_once('includes/dashhead.php');
+	
 
-	$create = new User();
-	$create->formCreate('');
+	?>
+	<section class="container page_content">
+		<div class="row cadre">
+			
+				
+	<?php
 
-	$modif = User::listGestion(0, 10);
-	foreach($modif as $form) {
-		$f = new User($form['id_utilisateur']);
-		$f->formGestion('');
-	}
+		$create = new User();
+		$create->formCreate('');
+
+	?>
+			
+		</div><div class="row cadre">
+			<table class="table table-bordered table-hover">
+			<tr>
+				<th>Nom</th>
+				<th>Prenom</th>
+				<th>Email</th>
+				<th>Permission</th>
+				<th>Action</th>
+				
+			</tr>	
+	<?php
+
+
+		$modif = User::listGestion(0, 10);
+		foreach($modif as $form) {
+			$f = new User($form['id_utilisateur']);
+			$f->formGestion('');
+		}
+	
+	?></table></div></sections><?php
+
 }
 else {
 	?>

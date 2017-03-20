@@ -95,7 +95,7 @@ class User {
     		<input type="text" name="prenom" />
     		<label for="email">Email</label>
 			<input type="email" name="email" />
-            <label for="permission">permission</label>
+            <label for="permission">Permission</label>
                 <select name="permission" id="permission">
                    <option value="inactif">inactif</option>
                    <option value="utilisateur">utilisateur</option>
@@ -119,26 +119,22 @@ class User {
         return $res;
     }
     function formGestion($target){
-        ?><form class="formGestion" action="<?php echo $target; ?>"  method="post">
-            <label for"nom">Nom :</label>
-            <input type="text" name="nom" value="<?php echo $this->getNom(); ?>" />
-            <label for"prenom">Prénom :</label>
-            <input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" />
-            <label for="email">Email</label>
-            <input type="email" name="email" value="<?php echo $this->getEmail(); ?>" />
-            <label for="permission">permission</label>
-                <select name="permission" id="permission">
+        ?><tr><form class="formGestion" action="<?php echo $target; ?>"  method="post">
+            <td><input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /></td>
+            <td><input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" /></td>
+            <td><input type="email" name="email" value="<?php echo $this->getEmail(); ?>" /></td>
+            <td><select name="permission" id="permission">
                    <option value="inactif" <?php if( $this->getPermission() == "inactif") { echo 'selected' ;} ?> >inactif</option>
                    <option value="utilisateur" <?php if( $this->getPermission() == "utilisateur") { echo 'selected' ;} ?>>utilisateur</option>
                    <option value="admin" <?php if( $this->getPermission() == "admin") { echo 'selected' ;} ?>>admin</option>
-                </select>   
+                </select></td>   
             <input type="hidden" name="id_user" value="<?php echo $this->getId(); ?>" />
             <input class="action" type="hidden" name="action" value="" />
 
-            <input type="submit" class="modifier" name="submit" value="Modifier" />
-            <button class="reset">Réinitialiser</button>
-            <button class="delete">Suppr</button>
-        </form>
+            <td><input type="submit" class="modifier" name="submit" value="Modifier" /></td>
+            <td><button class="reset">Réinitialiser</button></td>
+            <td><button class="delete">Suppr</button></td>
+        </form></tr>
             <!-- <input type="submit" name="submit" value="Modifier" id="modifier"/> -->
             <!-- <a id="modifier" href="#" name="modifier" >Modifier</a> -->
             <!-- <button id="#modifier">Modifier</button> -->

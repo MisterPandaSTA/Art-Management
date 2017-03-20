@@ -9,6 +9,12 @@
   height: auto;
 }
 
+.flex
+{
+  display: flex;
+}
+
+
 .login 
 {
 	margin-top:20px;
@@ -34,6 +40,23 @@
 }
 
 /*------------------------ 
+    partout.php (partout)
+-------------------------*/
+
+.page_content
+{
+  margin-top: 70px;
+}
+
+.cadre
+{
+  margin: 50px;
+  padding: 20px;
+  border: 2px solid rgba(57,57,57,0.4);
+  border-radius: 10px 10px 10px 10px;
+}
+
+/*------------------------ 
   dashboard.php (acceuil)
 -------------------------*/
 /* prout */ /*written by Djyp*/
@@ -41,45 +64,111 @@
 
 
 /*------------------------ 
-  sidebar.php (partout)
+    topbar.php (partout)
 -------------------------*/
 
-.flex
+.logotop
 {
-  display: flex;
-}
-
-.sidebar
-{
-  width: 230px;
-  height: 100%;
-}
-
-.sidenav
-{
-  background-color: #6C6C6C;
-  width: 200px;
-  padding-top: 20px;
+  display: block;
   position: absolute;
-  top: 73px;
-  bottom: 0;
+  top: 0px;
+  left: 0px;
+  right: 0px;
 }
 
 .logo_sidebar
 {
-  width: 200px; 
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 154px; 
   height: 73px;
 }
 
+.topbar
+{
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 154px;
+  background-color: #FC2D2D;
+  width: 100%;
+  height: 73px;
+  float: right;
+  padding-left: 15px;
+}
+
+.topbar h2
+{
+  color: #fff;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.topbar p
+{
+
+}
+
+
+/*------------------------ 
+  sidebar.php (partout)
+-------------------------*/
+
+
+
 .ul_sidebar 
 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   list-style: none;
   padding: 0;
 }
 
-.sidenav li
+.sidebar-brand 
 {
-  margin-bottom: 20px; 
+  display: flex;
+  height: 100%;
+}
+
+.ul_sidebar li
+{
+  display: block;
+  text-decoration: none;
+  background: #252525;
+  border-top: 2px solid #373737;
+  border-bottom: 2px solid #1A1A1A;
+  -webkit-transition: background .5s;
+  -moz-transition: background .5s;
+  -o-transition: background .5s;
+  -ms-transition: background .5s;
+  transition: background .5s;
+}
+
+
+.ul_sidebar li:first-child
+{
+  margin-top: 10px;
+
+}
+
+.ul_sidebar li a
+{
+  display: block;
+  text-decoration: none;
+  color: #999;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 135px
+}
+
+.ul_sidebar li a span
+{
+  width: 35px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .sidenav a
@@ -98,6 +187,11 @@
   margin-left: 5px; 
 }
 
+.btn-profil-disco
+{
+/*  margin-top: 50px;*/
+}
+
 /* test nouvelle sidebar */
 
 .row{
@@ -112,11 +206,12 @@
 }
 
 #sidebar-wrapper {
-    margin-left: -150px;
+    margin-left: -135px;
     left: 0px;
-    width: 150px;
+    width: 135px;
     background: #222;
     position: fixed;
+    top: 73px;
     height: 100%;
     z-index: 10000;
     transition: all .4s ease 0s;
@@ -142,33 +237,34 @@
     width: 100%;
     height: auto;
 }
-#wrapper.active, section.active {
-    padding-left: 150px;
-}
 
-#wrapper-bouton {
-    padding-left: 0;
-}
 
-#wrapper.active #sidebar-wrapper {
-    left: 150px;
+#wrapper.active #sidebar-wrapper, #wrapper.active .btn-menu {
+    left: 135px;
 }
 
 #page-content-wrapper {
     width: 100%;
 }
 
-#sidebar_menu {
-    height: 80px;
-    border-bottom-width: 2px;
-    border-top-width: 2px;
-    padding-top: 0px;
+#sidebar_menu 
+{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  border-top: 2px solid #373737;
+  border-bottom: 2px solid #1A1A1A;
+  border-left: 2px solid #373737;
+  border-right: 2px solid #1A1A1A;
+  padding-top: 0px;
+  padding-left: 0px;
+  margin-bottom: 0px; 
 }
 
 #sidebar_menu li a, .sidebar-nav li a {
     color: #999;
     text-decoration: none;
-    width: 150px;
+    /*width: 150px;*/
     background: #252525;
     border-top: 2px solid #373737;
     border-bottom: 2px solid #1A1A1A;
@@ -183,29 +279,27 @@
     top: 73px; 
     left: 0px;
     bottom: 0px;
-    width: 15px;
+    width: 19px;
     background: #222;
     position: fixed;
     z-index: 10000;
+    transition: all .4s ease 0s;
 }
 
 #menu-toggle
-{
-    height: 80px;
-    border-bottom-width: 2px;
-    border-top-width: 2px;
-    padding-top: 0px;
+{ 
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border-bottom-width: 2px;
+  border-top-width: 2px;
+  padding-top: 0px;
 }
 
 #menu-toggle:hover {
     color: #fff;
     background: rgba(255,255,255,0.2);
     text-decoration: none;
-}
-
-#menu-toggle div
-{
-    width: 100px;
 }
 
 .sidebar_name {
@@ -232,6 +326,8 @@
   text-decoration: none;
 }
 
+
+
 .sidebar-brand:hover {
   color: #fff;
   background: rgba(255,255,255,0.2);
@@ -243,8 +339,8 @@
 }
 
 .sidebar-nav > .sidebar-brand {
-  height: 80px;
-  line-height: 80px;
+/*  height: 80px;
+  line-height: 80px;*/
   font-size: 18px;
 }
 
@@ -257,12 +353,12 @@
   background: none;
 }
 
-#main_icon
+/*#main_icon
 {
     float:right;
     padding-right: 15px;
     padding-top: 33px;
-}
+}*/
 .sub_icon
 {
     float:right;
@@ -298,30 +394,7 @@
 }
 
 
-/*------------------------ 
-    topbar.php (partout)
--------------------------*/
 
-.topbar
-{
-  background-color: #FC2D2D;
-  width: 100%;
-  height: 73px;
-  float: right;
-  padding-left: 15px;
-}
-
-.topbar h2
-{
-  color: #fff;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.topbar p
-{
-
-}
 
 /*------------------------ 
   user.php (modif user)
