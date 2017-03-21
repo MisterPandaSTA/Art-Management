@@ -119,7 +119,7 @@ class User {
         return $res;
     }
     function formGestion($target){
-        ?><tr><form class="formGestion" action="<?php echo $target; ?>"  method="post">
+        ?><tr class="formGestion" id="<?php echo "n".$this->getId(); ?>">
             <td><input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /></td>
             <td><input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" /></td>
             <td><input type="email" name="email" value="<?php echo $this->getEmail(); ?>" /></td>
@@ -128,13 +128,13 @@ class User {
                    <option value="utilisateur" <?php if( $this->getPermission() == "utilisateur") { echo 'selected' ;} ?>>utilisateur</option>
                    <option value="admin" <?php if( $this->getPermission() == "admin") { echo 'selected' ;} ?>>admin</option>
                 </select></td>   
-            <input type="hidden" name="id_user" value="<?php echo $this->getId(); ?>" />
+            <td><input type="hidden" name="id_user" value="<?php echo $this->getId(); ?>" />
             <input class="action" type="hidden" name="action" value="" />
 
-            <td><input type="submit" class="modifier" name="submit" value="Modifier" /></td>
+            <input type="submit" class="modifier" name="submit" value="Modifier" /></td>
             <td><button class="reset">Réinitialiser</button></td>
             <td><button class="delete">Suppr</button></td>
-        </form></tr>
+        </tr>
             <!-- <input type="submit" name="submit" value="Modifier" id="modifier"/> -->
             <!-- <a id="modifier" href="#" name="modifier" >Modifier</a> -->
             <!-- <button id="#modifier">Modifier</button> -->

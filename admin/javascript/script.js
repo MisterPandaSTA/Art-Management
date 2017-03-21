@@ -94,17 +94,17 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$('.modifier').click(function(){
 		$(".action").val('modifier');
-		var nom = $(".formGestion input[name='nom']").val();
-		console.log(nom);
-		var prenom = $(".formGestion input[name='prenom']").val();
-		console.log(prenom);
-		var email = $(".formGestion input[name='email']").val();
-		console.log(email);	
-		var permission = $(".formGestion select[name='permission']").val();
-		console.log(permission);
-		var id_user = $(".formGestion input[name='id_user']").val();
+		var id_user = $(this).parent().parent().attr('id').substr(1);
 		console.log(id_user);
-		var action = $(".formGestion input[name='action']").val();
+		var nom = $('#n'+id_user+' input[name="nom"]').val();
+		console.log(nom);
+		var prenom = $('#n'+id_user+' input[name="prenom"]').val();
+		console.log(prenom);
+		var email = $('#n'+id_user+' input[name="email"]').val();
+		console.log(email);	
+		var permission = $('#n'+id_user+' select[name="permission"]').val();
+		console.log(permission);
+		var action = $('#n'+id_user+' input[name="action"]').val();
 		console.log(action);		
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcModUser.php",
@@ -150,8 +150,8 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$(".reset").click(function (){
 		$(".action").val('reset');
-		var id_user = $(".formGestion input[name='id_user']").val();
-		var action = $(".formGestion input[name='action']").val();
+		var id_user = $(this).parent().parent().attr('id').substr(1);
+		var action = $('#n'+id_user+' input[name="action"]').val();
 		console.log(action);
 		$.ajax({
 			url: "includes/AjaxPhpfunctions/funcModUser.php",
@@ -193,8 +193,8 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$(".delete").click(function (){
 		$(".action").val('delete');
-		var id_user = $(".formGestion input[name='id_user']").val();
-		var action = $(".formGestion input[name='action']").val();
+		var id_user = $(this).parent().parent().attr('id').substr(1);
+		var action = $('#n'+id_user+' input[name="action"]').val();
 		console.log(action);
 		$.ajax({
 			url: "includes/AjaxPhpfunctions/funcModUser.php",

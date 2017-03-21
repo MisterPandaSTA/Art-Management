@@ -3,6 +3,8 @@
 require_once('includes/classconfig.php');
 
 if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
+	$texte = "Dashboard > Gestion Utilisateur";
+	$desc = "Vous pouvez gérer les differents utilisateurs depuis cette page.";
 	require_once('includes/dashhead.php');
 	
 
@@ -17,17 +19,21 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 		$create->formCreate('');
 
 	?>
-			
 		</div><div class="row cadre">
-			<table class="table table-bordered table-hover">
-			<tr>
-				<th>Nom</th>
-				<th>Prenom</th>
-				<th>Email</th>
-				<th>Permission</th>
-				<th>Action</th>
-				
-			</tr>	
+			<div class="panel panel-default">
+	 		 <div class="panel-heading">Liste des utilisateurs</div>
+		
+			
+				<table class="table table-bordered table-striped table-hover">
+					<thead>
+						<th>Nom</th>
+						<th>Prenom</th>
+						<th>Email</th>
+						<th>Permission</th>
+						<th colspan="3">Action</th>
+						
+					</thead>
+
 	<?php
 
 

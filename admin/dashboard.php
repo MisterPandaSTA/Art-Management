@@ -5,7 +5,8 @@ require_once('includes/dashhead.php');
 
 if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
-		
+	$texte = "Dashboard";
+	$desc = "Bienvenue ".$_SESSION['prenom']." " ;	
 	if($_SESSION['permission'] == 'admin' )
 	{
 		

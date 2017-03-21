@@ -3,17 +3,15 @@
 if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
 	
-	function showPage ($texte = "Dashboard") 
+	function showPage ($texte) 
 	{
 		echo $texte ;
 	}
 
-		function showDesc ($desc)
+	function showDesc ($desc)
 	{
     	echo $desc ;
 	}
-
-	$desc = "Bienvenue ".$_SESSION['prenom']." " ;
 
 
 ?>
@@ -22,7 +20,7 @@ if(isset($_SESSION['id']) && $_SESSION['permission'])
 		<div class="logotop">
 			<img src="images/test2.svg" class="logo_sidebar"></img>
 			<div class="topbar">
-				<h2><?php $h1 = showPage() ; ?></h2>
+				<h2><?php $h1 = showPage($texte) ; ?></h2>
 				<p><?php $p = showDesc($desc) ; ?></p>
 			</div>
 		</div>	

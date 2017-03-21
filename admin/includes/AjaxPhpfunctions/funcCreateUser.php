@@ -5,11 +5,11 @@
 
 	/*if(isset($_POST['nom']) && ($_POST['prenom']))Si je reçois un $_POST['nom'], alors je crèer une nouvelle entré dans la table User avec les informations données{*/
 		$user = new User ();
-		$user->setNom($post['nom']);
-		$user->setPrenom($post['prenom']);
-		$user->setEmail($post['email']);
+		$user->setNom($_POST['nom']);
+		$user->setPrenom($_POST['prenom']);
+		$user->setEmail($_POST['email']);
 		$hash = user::hashage(default_password);
-		$user->setPermission($post['permission']);
+		$user->setPermission($_POST['permission']);
 		$create = $user->createUser($hash);
 		var_dump($_POST['nom']);
 	/*	$mail = new PHPMailer;
