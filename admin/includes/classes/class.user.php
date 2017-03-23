@@ -168,14 +168,18 @@ class User {
             if (password_verify($password, $passtest)) {
                 if ($password !== default_password){
                     $id_user = $res[0]['id_utilisateur'];
-                    $permission = $res[0]['permission'];
                     $prenom = $res[0]['prenom'];
-                    return array($id_user, $permission, $prenom);
+                    $permission = $res[0]['permission'];
+                    return array($id_user, $prenom, $permission);
                 }
                 else {
                     $id_user = $res[0]['id_utilisateur'];
-                    return array($id_user);   
+                    $prenom = $res[0]['prenom'];
+                    return array($id_user, $prenom);   
                 }        
+            }
+            else /*sinon je retourn FALSE*/{
+            return FALSE;
             } 
         }    
         else /*sinon je retourn FALSE*/{

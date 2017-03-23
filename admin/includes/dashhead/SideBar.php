@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_SESSION['id']) && $_SESSION['permission'])
+if(isset($_SESSION['id']))
 {	
 	
 	function showPage ($texte) 

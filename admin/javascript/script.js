@@ -33,6 +33,13 @@ $(document).ready(function () {
   $('#mdpoublie').popover('');
 });
 
+/*------------------------ 
+    Dashboard.php (firtlogin)
+-------------------------*/
+
+function RedirectFirstLogin(){
+        document.location.href="http://localhost/git/art_management/admin/user.php";
+      }
 
 /*------------------------ 
   user.php (modif user)
@@ -165,6 +172,7 @@ $(document).ready(function () {
 		var id_user = $(this).parent().parent().attr('id').substr(1);
 		var action = $('#n'+id_user+' input[name="action"]').val();
 		console.log(action);
+		console.log(id_user);
 		$.ajax({
 			url: "includes/AjaxPhpfunctions/funcModUser.php",
 			method: 'POST',

@@ -2,10 +2,17 @@
 
 require_once('includes/classconfig.php');
 
+$texte = "Dashboard > Profil";
+$desc = "Vous pouvez modifier vos informations de compte" ;
 require_once('includes/dashhead.php');
 
 if(isset($_SESSION['id']))
 {	
+	?>
+	<section class="container page_content">
+		<div class="row cadre">
+	<?php		
+
 	if(isset($_POST['email'])) {
 		$user = new User ();
 		$user->setNom($_POST['nom']);
@@ -20,15 +27,15 @@ if(isset($_SESSION['id']))
 		elseif($updata == TRUE || $updatepwd == TRUE){
 	
 		$_SESSION['id'] = $login['0'];
-		$_SESSION['permission'] = $login['1'];
-		$_SESSION['prenom'] = $login['2'];
+		$_SESSION['prenom'] = $login['1'];
+		$_SESSION['permission'] = $login['2'];
 		}
 	}
 	else {
 	$modif = new User($_SESSION['id']);
 	$modif->modForm('user.php');
 	}
-
+	?></div></sections><?php
 }
 else { 
 
