@@ -132,12 +132,9 @@ class User {
             <input class="action" type="hidden" name="action" value="" />
 
             <input type="submit" class="modifier" name="submit" value="Modifier" /></td>
-            <td><button class="reset">Réinitialiser</button></td>
-            <td><button class="delete">Suppr</button></td>
+            <td><button class="reset" data-toggle= "modal" data-target= ".reset-pass-modal">Réinitialiser</button></td>
+            <td><button class="delete" id="btn-modal" data-toggle= "modal" data-target= ".reset-pass-modal">Suppr</button></td>
         </tr>
-            <!-- <input type="submit" name="submit" value="Modifier" id="modifier"/> -->
-            <!-- <a id="modifier" href="#" name="modifier" >Modifier</a> -->
-            <!-- <button id="#modifier">Modifier</button> -->
             
         <?php
     }    

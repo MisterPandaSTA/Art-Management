@@ -33,7 +33,7 @@ require_once ('includes/dashhead/header.php');
 <div class="row login">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
     	<div class="col-xs-10 col-xs-offset-1 ">
-    		<img src="images/test.svg" id="logo"></img>
+    		<img src="images/test2.svg" id="logo"></img>
     	</div>
     </div>
 </div>
@@ -46,7 +46,7 @@ require_once ('includes/dashhead/header.php');
 				<div class="form-group">
                     <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Votre adresse mail">
 				</div>
-				<div class="form-group">
+				<div class="form-group" id="pass-login">
                     <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Votre mot de passe">
 				</div>
 				<div class="form-group">
@@ -54,7 +54,10 @@ require_once ('includes/dashhead/header.php');
 				</div>
 				<div class="row">
 					<div class="button-checkbox col-xs-3 col-sm-3 col-xs-offset-6 col-sm-offset-8">
-						<a href="" id="mdpoublie" class="btn btn-link">Mot de passe oublié ?</a>	
+						<button type="button" id="mdpoublie" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Veuillez contacter votre administrateur pour qu'il réinitialise votre mot de passe.">
+  							Mot de passe oublié ?
+						</button>
+						<!-- <a href="" id="mdpoublie" class="btn btn-link">Mot de passe oublié ?</a> -->	
 					</div>
 				</div>
 				<hr class="colorgraph">

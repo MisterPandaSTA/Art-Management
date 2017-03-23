@@ -1,12 +1,13 @@
 <?php
 
 require_once('includes/classconfig.php');
-require_once('includes/dashhead.php');
+
 
 if(isset($_SESSION['id']) && $_SESSION['permission'])
 {	
 	$texte = "Dashboard";
-	$desc = "Bienvenue ".$_SESSION['prenom']." " ;	
+	$desc = "Bienvenue ".$_SESSION['prenom']." " ;
+	require_once('includes/dashhead.php');	
 	if($_SESSION['permission'] == 'admin' )
 	{
 		

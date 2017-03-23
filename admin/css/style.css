@@ -20,10 +20,15 @@
 	margin-top:20px;
 } 
 
+#pass-login
+{
+  margin-bottom: 10px;
+}
+
 #mdpoublie 
 {
   display: block;
-  padding: 0;
+  padding: 5px;
 }
 
 /* Credit to bootsnipp.com for the css for the color graph */

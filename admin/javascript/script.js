@@ -23,16 +23,28 @@ $("#menu-toggle").click(function(e) {
 
 
 
-$(document).ready(function () {
+/*$(document).ready(function () {
 	$('#mdpoublie').click(function(){
 		alert("Veuillez contacter votre administrateur pour qu'il réinitialise votre mot de passe.");
 	});
+});*/
+
+$(document).ready(function () {
+  $('#mdpoublie').popover('');
 });
 
 
 /*------------------------ 
   user.php (modif user)
 -------------------------*/
+
+/*test*/
+
+/*$(document).ready(function () {
+	$('#btn-modal').click(function(){
+		$('#mymodal').modal('toggle');
+	});
+});*/
 
 
 /*------------------------ 
