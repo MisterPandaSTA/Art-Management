@@ -8,6 +8,7 @@ require_once('includes/classconfig.php');
 if(isset($_POST['email'])) /*si je reçois un $_POST['courriel'] par le formulaire, l'utilise la function login qui va tester les informations fournis par le formulaire*/ {
 	
 	$login = user::login($_POST['email'],$_POST['password']);
+	
 	if($login !== FALSE) /*si la fonction retourne autre chose que FALSE, alors une connection est établi*/{
 
 		$_SESSION['id'] = $login['0'];

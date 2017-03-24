@@ -24,7 +24,7 @@ $("#menu-toggle").click(function(e) {
 
 
 /*$(document).ready(function () {
-	$('#mdpoublie').click(function(){
+	$('#mdpoublie').click(function(){s
 		alert("Veuillez contacter votre administrateur pour qu'il réinitialise votre mot de passe.");
 	});
 });*/

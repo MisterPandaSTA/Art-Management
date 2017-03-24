@@ -3,17 +3,18 @@
 require_once('includes/classconfig.php');
 
 
-if(isset($_SESSION['id']) && $_SESSION['permission'])
-{	
-	require_once('includes/dashhead.php');
-	echo '<div>';	
-	/*Oeuvre::affichage();*/
-	$oeuvre=new Oeuvre();
-	$oeuvre->affichage();
-	
-	if(isset($_GET['id_oeuvre'])) {
-	$oeuvre = new Oeuvre($_GET['id_oeuvre']);
-	$oeuvre->form('oeuvre.php','mettre à jour');
+if(isset($_SESSION['id']))
+{
+	if($_SESSION['permission'] == 'utilisateur' || $_SESSION['permission'] == 'admin') {	
+		require_once('includes/dashhead.php');
+		echo '<div>';	
+		/*Oeuvre::affichage();*/
+		$oeuvre=new Oeuvre();
+		$oeuvre->affichage();
+		
+		if(isset($_GET['id_oeuvre'])) {
+		$oeuvre = new Oeuvre($_GET['id_oeuvre']);
+		$oeuvre->form('oeuvre.php','mettre à jour');
 
 /*if(isset($_POST['nom']) && $_POST['nom'] != '' && $_POST['id_oeuvre'] !='') {
 
@@ -59,7 +60,7 @@ if(isset($_POST['nom'])) {
 	
 	if ($insert==TRUE) {header("location:oeuvre.php");}
 }*/
-
+	}
 }
 
 }
