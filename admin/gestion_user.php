@@ -45,28 +45,77 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 	
 	?></table></div></sections>
 
-<button type= "button" id="btn-modal" data-toggle= "modal" data-target= ".reset-pass-modal" > Launch modal </button>
-
 		<div class="modal fade reset-pass-modal" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Réinitialisation de mot de passe</h4>
+		        <h4 class="modal-title">Réinitialisation de mot de passe ?</h4>
 		      </div>
 		      <div class="modal-body">
-		        <p>Voulez-vous vraiment réinitialiser le mot de passe de de cet utilisateur ?</p>
+		        <p>Voulez-vous vraiment réinitialiser le mot de passe du compte <span class="nom_compte"></span> ?</p>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-		        <button type="button" class="btn btn-primary">Réinitialiser</button>
+		        <button type="button" class="btn btn-primary" id="requeteAjaxReset" data-toggle= "modal" data-target= ".reset-complet" data-dismiss="modal">Réinitialiser</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+		<div class="modal fade reset-complet" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Action effectué</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Vous venez de réinitialiser le mot de passe du compte <span class="nom_compte"></span> </p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" data-dismiss="modal">Fermer</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+	<div class="modal fade delete-pass-modal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Supprimer l'utilisateur ?</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Voulez-vous vraiment supprimer le compte <span class="nom_compte"></span> ?</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+		        <button type="button" class="btn btn-primary" id="requeteAjaxDelete" data-toggle= "modal" data-target= ".suppr-complet" data-dismiss="modal">Supprimer</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	
+
+	<div class="modal fade suppr-complet" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Action effectué</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Vous venez de supprimer le compte <span class="nom_compte"></span> </p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" id="reset_page">Fermer</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 	<?php
-
-
 }
 else {
 	?>

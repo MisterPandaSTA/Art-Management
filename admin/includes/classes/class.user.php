@@ -131,9 +131,9 @@ class User {
             <td><input type="hidden" name="id_user" value="<?php echo $this->getId(); ?>" />
             <input class="action" type="hidden" name="action" value="" />
 
-            <input type="submit" class="modifier" name="submit" value="Modifier" /></td>
-            <td><button class="reset" data-toggle= "modal" data-target= ".reset-pass-modal">Réinitialiser</button></td>
-            <td><button class="delete" id="btn-modal" data-toggle= "modal" data-target= ".reset-pass-modal">Suppr</button></td>
+            <input type="submit" class="modifier btn btn-success" name="submit" value="Modifier" /></td>
+            <td><button class="reset btn btn-info" data-toggle= "modal" data-target= ".reset-pass-modal">Réinitialiser</button></td>
+            <td><button class="delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Suppr</button></td>
         </tr>
             
         <?php
