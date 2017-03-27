@@ -73,6 +73,10 @@
 /*------------------------ 
   sidebar.php (partout)
 -------------------------*/
+.fixe
+{
+  display: fixed;
+} 
 
 .logotop
 {
@@ -99,8 +103,9 @@
   position: absolute;
   top: 0px;
   left: 154px;
+  right: 0px;
   background-color: #9DCB9E;
-  width: 100%;
+ /* width: 100%;*/
   height: 73px;
   float: right;
   padding-left: 15px;

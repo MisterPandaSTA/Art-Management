@@ -1,5 +1,3 @@
-<?php
-
 <?php	
 
 require_once('includes/classconfig.php');
@@ -13,16 +11,23 @@ if($_SESSION['id']){
 	?>
 	<section class="container page_content">
 		<div class="row cadre">
+		<a href="#">Cliquez ici pour afficher le formulaire de création de fiche artiste</a>
+			<div class="panel panel-default">
+	 		 <div class="panel-heading">Création de Fiche Artiste</div>
+		
 			
 				
 	<?php
 
-			$artiste= new artiste();
-			$artiste->form('creer.php','creer fiche');
+					$artiste= new artiste();
+					$artiste->formArtiste('artiste.php','Créer');
 	?>
-		</div><div class="row cadre">
+				
+			</div>
+		</div>
+		<div class="row cadre">
 			<div class="panel panel-default">
-	 		 <div class="panel-heading">Liste des utilisateurs</div>
+	 		 <div class="panel-heading">Liste des fiches artistes</div>
 		
 			
 				<table class="table table-bordered table-striped table-hover">
@@ -31,9 +36,10 @@ if($_SESSION['id']){
 						<th>Prenom</th>
 						<th>Pseudo</th>
 						<th>Email</th>
-						<th>telephone</th>
-						<th>adresse</th>
-						<th>description</th>
+						<th>Téléphone</th>
+						<th>Adresse</th>
+						<th>Activitées</th>
+						<th>Description</th>
 						<th colspan="3">Action</th>
 						
 					</thead>

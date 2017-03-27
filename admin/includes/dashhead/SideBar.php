@@ -16,7 +16,7 @@ if(isset($_SESSION['id']))
 
 ?>
 <body>
-	<div class="">
+	<div class="fixe">
 		<div class="logotop">
 			<img src="images/test2.svg" class="logo_sidebar"></img>
 			<div class="topbar">

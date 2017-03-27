@@ -224,61 +224,86 @@ class Artiste {
 
      /*  formulaire */
 
-    function form($target,$submit='') {
-    ?><form action="<?php echo $target; ?>" method="post">
-    <input type="hidden" name="id_artiste" value="<?php echo $this->id_artiste; ?>">
+    function formArtiste($target,$submit='') {
+    ?><form action="<?php echo $target; ?>" id="n<?php echo $this->id_artiste; ?>">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <th colspan="3">Identité</th>
+            </thead>
+            <tr>
+                <td><label for="nom">Nom :</label>
+                    <input type="text" name="nom" value="<?php echo $this->nom; ?>"></td>
 
-    <label for="nom">Nom de l'artiste</label>
-    <input type="text" name="nom" value="<?php echo $this->nom; ?>"><br>
+                    <td><label for="prenom">Prenom :</label>
+                     <input type="text" name="prenom" value="<?= $this->prenom ?>"></td>
+                    
+                    <td><label for="pseudo">Pseudo :</label>
+                    <input type="text" name="pseudo" value="<?= $this->pseudo ?>"></td>
+            </tr> 
+        </table>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <th colspan="3">Coordonnées</th>
+            </thead>
+            <tr>
+                <td><label for="email">Email :</label>
+                <input type="email" name="email" value="<?= $this->email ?>"></td>
 
-    <label for="prenom">Prénom de l'artiste</label>
-    <input type="text" name="prenom" value="<?= $this->prenom ?>"><br>
+                <td><label for="telephone">Téléphone :</label>
+                <input type="tel" name="telephone" value="<?= $this->telephone ?>"></td>
 
-    <label for="pseudo">Pseudo</label>
-    <input type="text" name="pseudo" value="<?= $this->pseudo ?>"><br>
+                <td><label for="adresse">Adresse :</label>
+                <input type="text" name="adresse" value="<?= $this->adresse ?>"></td>
+            </tr>
+        </table>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <th colspan="3">Détails</th>
+            </thead>
+            <tr>
+                <td><label for="activitees">Activitées :</label>
+                <input type="text" name="activitees" value="<?= $this->activitees ?>"></td>
+                <td><label for="photo">Photo : </label>
+                    <input type="file" name="photo"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><textarea name="description" value="<?= $this->description ?>"></textarea></td>
+            </tr>
+        </table>
 
-    <label for="email">Email</label>
-    <input type="email" name="email" value="<?= $this->email ?>"><br>
-
-    <label for="telephone">Téléphone</label>
-    <input type="tel" name="telephone" value="<?= $this->telephone ?>"><br>
-
-    <label for="adresse">Adresse</label>
-    <input type="text" name="adresse" value="<?= $this->adresse ?>"><br>
-
-    <label for="description">Description</label>
-    <input type="text" name="description" value="<?= $this->description ?>"><br>
-
-    <label for="activitees">Activitées</label>
-    <input type="text" name="activitees" value="<?= $this->activitees ?>"><br>
-
-    <label for="description_anglais">Description en anglais</label>
-    <input type="text" name="description_anglais" value="<?= $this->description_anglais ?>"><br>
-
-    <label for="description_allemand">Description en allemand</label>
-    <input type="text" name="description_allemand" value="<?= $this->description_allemand ?>"><br>
-
-    <label for="description_russe">Description en russe</label>
-    <input type="text" name="description_russe" value="<?= $this->description_russe ?>"><br>
-
-    <label for="description_chinois">Description en chinois</label>
-    <input type="text" name="description_chinois" value="<?= $this->description_chinois ?>"><br>
-
-    <label for="activitees_anglais">Activitées en anglais</label>
-    <input type="text" name="activitees_anglais" value="<?= $this->activitees_anglais ?>"><br>
-
-    <label for="activitees_allemand">Activitees en allemand</label>
-    <input type="text" name="activitees_allemand" value="<?= $this->activitees_allemand ?>"><br>
-
-    <label for="activitees_russe">Activitees en russe</label>
-    <input type="text" name="activitees_russe" value="<?= $this->activitees_russe ?>"><br>
-
-    <label for="activitees_chinois">Activitees en chinois</label>
-    <input type="text" name="activitees_chinois" value="<?= $this->activitees_chinois ?>"><br>
+ 
 
     <input type="submit" value="<?php echo $submit==''?'Envoyer':$submit; ?>">
 
     </form><?php
+    }
+
+    function formTradArtiste () {
+    ?>
+    <label for="description_anglais">Description en anglais</label>
+    <input type="text" name="description_anglais" value="<?= $this->description_anglais ?>">
+
+    <label for="description_allemand">Description en allemand</label>
+    <input type="text" name="description_allemand" value="<?= $this->description_allemand ?>">
+
+    <label for="description_russe">Description en russe</label>
+    <input type="text" name="description_russe" value="<?= $this->description_russe ?>">
+
+    <label for="description_chinois">Description en chinois</label>
+    <input type="text" name="description_chinois" value="<?= $this->description_chinois ?>">
+
+    <label for="activitees_anglais">Activitées en anglais</label>
+    <input type="text" name="activitees_anglais" value="<?= $this->activitees_anglais ?>">
+
+    <label for="activitees_allemand">Activitees en allemand</label>
+    <input type="text" name="activitees_allemand" value="<?= $this->activitees_allemand ?>">
+
+    <label for="activitees_russe">Activitees en russe</label>
+    <input type="text" name="activitees_russe" value="<?= $this->activitees_russe ?>">
+
+    <label for="activitees_chinois">Activitees en chinois</label>
+    <input type="text" name="activitees_chinois" value="<?= $this->activitees_chinois ?>">
+    <?php
     }
 
     /* Insert ou Update */
