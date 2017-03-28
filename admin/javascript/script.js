@@ -15,6 +15,7 @@ $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("active");
         $("#sidebar-wrapper").toggleClass("active");
+        $("section .container-fluid").toggleClass("active");
 });
 
 /*------------------------ 
@@ -283,7 +284,177 @@ $(document).ready(function () {
 /*------------------------ 
   artistes.php (gestion des artistes)
 -------------------------*/
+$(document).ready(function () {
+	$('#artiste_create').click(function(){
+		var nom = $("#formArtiste input[name='nom']").val();
+		console.log(nom);
+		var prenom = $("#formArtiste input[name='prenom']").val();
+		console.log(prenom);
+		var pseudo = $("#formArtiste input[name='pseudo']").val();
+		console.log(pseudo);
+		var email = $("#formArtiste input[name='email']").val();
+		console.log(email);
+		var telephone = $("#formArtiste input[name='telephone']").val();
+		console.log(telephone);	
+		var adresse = $("#formArtiste input[name='adresse']").val();
+		console.log(adresse);
+		var activitees = $("#formArtiste input[name='activitees']").val();
+		console.log(activitees);
+		var description = $("#formArtiste textearea[name='description']").val(description);
+		console.log(description);
+			$.ajax({
+				url: "includes/AjaxPhpfunctions/funcCreateUser.php",
+				method: 'POST',
+				data : {
+						nom : nom,
+						prenom : prenom,
+						email : email,
+						permission : permission,
+						
+					},
+				success : function (response) {
+					console.log(response);
+					if(response == 'error' ) {
+						// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
+						alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
+						ajaxResponse = false;
+					}
+					else if (response == 'ok') {
+						// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
+						console.log('Cycle achevé et mis à jours');
+						ajaxResponse = true;
+					}
+					else {
+						// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
+						/*actualCycleId = parseInt(response);
+						ajaxResponse = parseInt(response);*/
 
+						ajaxResponse = parseInt(response,10);
+					}
+				},
+				error: function () {
+					alert('Désolé, une erreur est survenue lors de de la requête ajax');
+				},
+				complete : function () {
+					console.log('Requête Ajax exécutée');
+				}
+			});	
+		
+	});
+});
+
+
+
+$(document).ready(function () {
+	$('.artiste_modifier').click(function(){
+		$(".action").val('modifier');
+		var id_user = $(this).parent().parent().attr('id').substr(1);
+		console.log(id_user);
+		var nom = $('#n'+id_user+' input[name="nom"]').val();
+		console.log(nom);
+		var prenom = $('#n'+id_user+' input[name="prenom"]').val();
+		console.log(prenom);
+		var email = $('#n'+id_user+' input[name="email"]').val();
+		console.log(email);	
+		var permission = $('#n'+id_user+' select[name="permission"]').val();
+		console.log(permission);
+		var action = $('#n'+id_user+' input[name="action"]').val();
+		console.log(action);		
+			$.ajax({
+				url: "includes/AjaxPhpfunctions/funcModUser.php",
+				method: 'POST',
+				data : {
+						nom : nom,
+						prenom : prenom,
+						email : email,
+						permission : permission,
+						id_user : id_user,
+						action : action
+					},
+				success : function (response) {
+					console.log(response);
+					if(response == 'error' ) {
+						// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
+						alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
+						ajaxResponse = false;
+					}
+					else if (response == 'ok') {
+						// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
+						console.log('Cycle achevé et mis à jours');
+						ajaxResponse = true;
+					}
+					else {
+						// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
+						/*actualCycleId = parseInt(response);
+						ajaxResponse = parseInt(response);*/
+
+						ajaxResponse = parseInt(response,10);
+					}
+				},
+				error: function () {
+					alert('Désolé, une erreur est survenue lors de de la requête ajax');
+				},
+				complete : function () {
+					console.log('Requête Ajax exécutée');
+				}
+			});		
+	});
+});
+
+
+$(document).ready(function () {
+	$(".artiste_delete").click(function (){
+		$(".action").val('delete');
+		var id_user = $(this).parent().parent().attr('id').substr(1);
+		var action = $('#n'+id_user+' input[name="action"]').val();
+		var email = $('#n'+id_user+' input[name="email"]').val();
+		$(".nom_compte").html(email);
+		console.log(id_user);
+		console.log(email);
+		console.log(action);
+		$('#requeteAjaxDelete').click(function (){
+			$.ajax({
+				url: "includes/AjaxPhpfunctions/funcModUser.php",
+				method: 'POST',
+				data: {
+						id_user : id_user,
+						action : action
+				},
+				success : function (response) {
+						console.log(response);
+						if(response == 'error' ) {
+							// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
+							alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
+							ajaxResponse = false;
+						}
+						else if (response == 'ok') {
+							// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
+							console.log('Cycle achevé et mis à jours');
+							ajaxResponse = true;
+						}
+						else {
+							// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
+							/*actualCycleId = parseInt(response);
+							ajaxResponse = parseInt(response);*/
+
+							ajaxResponse = parseInt(response,10);
+						}
+				},
+				error: function () {
+					alert('Désolé, une erreur est survenue lors de de la requête ajax');
+				},
+				complete : function () {
+					console.log('Requête Ajax exécutée');
+					$('.reset-complet')
+					$(document).click(function (){
+						document.location.href="http://localhost/git/art_management/admin/gestion_user.php";
+					});	
+				}		
+			});
+		
+		});	
+	});
+});
 
 /*------------------------ 
     .php ()

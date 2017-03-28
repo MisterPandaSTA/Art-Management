@@ -9,11 +9,11 @@ if($_SESSION['id']){
 	require_once('includes/dashhead.php');
 	
 	?>
-	<section class="container page_content">
+	<section class="container-fluid page_content">
 		<div class="row cadre">
-		<a href="#">Cliquez ici pour afficher le formulaire de création de fiche artiste</a>
+		<a href="">Cliquez ici pour afficher le formulaire de création de fiche artiste</a>
 			<div class="panel panel-default">
-	 		 <div class="panel-heading">Création de Fiche Artiste</div>
+	 		<div class="panel-heading">Création de Fiche Artiste</div>
 		
 			
 				
@@ -27,7 +27,7 @@ if($_SESSION['id']){
 		</div>
 		<div class="row cadre">
 			<div class="panel panel-default">
-	 		 <div class="panel-heading">Liste des fiches artistes</div>
+	 			<div class="panel-heading">Liste des fiches artistes</div>
 		
 			
 				<table class="table table-bordered table-striped table-hover">
@@ -40,11 +40,23 @@ if($_SESSION['id']){
 						<th>Adresse</th>
 						<th>Activitées</th>
 						<th>Description</th>
-						<th colspan="3">Action</th>
+						<th colspan="2">Action</th>
 						
 					</thead>
 
+				<?php
 
+
+					$modif = Artiste::listGestion(0, 10);
+					foreach($modif as $form) {
+						$f = new Artiste($form['id_artiste']);
+						$f->formArtisteModif('');
+					}
+				
+				?></table>
+			</div>
+		</div>	
+	</sections>	
 
 
 	

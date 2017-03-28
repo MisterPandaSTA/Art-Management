@@ -220,25 +220,40 @@ class Artiste {
     }
 
 
-    /* formulaire */
+    /* 
 
-     /*  formulaire */
+    formulaires 
+
+    */
+
+    static function listGestion($startNb=0, $nbElmts=10){ /*ceci est la liste des formulaires de modification des comptes*/
+        $res = sql("
+            SELECT *
+            FROM artiste
+            ORDER BY nom 
+            LIMIT ".$startNb.",".$nbElmts." ;"
+            );
+        /*print_r($res);*/
+        return $res;
+    }
+
+     /*  formulaire création */
 
     function formArtiste($target,$submit='') {
-    ?><form action="<?php echo $target; ?>" id="n<?php echo $this->id_artiste; ?>">
+    ?><form action="<?php echo $target; ?>" id="formArtiste" >
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <th colspan="3">Identité</th>
             </thead>
             <tr>
                 <td><label for="nom">Nom :</label>
-                    <input type="text" name="nom" value="<?php echo $this->nom; ?>"></td>
+                    <input type="text" name="nom" value=""></td>
 
                     <td><label for="prenom">Prenom :</label>
-                     <input type="text" name="prenom" value="<?= $this->prenom ?>"></td>
+                     <input type="text" name="prenom" value=""></td>
                     
                     <td><label for="pseudo">Pseudo :</label>
-                    <input type="text" name="pseudo" value="<?= $this->pseudo ?>"></td>
+                    <input type="text" name="pseudo" value=""></td>
             </tr> 
         </table>
         <table class="table table-bordered table-striped table-hover">
@@ -247,13 +262,13 @@ class Artiste {
             </thead>
             <tr>
                 <td><label for="email">Email :</label>
-                <input type="email" name="email" value="<?= $this->email ?>"></td>
+                <input type="email" name="email" value=""></td>
 
                 <td><label for="telephone">Téléphone :</label>
-                <input type="tel" name="telephone" value="<?= $this->telephone ?>"></td>
+                <input type="tel" name="telephone" value=""></td>
 
                 <td><label for="adresse">Adresse :</label>
-                <input type="text" name="adresse" value="<?= $this->adresse ?>"></td>
+                <input type="text" name="adresse" value=""></td>
             </tr>
         </table>
         <table class="table table-bordered table-striped table-hover">
@@ -262,21 +277,23 @@ class Artiste {
             </thead>
             <tr>
                 <td><label for="activitees">Activitées :</label>
-                <input type="text" name="activitees" value="<?= $this->activitees ?>"></td>
+                <input type="text" name="activitees" value=""></td>
                 <td><label for="photo">Photo : </label>
                     <input type="file" name="photo"></td>
             </tr>
             <tr>
-                <td colspan="2"><textarea name="description" value="<?= $this->description ?>"></textarea></td>
+                <td colspan="2"><textarea name="description" value="" col="5"></textarea></td>
             </tr>
         </table>
 
  
 
-    <input type="submit" value="<?php echo $submit==''?'Envoyer':$submit; ?>">
+    <input type="submit" class="btn" id="artiste_create" value="<?php echo $submit==''?'Envoyer':$submit; ?>">
 
     </form><?php
     }
+
+    /* formulaire pour ajouter des trads*/
 
     function formTradArtiste () {
     ?>
@@ -305,6 +322,28 @@ class Artiste {
     <input type="text" name="activitees_chinois" value="<?= $this->activitees_chinois ?>">
     <?php
     }
+
+     /* formulaire pour les modifs et les actions */
+     function formArtisteModif () {
+         ?><tr class="formArtisteModif" id="<?php echo "n".$this->getIdArtiste(); ?>">
+            <td><input type="text" name="nom" value="<?php echo $this->getNom(); ?>" /></td>
+            <td><input type="text" name="prenom" value="<?php echo $this->getPrenom(); ?>" /></td>
+            <td><input type="text" name="pseudo"></td>
+            <td><input type="email" name="email" value="<?php echo $this->getEmail(); ?>" /></td>
+            <td><input type="text" name="telephone" value="<?php echo $this->getTelephone(); ?>" />
+            <td><input type="text" name="adresse" value="<?php echo $this->getAdresse(); ?>"></td>
+            <td><input type="text" name="activitees" value="<?php echo $this->getActivitees(); ?>"></td>
+            <td><textarea name="description"><?php echo $this->getDescription(); ?></textarea></td>
+            <td><input class="action" type="hidden" name="action" value="" />
+
+            <input type="submit" class="modifier btn btn-success" name="submit" value="Modifier" /></td>
+            <td><button class="delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Suppr</button></td>
+        </tr>
+            
+        <?php
+
+     }
+
 
     /* Insert ou Update */
 

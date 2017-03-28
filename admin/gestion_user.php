@@ -9,7 +9,7 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 	
 
 	?>
-	<section class="container page_content">
+	<section class="container-fluid page_content">
 		<div class="row cadre">
 			
 				
