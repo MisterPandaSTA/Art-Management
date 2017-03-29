@@ -9,6 +9,8 @@ if($_SESSION['id']){
 	require_once('includes/dashhead.php');
 	?>
 	
+	<section class="container-fluid page_content active">
+		<div class="row cadre">
 
 	<!-- contenue -->
 

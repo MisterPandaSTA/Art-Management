@@ -239,7 +239,7 @@ class Artiste {
 
      /*  formulaire création */
 
-    function formArtiste($target,$submit='') {
+    function formArtiste($target) {
     ?>
     <form action="<?php echo $target; ?>" id="formCreateArtiste">
             <div class="panel-heading">Création de Fiche Artiste</div>
@@ -291,7 +291,7 @@ class Artiste {
             </form>
 
             
-            <form action="<?php echo $target; ?>" id="formModifArtiste" class="none_class">
+            <form action="#" id="formModifArtiste" class="none_class" method="post">
             <div class="panel-heading">Modifier Fiche Artiste de</div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>

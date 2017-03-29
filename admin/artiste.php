@@ -9,7 +9,7 @@ if($_SESSION['id']){
 	require_once('includes/dashhead.php');
 	
 	?>
-	<section class="container-fluid page_content">
+	<section class="container-fluid page_content active">
 		<div class="row cadre">
 			<div class="panel panel-default">
 	 		
@@ -19,7 +19,7 @@ if($_SESSION['id']){
 	<?php
 
 					$artiste= new artiste();
-					$artiste->formArtiste('artiste.php','Créer');
+					$artiste->formArtiste('artiste.php');
 	?>
 				
 			</div>

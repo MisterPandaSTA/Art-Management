@@ -51,6 +51,9 @@
 .page_content
 {
   margin-top: 70px;
+  margin-left: 20px;
+  margin-right: 20px;
+  transition: all .4s ease 0s;
 }
 
 .cadre
@@ -247,7 +250,11 @@
 
 
 #wrapper.active #sidebar-wrapper, #wrapper.active .btn-menu {
-    left: 135px;
+  left: 135px;
+}
+
+.page_content.active {
+  margin-left: 155px;
 }
 
 #page-content-wrapper {

@@ -15,7 +15,7 @@ $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("active");
         $("#sidebar-wrapper").toggleClass("active");
-        /*$("section .container-fluid").toggleClass("active");*/
+        $(".page_content").toggleClass("active");
 });
 
 /*------------------------ 
@@ -378,8 +378,8 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-	$('.btn_artiste_modifier').click(function(){
-		$(".action").val('modifier');
+	$('.btn_artiste_modif').click(function(){
+	/*	$(".action").val('modifier');*/
 		var nom = $("#formModifArtiste input[name='nom']").val();
 		var prenom = $("#formModifArtiste input[name='prenom']").val();
 		var pseudo = $("#formModifArtiste input[name='pseudo']").val();
@@ -389,7 +389,23 @@ $(document).ready(function () {
 		var activitees = $("#formModifArtiste input[name='activitees']").val();
 		var description = $("#formModifArtiste textarea[name='description']").val();
 		var action = $("#formModifArtiste input[name='action']").val();
-		var id_artiste = $("#formModifArtiste input[name='id_artiste']").val();	
+		var id_artiste = $("#formModifArtiste input[name='id_artiste']").val();
+
+		console.log(nom);
+		
+		console.log(prenom);
+		
+		console.log(pseudo);
+		
+		console.log(email);
+		
+		console.log(telephone);	
+		
+		console.log(adresse);
+		
+		console.log(activitees);
+		
+		console.log(description);	
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
 				method: 'POST',
@@ -403,7 +419,7 @@ $(document).ready(function () {
 						activitees : activitees,
 						description : description,
 						action : action,
-						id_user : id_user
+						id_artiste : id_artiste
 						
 					},
 				success : function (response) {
