@@ -15,7 +15,7 @@ $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("active");
         $("#sidebar-wrapper").toggleClass("active");
-        $("section .container-fluid").toggleClass("active");
+        /*$("section .container-fluid").toggleClass("active");*/
 });
 
 /*------------------------ 
@@ -286,21 +286,21 @@ $(document).ready(function () {
 -------------------------*/
 $(document).ready(function () {
 	$('#btn_artiste_create').click(function(){
-		var nom = $("#formArtiste input[name='nom']").val();
+		var nom = $("#formCreateArtiste input[name='nom']").val();
 		console.log(nom);
-		var prenom = $("#formArtiste input[name='prenom']").val();
+		var prenom = $("#formCreateArtiste input[name='prenom']").val();
 		console.log(prenom);
-		var pseudo = $("#formArtiste input[name='pseudo']").val();
+		var pseudo = $("#formCreateArtiste input[name='pseudo']").val();
 		console.log(pseudo);
-		var email = $("#formArtiste input[name='email']").val();
+		var email = $("#formCreateArtiste input[name='email']").val();
 		console.log(email);
-		var telephone = $("#formArtiste input[name='telephone']").val();
+		var telephone = $("#formCreateArtiste input[name='telephone']").val();
 		console.log(telephone);	
-		var adresse = $("#formArtiste input[name='adresse']").val();
+		var adresse = $("#formCreateArtiste input[name='adresse']").val();
 		console.log(adresse);
-		var activitees = $("#formArtiste input[name='activitees']").val();
+		var activitees = $("#formCreateArtiste input[name='activitees']").val();
 		console.log(activitees);
-		var description = $("#formArtiste textarea[name='description']").val();
+		var description = $("#formCreateArtiste textarea[name='description']").val();
 		console.log(description);
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcCreateArtiste.php",
@@ -347,33 +347,64 @@ $(document).ready(function () {
 	});
 });
 
+$(document).ready(function () {
+	$('.btn_affiche_modifier_artiste').click(function (){
+		var id = $(this).parent().parent().attr('id').substr(1);
+
+		var nom = $('#n'+id+' td').html();
+		var prenom = $('#n'+id+' td').html();
+		var pseudo = $('#n'+id+' td').html();
+		var email = $('#n'+id+' input[name="email"]').val();
+		var telephone = $('#n'+id+' input[name="telephone"]').val();
+		var adresse = $('#n'+id+' input[name="adresse"]').val();
+		var activitees = $('#n'+id+' input[name="activitees"]').val();
+		var description = $('#n'+id+' textarea[name="description"]').val();
+		
+
+		$('#formCreateArtiste').toggle(false);
+		$('#formModifArtiste').toggle(true);
+
+		$("#formModifArtiste input[name='nom']").val(nom);
+		$("#formModifArtiste input[name='prenom']").val(prenom);
+		$("#formModifArtiste input[name='pseudo']").val(pseudo);
+		$("#formModifArtiste input[name='email']").val(email);
+		$("#formModifArtiste input[name='telephone']").val(telephone);
+		$("#formModifArtiste input[name='adresse']").val(adresse);
+		$("#formModifArtiste input[name='activitees']").val(activitees);
+		$("#formModifArtiste textarea[name='description']").val(description);
+		$("#formModifArtiste input[name='id_artiste']").val();
+	}); 
+});	
 
 
 $(document).ready(function () {
 	$('.btn_artiste_modifier').click(function(){
 		$(".action").val('modifier');
-		var id_user = $(this).parent().parent().attr('id').substr(1);
-		console.log(id_user);
-		var nom = $('#n'+id_user+' input[name="nom"]').val();
-		console.log(nom);
-		var prenom = $('#n'+id_user+' input[name="prenom"]').val();
-		console.log(prenom);
-		var email = $('#n'+id_user+' input[name="email"]').val();
-		console.log(email);	
-		var permission = $('#n'+id_user+' select[name="permission"]').val();
-		console.log(permission);
-		var action = $('#n'+id_user+' input[name="action"]').val();
-		console.log(action);		
+		var nom = $("#formModifArtiste input[name='nom']").val();
+		var prenom = $("#formModifArtiste input[name='prenom']").val();
+		var pseudo = $("#formModifArtiste input[name='pseudo']").val();
+		var email = $("#formModifArtiste input[name='email']").val();
+		var telephone = $("#formModifArtiste input[name='telephone']").val();
+		var adresse = $("#formModifArtiste input[name='adresse']").val();
+		var activitees = $("#formModifArtiste input[name='activitees']").val();
+		var description = $("#formModifArtiste textarea[name='description']").val();
+		var action = $("#formModifArtiste input[name='action']").val();
+		var id_artiste = $("#formModifArtiste input[name='id_artiste']").val();	
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
 				method: 'POST',
 				data : {
 						nom : nom,
 						prenom : prenom,
+						pseudo : pseudo,
 						email : email,
-						permission : permission,
-						id_user : id_user,
-						action : action
+						telephone : telephone,
+						adresse : adresse,
+						activitees : activitees,
+						description : description,
+						action : action,
+						id_user : id_user
+						
 					},
 				success : function (response) {
 					console.log(response);

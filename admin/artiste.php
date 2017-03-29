@@ -11,9 +11,8 @@ if($_SESSION['id']){
 	?>
 	<section class="container-fluid page_content">
 		<div class="row cadre">
-		<a href="">Cliquez ici pour afficher le formulaire de création de fiche artiste</a>
 			<div class="panel panel-default">
-	 		<div class="panel-heading">Création de Fiche Artiste</div>
+	 		
 		
 			
 				
@@ -50,7 +49,7 @@ if($_SESSION['id']){
 					$modif = Artiste::listGestion(0, 10);
 					foreach($modif as $form) {
 						$f = new Artiste($form['id_artiste']);
-						$f->formArtisteModif('');
+						$f->afficheArtisteModif('');
 					}
 				
 				?></table>

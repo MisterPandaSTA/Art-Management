@@ -3,9 +3,8 @@
 require_once('../classconfig.php');
 
 
-
-
-
+if(isset($_POST['nom']) && ($_POST['prenom']) && ($_POST['email'])) {
+	
 	$artiste= new artiste();
 	$artiste->setNom($_POST['nom']);
 	$artiste->setPrenom($_POST['prenom']);
@@ -13,8 +12,9 @@ require_once('../classconfig.php');
 	$artiste->setEmail($_POST['email']);
 	$artiste->setTelephone($_POST['telephone']);
 	$artiste->setAdresse($_POST['adresse']);
-/*	$artiste->setDescription($_POST['description']);*/
+	$artiste->setDescription($_POST['description']);
 	$artiste->setActivitees($_POST['activitees']);
+	var_dump($_POST['nom']);
 	/*$artiste->setDescriptionAnglais($_POST['description_anglais']);
 	$artiste->setDescriptionAllemand($_POST['description_allemand']);
 	$artiste->setDescriptionRusse($_POST['description_russe']);
@@ -26,5 +26,5 @@ require_once('../classconfig.php');
 
 	$insert=$artiste->syncDb();
 
-
+}
 		

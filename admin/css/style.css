@@ -427,10 +427,11 @@
   artistes.php (gestion des artistes)
 -------------------------*/
   
-.formArtisteModif input
-{
-  width: 100px;
+.none_class{
+  display: none;
 }
+ 
+
 
 /*------------------------ 
     .php ()

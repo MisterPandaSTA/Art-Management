@@ -240,7 +240,9 @@ class Artiste {
      /*  formulaire création */
 
     function formArtiste($target,$submit='') {
-    ?><form action="<?php echo $target; ?>" id="formArtiste">
+    ?>
+    <form action="<?php echo $target; ?>" id="formCreateArtiste">
+            <div class="panel-heading">Création de Fiche Artiste</div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <th colspan="3">Identité</th>
@@ -288,7 +290,9 @@ class Artiste {
                 <input type="submit" class="btn" id="btn_artiste_create" value="Créer">
             </form>
 
-            <form action="<?php echo $target; ?>" id="formModifArtiste">
+            
+            <form action="<?php echo $target; ?>" id="formModifArtiste" class="none_class">
+            <div class="panel-heading">Modifier Fiche Artiste de</div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <th colspan="3">Identité</th>
@@ -333,6 +337,7 @@ class Artiste {
                     <td colspan="2"><textarea name="description" value="" col="5"></textarea></td>
                 </tr>
             </table>
+            <input type="hidden" name="id_artiste">
             <input class="action" type="hidden" name="action" value="" />
             <input type="submit" class="btn" id="btn_artiste_modif" value="Modifier">
  
@@ -373,18 +378,18 @@ class Artiste {
     }
 
      /* formulaire pour les modifs et les actions */
-     function formArtisteModif () {
-         ?><tr class="formArtisteModif" id="<?php echo "n".$this->getIdArtiste(); ?>">
+     function afficheArtisteModif () {
+         ?><tr class="afficheArtisteModif"  id="<?php echo "n".$this->getIdArtiste(); ?>">
             <td><?php echo $this->getNom(); ?></td>
             <td><?php echo $this->getPrenom(); ?></td>
             <td><?php echo $this->getPseudo(); ?></td>
-            <td><?php echo $this->getEmail(); ?></td>
-            <td><?php echo $this->getTelephone(); ?></td>
-            <td><?php echo $this->getAdresse(); ?></td>
-            <td><?php echo $this->getActivitees(); ?></td>
-            <td><?php echo $this->getDescription(); ?></td>
             <td>    
-            <input class="action" type="hidden" name="action" value="" />
+                <input type="hidden" name="email" value="<?php echo $this->getEmail(); ?>"/>
+                <input type="hidden" name="telephone" value="<?php echo $this->getTelephone(); ?>"/>
+                <input type="hidden" name="adresse" value="<?php echo $this->getAdresse(); ?>"/>
+                <input type="hidden" name="activitees" value="<?php echo $this->getActivitees(); ?>"/>
+                <textarea name="description" class="none_class"><?php echo $this->getDescription(); ?></textarea>
+                <input class="action" type="hidden" name="action" value="" />
                 <button class="btn_affiche_modifier_artiste btn btn-success" name="modifier">Modifier</button>
             </td>
             <td><button class="delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Suppr</button></td>
@@ -442,20 +447,9 @@ class Artiste {
 
         }
 
-    /* affichage de la liste des artistes */
-
-    function affichage(){
-         $res=sql("SELECT * FROM artiste");
-         foreach ($res as $value) {
-             /*var_dump($value);
-    */  echo ''.$value['nom'].'<br><a href="modifier.php?id_artiste='.$value['id_artiste'].'">Modifier </a><a href="delete.php?id_artiste='.$value['id_artiste'].'">Supprimer </a><a href="description.php?id_artiste='.$value['id_artiste'].'">Description</a><br><br>';
-        }
-            echo '<a href="creer.php">Créer nouvelle fiche</a>';
-    }
-
      /* suppression d'un artiste*/
 
-    function delete(){
+    function deleteArtiste(){
             $res=sql("DELETE FROM artiste WHERE id_artiste='".$_GET['id_artiste']."'");
     }
 
