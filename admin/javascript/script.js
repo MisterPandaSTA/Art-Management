@@ -285,7 +285,7 @@ $(document).ready(function () {
   artistes.php (gestion des artistes)
 -------------------------*/
 $(document).ready(function () {
-	$('#artiste_create').click(function(){
+	$('#btn_artiste_create').click(function(){
 		var nom = $("#formArtiste input[name='nom']").val();
 		console.log(nom);
 		var prenom = $("#formArtiste input[name='prenom']").val();
@@ -300,16 +300,20 @@ $(document).ready(function () {
 		console.log(adresse);
 		var activitees = $("#formArtiste input[name='activitees']").val();
 		console.log(activitees);
-		var description = $("#formArtiste textearea[name='description']").val(description);
+		var description = $("#formArtiste textarea[name='description']").val();
 		console.log(description);
 			$.ajax({
-				url: "includes/AjaxPhpfunctions/funcCreateUser.php",
+				url: "includes/AjaxPhpfunctions/funcCreateArtiste.php",
 				method: 'POST',
 				data : {
 						nom : nom,
 						prenom : prenom,
+						pseudo : pseudo,
 						email : email,
-						permission : permission,
+						telephone : telephone,
+						adresse : adresse,
+						activitees : activitees,
+						description : description
 						
 					},
 				success : function (response) {
@@ -346,7 +350,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-	$('.artiste_modifier').click(function(){
+	$('.btn_artiste_modifier').click(function(){
 		$(".action").val('modifier');
 		var id_user = $(this).parent().parent().attr('id').substr(1);
 		console.log(id_user);
@@ -361,7 +365,7 @@ $(document).ready(function () {
 		var action = $('#n'+id_user+' input[name="action"]').val();
 		console.log(action);		
 			$.ajax({
-				url: "includes/AjaxPhpfunctions/funcModUser.php",
+				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
 				method: 'POST',
 				data : {
 						nom : nom,

@@ -3,7 +3,8 @@
 	require_once('../classconfig.php');
 	/*require 'includes/PHPMailer/PHPMailerAutoload.php';*/
 
-	/*if(isset($_POST['nom']) && ($_POST['prenom']))Si je reçois un $_POST['nom'], alors je crèer une nouvelle entré dans la table User avec les informations données{*/
+	if(isset($_POST['nom']) && ($_POST['prenom']) && ($_POST['email'])) /*Si je reçois un $_POST['nom'] alors je crèer une nouvelle entré dans la table User avec les informations données*/
+	{
 		$user = new User ();
 		$user->setNom($_POST['nom']);
 		$user->setPrenom($_POST['prenom']);
