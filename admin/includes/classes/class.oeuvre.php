@@ -11,13 +11,17 @@ class Oeuvre {
     private $date_creation;
     private $livraison;
     
-    /*  constructeur */
+ /*  constructeur */
 
     function __construct($id=0){
         if($id!=0){
-            $res=sql("SELECT * FROM oeuvre WHERE id_oeuvre='".$id."'");
+            $res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  WHERE id_oeuvre='".$id."'");
+            /*var_dump($res);*/
             $user=$res[0];
+            
+            $this->nom_artiste=$user['nom_artiste'];
             $this->id_oeuvre=$user['id_oeuvre'];
+            $this->id_artiste=$user['id_artiste'];
             $this->nom=$user['nom'];
             $this->type_oeuvre=$user['type_oeuvre'];
             $this->dimensions=$user['dimensions'];
@@ -25,8 +29,11 @@ class Oeuvre {
             $this->description_oeuvre=$user['description_oeuvre'];
             $this->date_creation=$user['date_creation'];
             $this->livraison=$user['livraison'];
-
+            
+/*var_dump($user);*/
         }
+
+
     }
 
 
@@ -51,6 +58,26 @@ class Oeuvre {
     function setNom($nom){
         
         $this->nom=$nom;
+    }
+
+    function getIdArtiste(){
+
+        return $this->id_artiste;
+    }
+
+    function setIdArtiste($idArtiste){
+
+        $this->id_artiste=$idArtiste;
+    }
+
+    function getNomArtiste(){
+
+        return $this->nom_artiste;
+    }
+
+    function setNomArtiste($nomArtiste){
+
+        $this->nom_artiste=$nomArtiste;
     }
     
     function getTypeOeuvre(){
@@ -148,12 +175,12 @@ class Oeuvre {
 
     /* insert ou update */
 
-    function syncDb() {
+   function syncDb() {
         if(empty($this->id_oeuvre)){
             //Si $this->id est vide, on fait un INSERT
-            $res= sql("INSERT INTO oeuvre (nom,type_oeuvre,dimensions,poids,
+            $res= sql("INSERT INTO oeuvre (id_oeuvre,id_artiste,nom,type_oeuvre,dimensions,poids,
                 description_oeuvre,date_creation,livraison)
-                      VALUES ('".$this->nom."','".$this->type_oeuvre."','".$this->dimensions."','".$this->poids."','".$this->description_oeuvre."','".$this->date_creation."','".$this->livraison."')");
+                      VALUES (NULL,'".$this->id_artiste."','".$this->nom."','".$this->type_oeuvre."','".$this->dimensions."','".$this->poids."','".$this->description_oeuvre."','".$this->date_creation."','".$this->livraison."')");
               
 
             if($res!==FALSE){
@@ -165,6 +192,7 @@ class Oeuvre {
         else {
             //Sinon on fait un UPDATE
                 $res=sql("UPDATE oeuvre SET 
+                id_artiste='".$this->id_artiste."',
                 nom = '".$this->nom."',
                 type_oeuvre= '".$this->type_oeuvre."',
                 dimensions= '".$this->dimensions."',
@@ -174,25 +202,27 @@ class Oeuvre {
                 livraison = '".$this->livraison."'
                 WHERE id_oeuvre = '".$this->id_oeuvre."'");
 
+
                 if ($res==TRUE){
                     return TRUE;
+                    echo 'la mise a jour a fonctionné';
                 }
                 else {
                     return FALSE;
+                    echo 'la mise a jour a échoué';
                 }
                
         }
 
     }
-
-
+            
     /* affichage de la liste des oeuvres */
 
     function affichage(){
          $res=sql("SELECT * FROM oeuvre");
          foreach ($res as $value) {
              /*var_dump($value);
-    */  echo ''.$value['nom'].'<br><a href="modifier.php?id_oeuvre='.$value['id_oeuvre'].'">Modifier </a><a href="delete.php?id_oeuvre='.$value['id_oeuvre'].'">Supprimer </a><a href="description.php?id_oeuvre='.$value['id_oeuvre'].'">Description</a><br><br>';
+    */  echo ''.$value['nom'].'<br><a href="modifier.php?id_oeuvre='.$value['id_oeuvre'].'">Modifier </a><a href="delete.php?id_oeuvre='.$value['id_oeuvre'].'">Supprimer </a><a href="pagetype.php?id_oeuvre='.$value['id_oeuvre'].'">Description</a><br><br>';
         }
             echo '<a href="creer.php">Créer nouvelle fiche</a>';
     }
@@ -202,6 +232,91 @@ class Oeuvre {
     function delete(){
             $res=sql("DELETE FROM oeuvre WHERE id_oeuvre='".$_GET['id_oeuvre']."'");
     }
-}
 
 
+    // formulaire de création d'utilisateur
+
+    function formCreate($target){ /*ceci est le formulaire de création de compte*/
+        ?>
+        <form id="formCreate" action="../admin/creation_oeuvre.php" method="post">
+            <table class="table table-bordered table-striped table-hover">
+            <thead>
+                
+                <th colspan="3"><label for="id_artiste">Choix de l'artiste :</label>
+            <select name="id_artiste" id="id_artiste">
+            <?php
+            $req=sql("SELECT nom, id_artiste FROM artiste ");
+                 
+            foreach ($req as $donnee) {
+                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].'</option>';
+            }?></select>
+            
+
+            
+        <tr>
+           <td>
+                <label for"nom">nom de l'oeuvre :</label>
+                <input type="text" name="nom" />
+            </td>
+            <td>
+                <label for"type_oeuvre">type d'oeuvre :</label>
+                <input type="text" name="type_oeuvre" />
+            </td>
+            <td>
+                <label for="dimensions">dimensions</label>
+                <input type="text" name="dimensions" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="poids">poids</label>
+                <input type="text" name="poids" />
+            </td>
+            <td>
+                <label for="description_oeuvre">description_oeuvre</label>
+                <input type="text" name="description_oeuvre" />
+            </td>
+            <td>
+                <label for="date_creation">date de creation</label>
+                <input type="text" name="date_creation" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="livraison">livraison</label>
+                <input type="text" name="livraison" />
+            </td>
+            <td>
+                <input id="create" type="submit" name="submit" value="Créer" />
+            </td>
+            <td>
+                <form id="formCreate" action="../admin/modifier.php" method="post">
+                <input id="modifier" type="submit" name="submit" value="Modifier" />
+                </form>
+            </td>
+        </tr>
+         </th></thead>
+        </form><?php
+    }
+
+ /***** FONCTION SELECT  *****/
+    function select (){
+    $res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  ");
+        foreach ($res as $user){
+            $oeuvre = new Oeuvre($user['id_oeuvre']);
+            echo "<tr>";
+            echo "<td>".$oeuvre->getNomArtiste()."</td>";
+            echo "<td>".$oeuvre->getNom()."</td>";
+            echo "<td>".$oeuvre->getTypeOeuvre()."</td>";
+            echo "<td>".$oeuvre->getDimensions()."</td>";
+            echo "<td>".$oeuvre->getPoids()."</td>";
+            echo "<td>".$oeuvre->getDescriptionOeuvre()."</td>";
+            echo "<td>".$oeuvre->getDateCreation()."</td>";
+            echo "<td>".$oeuvre->getLivraison()."</td>";
+            echo "<td></form></td>";
+
+            echo "</tr>";
+
+            }
+        }
+  }          

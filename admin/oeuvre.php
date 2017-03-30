@@ -1,83 +1,82 @@
-<?php
+<?php	
 
 require_once('includes/classconfig.php');
+require_once('includes/classes/class.oeuvre.php');
 
+if($_SESSION['id']){
+	if($_SESSION['permission'] == 'utilisateur' || $_SESSION['permission'] == 'admin') {
+	$texte = "Dashboard > Gestion des Oeuvres";
+	$desc = "Vous pouvez gérer les différentes oeuvres depuis cette page.";
+	require_once('includes/dashhead.php');
+	/********DEBUT PAGE TYPE**/
+	?>
 
-if(isset($_SESSION['id']))
-{
-	if($_SESSION['permission'] == 'utilisateur' || $_SESSION['permission'] == 'admin') {	
-		require_once('includes/dashhead.php');
-		echo '<div>';	
-		/*Oeuvre::affichage();*/
-		$oeuvre=new Oeuvre();
-		$oeuvre->affichage();
+	<section class="container-fluid page_content active">
+		<div class="row cadre">
+			<div class="panel-heading">Créer une Oeuvre</div>
+			
+	<?php
+	$oeuvre=new Oeuvre();
+	$oeuvre->formCreate('');
 		
-		if(isset($_GET['id_oeuvre'])) {
-		$oeuvre = new Oeuvre($_GET['id_oeuvre']);
-		$oeuvre->form('oeuvre.php','mettre à jour');
 
-/*if(isset($_POST['nom']) && $_POST['nom'] != '' && $_POST['id_oeuvre'] !='') {
+	?>
+		</div>
+		<div class="row cadre">	
+			<div class="panel panel-default">
+		 		<div class="panel-heading">Liste des oeuvres</div>
 
-	$oeuvre = new Oeuvre($_POST['id_oeuvre']);
-	$oeuvre->setNom($_POST['nom']);
-	$oeuvre->setTypeOeuvre($_POST['type_oeuvre']);
-	$oeuvre->setDimensions($_POST['dimensions']);
-	$oeuvre->setPoids($_POST['poids']);
-	$oeuvre->setDescriptionOeuvre($_POST['description_oeuvre']);
-	$oeuvre->setDateCreation($_POST['date_creation']);
-	$oeuvre->setLivraison($_POST['livraison']);
-	
-	var_dump($oeuvre);
+		 			<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<th>Nom de l'artiste</th>
+							<th>Nom de l'oeuvre</th>
+							<th>Type d'oeuvre</th>
+							<th>Dimensions</th>
+							<th>Poids</th>
+							<th>Description</th>
+							<th>Date de création</th>
+							<th>Livraison</th>
+							<th colspan="3">Action</th>
+						</thead>
 
-	$update=$oeuvre->syncDb();
+<?php
+		$res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  ");
+		foreach ($res as $user){
+			$oeuvre = new Oeuvre($user['id_oeuvre']);
+			echo "<tr>";
+			echo "<td>".$oeuvre->getNomArtiste()."</td>";
+			echo "<td>".$oeuvre->getNom()."</td>";
+			echo "<td>".$oeuvre->getTypeOeuvre()."</td>";
+			echo "<td>".$oeuvre->getDimensions()."</td>";
+			echo "<td>".$oeuvre->getPoids()."</td>";
+			echo "<td>".$oeuvre->getDescriptionOeuvre()."</td>";
+			echo "<td>".$oeuvre->getDateCreation()."</td>";
+			echo "<td>".$oeuvre->getLivraison()."</td>";
+			echo "<td></td>";
 
+			echo "</tr>";
 
-	if ($update==TRUE) {header("location:oeuvre.php");}
-}*/
+			
+		}
+				?></table>	
+			</div>
+		</div>
+	</section>
 
-/*if(empty($_GET['id_oeuvre'])){
-	$oeuvre= new Oeuvre();
-	$oeuvre->form('creer.php','creer fiche');
-}
-
-if(isset($_POST['nom'])) {
-
-
-	$oeuvre->setNom($_POST['nom']);
-	$oeuvre->setTypeOeuvre($_POST['type_oeuvre']);
-	$oeuvre->setDimensions($_POST['dimensions']);
-	$oeuvre->setPoids($_POST['poids']);
-	$oeuvre->setDescriptionOeuvre($_POST['description_oeuvre']);
-	$oeuvre->setDateCreation($_POST['date_creation']);
-	$oeuvre->setLivraison($_POST['livraison']);
-
-
-
-	$insert=$oeuvre->syncDb();
-
-
-		
-	
-	if ($insert==TRUE) {header("location:oeuvre.php");}
-}*/
+	<?php
 	}
 }
+/************* fin page type */////
+else{
+	?>
+
+	
+	<body onLoad="setTimeout('RedirectLogin()', 5000)">
+		<div onLoad="setTimeout('RedirectLogin()', 5000)">Vous n'avez pas accès au contenue de cette page, dans 5 secondes vous allez être redirigé vers <a href="http://localhost/git/art_management/admin/index.php">la page de connexion</a></div>
+	<?php
 
 }
-else { 
-	echo 'Vous n\'êtes pas autorisé à accéder à cette page vous allez être rediriger sur la page de connexion.';
+
+	require_once('footer.php');
 
 ?>
-<body onLoad="setTimeout('RedirectLogin()', 5000)">
-	<div onLoad="setTimeout('RedirectLogin()', 5000)">Vous n'avez pas accès au contenue de cette page, dans 5 secondes vous allez être redirigé vers <a href="http://localhost/git/art_management/admin/index.php">la page de connexion</a></div>
-<?php
-
-}
-require_once('footer.php');
-?>
-
-
-
-
-
-
