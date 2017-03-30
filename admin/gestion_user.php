@@ -60,8 +60,8 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 		        <button type="button" class="btn btn-primary" id="requeteAjaxReset" data-toggle= "modal" data-target= ".reset-complet" data-dismiss="modal">Réinitialiser</button>
 		      </div>
 		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 		
 		<div class="modal fade reset-complet" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
@@ -77,8 +77,8 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 		        <button type="button" class="btn btn-default" data-dismiss="modal" data-dismiss="modal">Fermer</button>
 		      </div>
 		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
 	<div class="modal fade delete-pass-modal" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
@@ -94,9 +94,9 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 		        <button type="button" class="btn btn-primary" id="requeteAjaxDelete" data-toggle= "modal" data-target= ".suppr-complet" data-dismiss="modal">Supprimer</button>
 		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+		 	</div><!-- /.modal-content -->	
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 	
 
 	<div class="modal fade suppr-complet" tabindex="-1" role="dialog">
@@ -112,9 +112,9 @@ if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal" id="reset_page">Fermer</button>
 		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 	<?php
 }
 else {

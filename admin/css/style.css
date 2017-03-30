@@ -52,13 +52,12 @@
 {
   margin-top: 70px;
   margin-left: 20px;
-  margin-right: 20px;
   transition: all .4s ease 0s;
 }
 
 .cadre
 {
-  margin: 50px;
+  margin: 30px;
   padding: 20px;
   border: 2px solid rgba(57,57,57,0.4);
   border-radius: 10px 10px 10px 10px;
@@ -78,13 +77,13 @@
 -------------------------*/
 .fixe
 {
-  display: fixed;
+  
 } 
 
 .logotop
 {
   display: block;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
@@ -98,6 +97,7 @@
   left: 0px;
   width: 154px; 
   height: 73px;
+  background-color: rgb(255,255,255);
 }
 
 .topbar

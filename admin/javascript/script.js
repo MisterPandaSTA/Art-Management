@@ -372,14 +372,14 @@ $(document).ready(function () {
 		$("#formModifArtiste input[name='adresse']").val(adresse);
 		$("#formModifArtiste input[name='activitees']").val(activitees);
 		$("#formModifArtiste textarea[name='description']").val(description);
-		$("#formModifArtiste input[name='id_artiste']").val();
+		$("#formModifArtiste input[name='id_artiste']").val(id);
 	}); 
 });	
 
 
 $(document).ready(function () {
-	$('.btn_artiste_modif').click(function(){
-	/*	$(".action").val('modifier');*/
+	$('#btn_artiste_modif').click(function(){
+		$(".action").val('modifier');
 		var nom = $("#formModifArtiste input[name='nom']").val();
 		var prenom = $("#formModifArtiste input[name='prenom']").val();
 		var pseudo = $("#formModifArtiste input[name='pseudo']").val();
@@ -392,20 +392,15 @@ $(document).ready(function () {
 		var id_artiste = $("#formModifArtiste input[name='id_artiste']").val();
 
 		console.log(nom);
-		
 		console.log(prenom);
-		
 		console.log(pseudo);
-		
 		console.log(email);
-		
 		console.log(telephone);	
-		
 		console.log(adresse);
-		
 		console.log(activitees);
-		
-		console.log(description);	
+		console.log(description);
+		console.log(action);
+		console.log(id_artiste);	
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
 				method: 'POST',
@@ -418,8 +413,8 @@ $(document).ready(function () {
 						adresse : adresse,
 						activitees : activitees,
 						description : description,
-						action : action,
-						id_artiste : id_artiste
+						id_artiste : id_artiste,
+						action : action
 						
 					},
 				success : function (response) {
@@ -454,14 +449,12 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-	$(".artiste_delete").click(function (){
+	$("btn_artiste_delete").click(function (){
 		$(".action").val('delete');
-		var id_user = $(this).parent().parent().attr('id').substr(1);
-		var action = $('#n'+id_user+' input[name="action"]').val();
-		var email = $('#n'+id_user+' input[name="email"]').val();
-		$(".nom_compte").html(email);
-		console.log(id_user);
-		console.log(email);
+		var action = $('#formModifArtiste input[name="action"]').val();
+		var id_artiste = $('#formModifArtiste input[name="id_artiste"]').val();
+		var nom = $("#formModifArtiste input[name='nom']").val();
+		$(".nom_artiste").html(nom);
 		console.log(action);
 		$('#requeteAjaxDelete').click(function (){
 			$.ajax({

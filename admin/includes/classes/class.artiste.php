@@ -9,8 +9,9 @@ class Artiste {
 	private $email;
 	private $telephone;
 	private $adresse;
-	private $description;
 	private $activitees;
+    private $description;
+	
 	private $description_anglais;
 	private $description_allemand;
 	private $description_russe;
@@ -34,8 +35,9 @@ class Artiste {
             $this->email=$user['email'];
             $this->telephone=$user['telephone'];
             $this->adresse=$user['adresse'];
-            $this->description=$user['description'];
             $this->activitees=$user['activitees'];
+            $this->description=$user['description'];
+            
             $this->description_anglais=$user['description_anglais'];
             $this->description_allemand=$user['description_allemand'];
             $this->description_russe=$user['description_russe'];
@@ -241,7 +243,7 @@ class Artiste {
 
     function formArtiste($target) {
     ?>
-    <form action="<?php echo $target; ?>" id="formCreateArtiste">
+    <form action="<?php echo $target; ?>" id="formCreateArtiste" method="post">
             <div class="panel-heading">Création de Fiche Artiste</div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
@@ -284,14 +286,15 @@ class Artiste {
                         <input type="file" name="photo"></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><textarea name="description" value="" col="5"></textarea></td>
+                    <td colspan="2"><label for="description">Description :</label>
+                    <textarea name="description" value="" col="5"></textarea></td>
                 </tr>
             </table>
-                <input type="submit" class="btn" id="btn_artiste_create" value="Créer">
+                <input type="submit" class="btn btn-primary" id="btn_artiste_create" value="Créer">
             </form>
 
             
-            <form action="#" id="formModifArtiste" class="none_class" method="post">
+            <form action='#' id="formModifArtiste" class="none_class" method="post">
             <div class="panel-heading">Modifier Fiche Artiste de</div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
@@ -337,10 +340,10 @@ class Artiste {
                     <td colspan="2"><textarea name="description" value="" col="5"></textarea></td>
                 </tr>
             </table>
-            <input type="hidden" name="id_artiste">
+            <input type="hidden" name="id_artiste" value="">
             <input class="action" type="hidden" name="action" value="" />
-            <input type="submit" class="btn" id="btn_artiste_modif" value="Modifier">
- 
+            <input type="submit" class="btn btn-success" id="btn_artiste_modif" value="Modifier">
+            <button class="delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Supprimer</button>
 
         </form><?php
 
@@ -391,8 +394,10 @@ class Artiste {
                 <textarea name="description" class="none_class"><?php echo $this->getDescription(); ?></textarea>
                 <input class="action" type="hidden" name="action" value="" />
                 <button class="btn_affiche_modifier_artiste btn btn-success" name="modifier">Modifier</button>
+
             </td>
-            <td><button class="delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Suppr</button></td>
+            <td><button class="btn_affiche_trad_artiste btn btn-info" name="traduction">Traduction</button></td>
+            
         </tr>
             
         <?php
@@ -405,8 +410,8 @@ class Artiste {
     function syncDb() {
         if(empty($this->id_artiste)){
             //Si $this->id est vide, on fait un INSERT
-            $res= sql("INSERT INTO artiste (id_artiste,nom,prenom,pseudo,email,telephone,adresse,description,activitees,description_anglais,description_allemand,description_russe,description_chinois,activitees_anglais,activitees_allemand,activitees_russe,activitees_chinois)
-                      VALUES (NULL,'".$this->nom."','".$this->prenom."','".$this->pseudo."','".$this->email."','".$this->telephone."','".$this->adresse."','".$this->description."','".$this->activitees."','".$this->description_anglais."','".$this->description_allemand."','".$this->description_russe."','".$this->description_chinois."','".$this->activitees_anglais."','".$this->activitees_allemand."','".$this->activitees_russe."','".$this->activitees_chinois."')");
+            $res= sql("INSERT INTO artiste (id_artiste,nom,prenom,pseudo,email,telephone,adresse,activitees,description,description_anglais,description_allemand,description_russe,description_chinois,activitees_anglais,activitees_allemand,activitees_russe,activitees_chinois)
+                      VALUES (NULL,'".$this->nom."','".$this->prenom."','".$this->pseudo."','".$this->email."','".$this->telephone."','".$this->adresse."','".$this->activitees."','".$this->description."','".$this->description_anglais."','".$this->description_allemand."','".$this->description_russe."','".$this->description_chinois."','".$this->activitees_anglais."','".$this->activitees_allemand."','".$this->activitees_russe."','".$this->activitees_chinois."')");
            
 
             if($res!==FALSE){
@@ -424,8 +429,8 @@ class Artiste {
                 email= '".$this->email."',
                 telephone = '".$this->telephone."',
                 adresse = '".$this->adresse."',
-                description = '".$this->description."',
                 activitees = '".$this->activitees."',
+                description = '".$this->description."',
                 description_anglais = '".$this->description_anglais."',
                 description_allemand = '".$this->description_allemand."',
                 description_russe = '".$this->description_russe."',

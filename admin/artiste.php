@@ -57,7 +57,41 @@ if($_SESSION['id']){
 		</div>	
 	</sections>	
 
+		<div class="modal fade delete-pass-modal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Supprimer la fiche artiste ?</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Voulez-vous vraiment supprimer la fiche de l'artiste <span class="nom_artiste"></span> ?</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+		        <button type="button" class="btn btn-primary" id="requeteAjaxDelete" data-toggle= "modal" data-target= ".suppr-complet" data-dismiss="modal">Supprimer</button>
+		      </div>
+		 	</div><!-- /.modal-content -->	
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
 
+	<div class="modal fade suppr-complet" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title">Action effectué</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Vous venez de supprimer le compte <span class="nom_compte"></span> </p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" id="reset_page">Fermer</button>
+		      </div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 	
 	<?php
 	}

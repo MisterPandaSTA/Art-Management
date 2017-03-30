@@ -12,8 +12,9 @@ if(isset($_POST['nom']) && ($_POST['prenom']) && ($_POST['email'])) {
 	$artiste->setEmail($_POST['email']);
 	$artiste->setTelephone($_POST['telephone']);
 	$artiste->setAdresse($_POST['adresse']);
-	$artiste->setDescription($_POST['description']);
 	$artiste->setActivitees($_POST['activitees']);
+	$artiste->setDescription($_POST['description']);
+	
 	var_dump($_POST['nom']);
 	/*$artiste->setDescriptionAnglais($_POST['description_anglais']);
 	$artiste->setDescriptionAllemand($_POST['description_allemand']);
