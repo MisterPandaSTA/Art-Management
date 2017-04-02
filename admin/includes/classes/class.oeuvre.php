@@ -239,13 +239,14 @@ class Oeuvre {
     function formCreate($target){ /*ceci est le formulaire de création de compte*/
         ?>
         <form id="formCreate" action="../admin/creation_oeuvre.php" method="post">
+            <div class="panel-heading">Création de Fiche Artiste</div>
             <table class="table table-bordered table-striped table-hover">
             <thead>
                 
                 <th colspan="3"><label for="id_artiste">Choix de l'artiste :</label>
             <select name="id_artiste" id="id_artiste">
             <?php
-            $req=sql("SELECT nom, id_artiste FROM artiste ");
+            $req= sql("SELECT nom, id_artiste FROM artiste ");
                  
             foreach ($req as $donnee) {
                 echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].'</option>';
@@ -302,6 +303,10 @@ class Oeuvre {
  /***** FONCTION SELECT  *****/
     function select (){
     $res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  ");
+        ?>
+        <div class="panel-heading">Création de Fiche Artiste</div>
+        <table class="table table-bordered table-striped table-hover">
+        <?php
         foreach ($res as $user){
             $oeuvre = new Oeuvre($user['id_oeuvre']);
             echo "<tr>";

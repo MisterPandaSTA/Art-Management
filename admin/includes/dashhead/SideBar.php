@@ -39,10 +39,10 @@ if(isset($_SESSION['id']))
 				
 						<ul class="ul_sidebar">
 							<li class="sidebar-brand"><a href="dashboard.php"><span class="fa fa-tachometer"></span>Dashboard</a></li>
+							<li class="sidebar-brand"><a href="exposition.php"><span class="fa fa-calendar"></span>Expositions</a></li>
 							<li class="sidebar-brand"><a href="artiste.php"><span class="fa fa-camera"></span>Artistes</a></li>
 							<li class="sidebar-brand"><a href="oeuvre.php"><span class="fa fa-picture-o"></span>Oeuvres</a></li>
-							<li class="sidebar-brand"><a href="exposition.php"><span class="fa fa-calendar"></span>Expositions</a></li>
-							<li class="sidebar-brand"><a href="statistique.php"><span class="fa fa-bar-chart"></span>Statistiques</a></li>
+							<!-- <li class="sidebar-brand"><a href="statistique.php"><span class="fa fa-bar-chart"></span>Statistiques</a></li> -->
 						<?php
 
 						if($_SESSION['permission'] == 'admin' )

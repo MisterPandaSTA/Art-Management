@@ -2,10 +2,10 @@
 
 require_once('includes/classconfig.php');
 
-if($_SESSION['id']){
+if(isset($_SESSION['id'])){
 	if($_SESSION['permission'] == 'utilisateur' || $_SESSION['permission'] == 'admin') {
-	$texte = "Dashboard > type";
-	$desc = "Vous pouvez  ...  .";
+	$texte = "Dashboard > Gestion des Artistes";
+	$desc = "Vous pouvez gérer les fiches artistes.";
 	require_once('includes/dashhead.php');
 	
 	?>
@@ -25,34 +25,44 @@ if($_SESSION['id']){
 			</div>
 		</div>
 		<div class="row cadre">
-			<div class="panel panel-default">
+			<div class="panel panel-default flex tableau_artiste_mise_page">
 	 			<div class="panel-heading">Liste des fiches artistes</div>
 		
-			
-				<table class="table table-bordered table-striped table-hover">
-					<thead>
-						<th>Nom</th>
-						<th>Prenom</th>
-						<th>Pseudo</th>
-						<th>Email</th>
-						<th>Téléphone</th>
-						<th>Adresse</th>
-						<th>Activitées</th>
-						<th>Description</th>
-						<th colspan="2">Action</th>
-						
-					</thead>
+				<div class="flex">
+					<table class="table  table-bordered table-striped table-hover double_table">
+						<thead>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>Pseudo</th>
+							<th colspan="2">Action</th>
+							
+						</thead>
 
-				<?php
+					<?php
 
 
-					$modif = Artiste::listGestion(0, 10);
-					foreach($modif as $form) {
-						$f = new Artiste($form['id_artiste']);
-						$f->afficheArtisteModif('');
-					}
-				
-				?></table>
+						$modif = Artiste::listGestion(0, 10);
+						foreach($modif as $form) {
+							$f = new Artiste($form['id_artiste']);
+							$f->afficheArtisteModif();
+						}
+					?></table>
+					<table class="table table-bordered table-striped table-hover double_table">
+						<thead>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>Pseudo</th>
+							<th colspan="2">Action</th>
+							
+						</thead>
+					<?php
+						$modif = Artiste::listGestion(10, 20);
+						foreach($modif as $form) {
+							$f = new Artiste($form['id_artiste']);
+							$f->afficheArtisteModif();
+						}
+					?></table>
+				</div>
 			</div>
 		</div>	
 	</sections>	
@@ -84,7 +94,7 @@ if($_SESSION['id']){
 		        <h4 class="modal-title">Action effectué</h4>
 		      </div>
 		      <div class="modal-body">
-		        <p>Vous venez de supprimer le compte <span class="nom_compte"></span> </p>
+		        <p>Vous venez de supprimer la fiche de Monsieur <span class="nom_artiste"></span> </p>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal" id="reset_page">Fermer</button>
@@ -94,6 +104,22 @@ if($_SESSION['id']){
 	</div><!-- /.modal -->
 	
 	<?php
+	}
+	if($_SESSION['permission'] == 'inactif') {
+	$texte = "Dashboard > Gestion des Artistes";
+	$desc = "Bienvenue ".$_SESSION['prenom']." . C'est votre première connexion, pour avoir un accès complet, veuillez definir votre mot de passe !" ;
+	require_once('includes/dashhead.php');
+
+	?>
+	<body onLoad="setTimeout('RedirectFirstLogin()', 10000)">
+		<section class="container-fluid page_content active">
+			<div class="row cadre">
+		
+				<div onLoad="setTimeout('RedirectFirstLogin()', 10000)">
+					Vous vous êtes connectez avec le mot de passe de base, vous allez être redirigé vers <a href="http://localhost/git/art_management/admin/user.php">votre page profil</a> afin que vous definissiez votre nouveau mot de passe.
+				</div>
+	<?php
+
 	}
 }
 else {

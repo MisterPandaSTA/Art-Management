@@ -9,7 +9,7 @@ require_once('includes/dashhead.php');
 if(isset($_SESSION['id']))
 {	
 	?>
-	<section class="container page_content">
+	<section class="container-fluid page_content active">
 		<div class="row cadre">
 	<?php		
 
@@ -19,17 +19,27 @@ if(isset($_SESSION['id']))
 		$user->setPrenom($_POST['prenom']);
 		$user->setEmail($_POST['email']);
 		$updata = $user->modUser($_SESSION['id']);
-
+		if ($updata == TRUE){
+			echo "Votre profil a été mis a jour";
+		}
 		if(isset($_POST['oldpass']) && ($_POST['newpass']) == ($_POST['newpass2'])) {
 
 			$updatepwd = $user->updatePassword($_POST['oldpass'],$_POST['newpass'],$_SESSION['id']);
-		}	
-		elseif($updata == TRUE || $updatepwd == TRUE){
-	
-		$_SESSION['id'] = $login['0'];
-		$_SESSION['prenom'] = $login['1'];
-		$_SESSION['permission'] = $login['2'];
+			
+			if($updatepwd !== FALSE){
+				$_SESSION['id'] = $updatepwd['0'];
+				$_SESSION['prenom'] = $updatepwd['1'];
+				$_SESSION['permission'] = $updatepwd['2'];
+			}
+		
 		}
+		else 
+		{
+			echo "Le nouveau nouveau mot de passe et sa vérification ne sont pas identiques";
+		}	
+		
+	
+		
 	}
 	else {
 	$modif = new User($_SESSION['id']);

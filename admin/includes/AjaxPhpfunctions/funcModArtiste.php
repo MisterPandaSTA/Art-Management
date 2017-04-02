@@ -30,12 +30,12 @@ if(isset($_POST['id_artiste'])) {
 		$artiste->setActiviteesRusse($_POST['activitees_russe']);
 		$artiste->setActiviteesChinois($_POST['activitees_chinois']);
 		var_dump($artiste);
-		$reset = $user->syncDb();
+		$update = $artiste->syncDb();
 	}
 
 	if ($_POST['action'] == 'delete') {
 
-		$artiste = $user->deleteArtiste($_POST['id_user']);
+		$artiste = $artiste->deleteArtiste($_POST['id_user']);
 		var_dump($artiste);
 	}
 	else {

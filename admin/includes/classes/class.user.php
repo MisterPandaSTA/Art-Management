@@ -155,7 +155,7 @@ class User {
     <input type="password" name="newpass" /><br />
     <label for="newpass2">Veuillez retapper votre nouveau mot de passe :</label><br />
     <input type="password" name="newpass2" /><br />
-    <input type="submit" name="submit" value="modifier" /><br />
+    <input type="submit" class="btn btn-info" name="submit" value="modifier" /><br />
     </form><?php
     }
 
@@ -175,7 +175,8 @@ class User {
                 else {
                     $id_user = $res[0]['id_utilisateur'];
                     $prenom = $res[0]['prenom'];
-                    return array($id_user, $prenom);   
+                    $permission = $res[0]['permission'];
+                    return array($id_user, $prenom, $permission);   
                 }        
             }
             else /*sinon je retourn FALSE*/{
@@ -206,7 +207,7 @@ class User {
                 prenom = '".addslashes($this->prenom)."',
                 email = '".addslashes($this->email)."' WHERE id_utilisateur='".$id."';");
             if($res !== FALSE){
-                 echo ' c\'est bon';
+
                 return TRUE;
             }
             else{
@@ -263,17 +264,23 @@ class User {
              return FALSE;
         }
         else{
-            $res = sql("SELECT id_utilisateur, prenom, password, permission FROM utilisateur WHERE id_utilisateur ='".$id."';");
+            $res = sql("SELECT password FROM utilisateur WHERE id_utilisateur ='".$id."';");
             $passtest = $res[0]['password'];
             if (password_verify($oldpass, $passtest)){
-                $res = sql("UPDATE utilisateur set password = '".user::hashage($newpass)."' WHERE id_utilisateur='".$id."';");
-                if($res !== FALSE) {
-                    $id_user = $res[0]['id_utilisateur'];
-                    $permission = $res[0]['permission'];
-                    $prenom = $res[0]['prenom'];
-                    return array($id_user, $permission, $prenom);
+                if ($oldpass == default_password) {
+                    $update = sql("UPDATE utilisateur set password = '".user::hashage($newpass)."', permission = 'utilisateur' WHERE id_utilisateur='".$id."';");
+                    
+                        $res = sql("SELECT id_utilisateur, prenom, permission FROM utilisateur WHERE id_utilisateur ='".$id."';");
+                            $id_user = $res[0]['id_utilisateur'];
+                            $prenom = $res[0]['prenom']; 
+                            $permission = $res[0]['permission'];
+                        return array($id_user, $prenom, $permission);
+                }    
+                else {
+                        $update = sql("UPDATE utilisateur set password = '".user::hashage($newpass)."' WHERE id_utilisateur='".$id."';");
                 }
             }
+            
             else /*sinon je retourn FALSE*/{
                 return FALSE;
             }
