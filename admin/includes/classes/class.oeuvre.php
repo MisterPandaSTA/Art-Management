@@ -180,7 +180,17 @@ class Oeuvre {
             //Si $this->id est vide, on fait un INSERT
             $res= sql("INSERT INTO oeuvre (id_oeuvre,id_artiste,nom,type_oeuvre,dimensions,poids,
                 description_oeuvre,date_creation,livraison)
-                      VALUES (NULL,'".$this->id_artiste."','".$this->nom."','".$this->type_oeuvre."','".$this->dimensions."','".$this->poids."','".$this->description_oeuvre."','".$this->date_creation."','".$this->livraison."')");
+                      VALUES (
+                      NULL,
+                      '".addslashes($this->id_artiste)."',
+                      '".addslashes($this->nom)."',
+                      '".addslashes($this->type_oeuvre)."',
+                      '".addslashes($this->dimensions)."',
+                      '".addslashes($this->poids)."',
+                      '".addslashes($this->description_oeuvre)."',
+                      '".addslashes($this->date_creation)."',
+                      '".addslashes($this->livraison)."'
+                      )");
               
 
             if($res!==FALSE){
@@ -192,15 +202,15 @@ class Oeuvre {
         else {
             //Sinon on fait un UPDATE
                 $res=sql("UPDATE oeuvre SET 
-                id_artiste='".$this->id_artiste."',
-                nom = '".$this->nom."',
-                type_oeuvre= '".$this->type_oeuvre."',
-                dimensions= '".$this->dimensions."',
-                poids= '".$this->poids."',
-                description_oeuvre = '".$this->description_oeuvre."',
-                date_creation = '".$this->date_creation."',
-                livraison = '".$this->livraison."'
-                WHERE id_oeuvre = '".$this->id_oeuvre."'");
+                id_artiste='".addslashes($this->id_artiste)."',
+                nom = '".addslashes($this->nom)."',
+                type_oeuvre= '".addslashes($this->type_oeuvre)."',
+                dimensions= '".addslashes($this->dimensions)."',
+                poids= '".addslashes($this->poids)."',
+                description_oeuvre = '".addslashes($this->description_oeuvre)."',
+                date_creation = '".addslashes($this->date_creation)."',
+                livraison = '".addslashes($this->livraison)."'
+                WHERE id_oeuvre = '".addslashes($this->id_oeuvre)."'");
 
 
                 if ($res==TRUE){

@@ -35,7 +35,7 @@ if(isset($_POST['id_artiste'])) {
 
 	if ($_POST['action'] == 'delete') {
 
-		$artiste = $artiste->deleteArtiste($_POST['id_user']);
+		$delete = $artiste->deleteArtiste($_POST['id_artiste']);
 		var_dump($artiste);
 	}
 	else {

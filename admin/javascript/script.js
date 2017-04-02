@@ -351,15 +351,16 @@ $(document).ready(function () {
 	$('.btn_affiche_modifier_artiste').click(function (){
 		var id = $(this).parent().parent().attr('id').substr(1);
 
-		var nom = $('#n'+id+' td').html();
-		var prenom = $('#n'+id+' td').html();
-		var pseudo = $('#n'+id+' td').html();
+		var nom = $('#n'+id+' .td_nom').html();
+		var prenom = $('#n'+id+' .td_prenom').html();
+		var pseudo = $('#n'+id+' .td_pseudo').html();
 		var email = $('#n'+id+' input[name="email"]').val();
 		var telephone = $('#n'+id+' input[name="telephone"]').val();
 		var adresse = $('#n'+id+' input[name="adresse"]').val();
 		var activitees = $('#n'+id+' input[name="activitees"]').val();
 		var description = $('#n'+id+' textarea[name="description"]').val();
 		
+		$('.nom_artiste').html(nom);
 
 		$('#formCreateArtiste').toggle(false);
 		$('#formTradArtiste').toggle(false);
@@ -378,7 +379,7 @@ $(document).ready(function () {
 });	
 
 $(document).ready(function () {
-	$('#btn_annuler_artiste').click(function () {
+	$('.btn_annuler_artiste').click(function () {
 		$('#formModifArtiste').toggle(false);
 		$('#formTradArtiste').toggle(false);
 		$('#formCreateArtiste').toggle(true);
@@ -396,11 +397,11 @@ $(document).ready(function () {
 		var adresse = $("#formModifArtiste input[name='adresse']").val();
 		var activitees = $("#formModifArtiste input[name='activitees']").val();
 		var description = $("#formModifArtiste textarea[name='description']").val();
-		var action = $("#formModifArtiste input[name='action']").val();
 		var id_artiste = $("#formModifArtiste input[name='id_artiste']").val();
 		
 		$(".action").val('modifier');
-		$('#nom_artiste').html(nom);
+		var action = $("#formModifArtiste input[name='action']").val();
+		
 
 		console.log(nom);
 		console.log(prenom);
@@ -519,7 +520,7 @@ $(document).ready(function () {
 	$('.btn_affiche_trad_artiste').click(function (){
 		var id = $(this).parent().parent().attr('id').substr(1);
 
-		var nom = $('#n'+id+' td').html();
+		var nom = $('#n'+id+' .td_nom').html();
 		var description_anglais = $('#n'+id+' textarea[name="description_anglais"]').val();
 		var description_allemand = $('#n'+id+' textarea[name="description_allemand"]').val();
 		var description_russe = $('#n'+id+' textarea[name="description_russe"]').val();
@@ -528,12 +529,14 @@ $(document).ready(function () {
 		var activitees_allemand = $('#n'+id+' input[name="activitees_allemand"]').val();
 		var activitees_russe = $('#n'+id+' input[name="activitees_russe"]').val();
 		var activitees_chinois = $('#n'+id+' input[name="activitees_chinois"]').val();
-
+		
+		$('.nom_artiste').html(nom);
+		
 		$('#formCreateArtiste').toggle(false);
 		$('#formModifArtiste').toggle(false);
 		$('#formTradArtiste').toggle(true);
 		
-		$('#nom_artiste').html(nom);
+		
 		$("#formTradArtiste textarea[name='description_anglais']").val(description_anglais);
 		$("#formTradArtiste textarea[name='description_allemand']").val(description_allemand);
 		$("#formTradArtiste textarea[name='description_russe']").val(description_russe);

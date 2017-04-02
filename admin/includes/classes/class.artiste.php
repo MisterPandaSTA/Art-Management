@@ -314,7 +314,7 @@ class Artiste {
 
             
         <div id="formModifArtiste" class="none_class">
-            <div class="panel-heading">Modifier Fiche Artiste de M. <span id="nom_artiste"></span></div>
+            <div class="panel-heading">Modifier Fiche Artiste de M. <span class="nom_artiste"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <th colspan="3">Identité</th>
@@ -381,7 +381,7 @@ class Artiste {
                     <td>
                         <input type="hidden" name="id_artiste" value="">
                         <input class="action" type="hidden" name="action" value="" />
-                        <a href="#" class="btn btn-warning" id="btn_annuler_artiste">Annuler</a>
+                        <a href="#" class="btn btn-warning btn_annuler_artiste">Annuler</a>
                         <a href="#" class="btn btn-success" id="btn_artiste_modif">Modifier</a>
                         <button class="btn_artiste_delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Supprimer</button>
                     </td> 
@@ -390,7 +390,7 @@ class Artiste {
 
         </div>
         <div id="formTradArtiste" class="none_class">
-            <div class="panel-heading">Modifier les traductions Fiche Artiste de M. <span id="nom_artiste"></span></div>
+            <div class="panel-heading">Modifier les traductions Fiche Artiste de M. <span class="nom_artiste"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <th colspan="2">Description :</th>
@@ -448,7 +448,7 @@ class Artiste {
                     <td>
                         <input type="hidden" name="id_artiste" value="">
                         <input class="action" type="hidden" name="action" value="" />
-                        <a href="#" class="btn btn-warning" id="btn_annuler_artiste">Annuler</a>
+                        <a href="#" class="btn btn-warning btn_annuler_artiste">Annuler</a>
                         <a href="#" class="btn btn-success" id="btn_modif_trad_artiste">Enregistrer</a>
                     </td>
                 </tr>
@@ -463,9 +463,9 @@ class Artiste {
      /* formulaire pour les modifs et les actions */
      function afficheArtisteModif () {
          ?><tr class="afficheArtisteModif"  id="<?php echo "n".$this->getIdArtiste(); ?>">
-            <td><?php echo $this->getNom(); ?></td>
-            <td><?php echo $this->getPrenom(); ?></td>
-            <td><?php echo $this->getPseudo(); ?></td>
+            <td class="td_nom"><?php echo $this->getNom(); ?></td>
+            <td class="td_prenom"><?php echo $this->getPrenom(); ?></td>
+            <td class="td_pseudo"><?php echo $this->getPseudo(); ?></td>
             <td>    
                 <input type="hidden" name="email" value="<?php echo $this->getEmail(); ?>"/>
                 <input type="hidden" name="telephone" value="<?php echo $this->getTelephone(); ?>"/>
@@ -501,7 +501,25 @@ class Artiste {
         if(empty($this->id_artiste)){
             //Si $this->id est vide, on fait un INSERT
             $res= sql("INSERT INTO artiste (id_artiste,nom,prenom,pseudo,email,telephone,adresse,activitees,description,description_anglais,description_allemand,description_russe,description_chinois,activitees_anglais,activitees_allemand,activitees_russe,activitees_chinois)
-                      VALUES (NULL,'".$this->nom."','".$this->prenom."','".$this->pseudo."','".$this->email."','".$this->telephone."','".$this->adresse."','".$this->activitees."','".$this->description."','".$this->description_anglais."','".$this->description_allemand."','".$this->description_russe."','".$this->description_chinois."','".$this->activitees_anglais."','".$this->activitees_allemand."','".$this->activitees_russe."','".$this->activitees_chinois."')");
+                      VALUES (
+                      NULL,
+                      '".addslashes($this->nom)."',
+                      '".addslashes($this->prenom)."',
+                      '".addslashes($this->pseudo)."',
+                      '".addslashes($this->email)."',
+                      '".addslashes($this->telephone)."',
+                      '".addslashes($this->adresse)."',
+                      '".addslashes($this->activitees)."',
+                      '".addslashes($this->description)."',
+                      '".addslashes($this->description_anglais)."',
+                      '".addslashes($this->description_allemand)."',
+                      '".addslashes($this->description_russe)."',
+                      '".addslashes($this->description_chinois)."',
+                      '".addslashes($this->activitees_anglais)."',
+                      '".addslashes($this->activitees_allemand)."',
+                      '".addslashes($this->activitees_russe)."',
+                      '".addslashes($this->activitees_chinois)."'
+                      )");
            
 
             if($res!==FALSE){
@@ -513,23 +531,23 @@ class Artiste {
         else {
             //Sinon on fait un UPDATE
                 $res=sql("UPDATE artiste SET 
-                nom = '".$this->nom."',
-                prenom= '".$this->prenom."',
-                pseudo= '".$this->pseudo."',
-                email= '".$this->email."',
-                telephone = '".$this->telephone."',
-                adresse = '".$this->adresse."',
-                activitees = '".$this->activitees."',
-                description = '".$this->description."',
-                description_anglais = '".$this->description_anglais."',
-                description_allemand = '".$this->description_allemand."',
-                description_russe = '".$this->description_russe."',
-                description_chinois = '".$this->description_chinois."',
-                activitees_anglais = '".$this->activitees_anglais."',
-                activitees_allemand = '".$this->activitees_allemand."',
-                activitees_russe = '".$this->activitees_russe."',
-                activitees_chinois = '".$this->activitees_chinois."'
-                WHERE id_artiste = '".$this->id_artiste."'");
+                nom = '".addslashes($this->nom)."',
+                prenom= '".addslashes($this->prenom)."',
+                pseudo= '".addslashes($this->pseudo)."',
+                email= '".addslashes($this->email)."',
+                telephone = '".addslashes($this->telephone)."',
+                adresse = '".addslashes($this->adresse)."',
+                activitees = '".addslashes($this->activitees)."',
+                description = '".addslashes($this->description)."',
+                description_anglais = '".addslashes($this->description_anglais)."',
+                description_allemand = '".addslashes($this->description_allemand)."',
+                description_russe = '".addslashes($this->description_russe)."',
+                description_chinois = '".addslashes($this->description_chinois)."',
+                activitees_anglais = '".addslashes($this->activitees_anglais)."',
+                activitees_allemand = '".addslashes($this->activitees_allemand)."',
+                activitees_russe = '".addslashes($this->activitees_russe)."',
+                activitees_chinois = '".addslashes($this->activitees_chinois)."'
+                WHERE id_artiste = '".addslashes($this->id_artiste)."'");
 
                 if ($res==TRUE){
                     return TRUE;
@@ -544,8 +562,8 @@ class Artiste {
 
      /* suppression d'un artiste*/
 
-    function deleteArtiste(){
-            $res=sql("DELETE FROM artiste WHERE id_artiste='".$_GET['id_artiste']."'");
+    function deleteArtiste($id_artiste){
+            $res=sql("DELETE FROM artiste WHERE id_artiste='".$id_artiste."'");
     }
 
 
