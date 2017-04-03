@@ -52,4 +52,4 @@
 	// else /*sinon j'affiche un formulaire vierge*/ {  
 	// 	$new_user = new user();
 	// 	$new_user->formCreate('gestion_user.php');
-	// }
+	}

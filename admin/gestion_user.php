@@ -3,7 +3,7 @@
 require_once('includes/classconfig.php');
 
 if($_SESSION['id'] && $_SESSION['permission'] == 'admin' ){
-	$texte = "Dashboard > Gestion Utilisateur";
+	$texte = "Dashboard > Gestion des Utilisateur";
 	$desc = "Vous pouvez gérer les differents utilisateurs depuis cette page.";
 	require_once('includes/dashhead.php');
 	

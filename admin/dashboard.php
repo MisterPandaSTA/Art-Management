@@ -3,36 +3,45 @@
 require_once('includes/classconfig.php');
 
 
-if(isset($_SESSION['id']) && $_SESSION['permission'])
-{	
-	$texte = "Dashboard";
-	$desc = "Bienvenue ".$_SESSION['prenom']." " ;
-	require_once('includes/dashhead.php');	
-	if($_SESSION['permission'] == 'admin' )
-	{
-		
-		
+if(isset($_SESSION['id'])){
+	if($_SESSION['permission'] == 'utilisateur' || $_SESSION['permission'] == 'admin'){	
+
+		$texte = "Dashboard";
+		$desc = "Bienvenue ".$_SESSION['prenom']." " ;
+		require_once('includes/dashhead.php');
+		?>
+		<section class="container-fluid page_content active">
+		<div class="row cadre">
+			<div class="panel panel-default">Ici il y aura des trucs dans la semaine</div>
+		</div>
+		<?php
+			if($_SESSION['permission'] == 'admin' )
+			{
+				
+				
+			}
+		?>	
+		</section>
+		<?php
 	}
-	
-}
-elseif(isset($_SESSION['id']))
-{
-	$texte = "Dashboard";
-	$desc = "Bienvenue ".$_SESSION['prenom']." . C'est votre première connexion, pour avoir un accès complet, veuillez definir votre mot de passe !" ;
-	require_once('includes/dashhead.php');
+	if($_SESSION['permission'] == 'inactif'){
+		$texte = "Dashboard";
+		$desc = "Bienvenue ".$_SESSION['prenom']." . C'est votre première connexion, pour avoir un accès complet, veuillez definir votre mot de passe !" ;
+		require_once('includes/dashhead.php');
 
-	?>
-	<body onLoad="setTimeout('RedirectFirstLogin()', 10000)">
-		<section class="container page_content">
-			<div class="row cadre">
-		
-				<div onLoad="setTimeout('RedirectFirstLogin()', 10000)">
-					Vous vous êtes connectez avec le mot de passe de base, vous allez être redirigé vers <a href="http://localhost/git/art_management/admin/user.php">votre page profil</a> afin que vous definissiez votre nouveau mot de passe.
+		?>
+		<body onLoad="setTimeout('RedirectFirstLogin()', 10000)">
+			<section class="container-fluid page_content active">
+				<div class="row cadre">
+			
+					<div onLoad="setTimeout('RedirectFirstLogin()', 10000)">
+						Vous vous êtes connectez avec le mot de passe de base, vous allez être redirigé vers <a href="http://localhost/git/art_management/admin/user.php">votre page profil</a> afin que vous definissiez votre nouveau mot de passe.
+					</div>
 				</div>
-	<?php
-
+			</section>		
+		<?php
+	}
 }
-
 else { 
 	echo 'Vous n\'êtes pas autorisé à accéder à cette page vous allez être rediriger sur la page de connexion.';
 ?>

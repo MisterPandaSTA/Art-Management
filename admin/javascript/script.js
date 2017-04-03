@@ -351,17 +351,19 @@ $(document).ready(function () {
 	$('.btn_affiche_modifier_artiste').click(function (){
 		var id = $(this).parent().parent().attr('id').substr(1);
 
-		var nom = $('#n'+id+' td').html();
-		var prenom = $('#n'+id+' td').html();
-		var pseudo = $('#n'+id+' td').html();
+		var nom = $('#n'+id+' .td_nom').html();
+		var prenom = $('#n'+id+' .td_prenom').html();
+		var pseudo = $('#n'+id+' .td_pseudo').html();
 		var email = $('#n'+id+' input[name="email"]').val();
 		var telephone = $('#n'+id+' input[name="telephone"]').val();
 		var adresse = $('#n'+id+' input[name="adresse"]').val();
 		var activitees = $('#n'+id+' input[name="activitees"]').val();
 		var description = $('#n'+id+' textarea[name="description"]').val();
 		
+		$('.nom_artiste').html(nom);
 
 		$('#formCreateArtiste').toggle(false);
+		$('#formTradArtiste').toggle(false);
 		$('#formModifArtiste').toggle(true);
 
 		$("#formModifArtiste input[name='nom']").val(nom);
@@ -376,10 +378,17 @@ $(document).ready(function () {
 	}); 
 });	
 
+$(document).ready(function () {
+	$('.btn_annuler_artiste').click(function () {
+		$('#formModifArtiste').toggle(false);
+		$('#formTradArtiste').toggle(false);
+		$('#formCreateArtiste').toggle(true);
+	});
+});
 
 $(document).ready(function () {
 	$('#btn_artiste_modif').click(function(){
-		$(".action").val('modifier');
+		
 		var nom = $("#formModifArtiste input[name='nom']").val();
 		var prenom = $("#formModifArtiste input[name='prenom']").val();
 		var pseudo = $("#formModifArtiste input[name='pseudo']").val();
@@ -388,8 +397,11 @@ $(document).ready(function () {
 		var adresse = $("#formModifArtiste input[name='adresse']").val();
 		var activitees = $("#formModifArtiste input[name='activitees']").val();
 		var description = $("#formModifArtiste textarea[name='description']").val();
-		var action = $("#formModifArtiste input[name='action']").val();
 		var id_artiste = $("#formModifArtiste input[name='id_artiste']").val();
+		
+		$(".action").val('modifier');
+		var action = $("#formModifArtiste input[name='action']").val();
+		
 
 		console.log(nom);
 		console.log(prenom);
@@ -442,6 +454,10 @@ $(document).ready(function () {
 				},
 				complete : function () {
 					console.log('Requête Ajax exécutée');
+					
+					
+						document.location.href="http://localhost/git/art_management/admin/artiste.php";
+					
 				}
 			});		
 	});
@@ -449,7 +465,7 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-	$("btn_artiste_delete").click(function (){
+	$(".btn_artiste_delete").click(function (){
 		$(".action").val('delete');
 		var action = $('#formModifArtiste input[name="action"]').val();
 		var id_artiste = $('#formModifArtiste input[name="id_artiste"]').val();
@@ -458,10 +474,10 @@ $(document).ready(function () {
 		console.log(action);
 		$('#requeteAjaxDelete').click(function (){
 			$.ajax({
-				url: "includes/AjaxPhpfunctions/funcModUser.php",
+				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
 				method: 'POST',
 				data: {
-						id_user : id_user,
+						id_artiste : id_artiste,
 						action : action
 				},
 				success : function (response) {
@@ -491,12 +507,107 @@ $(document).ready(function () {
 					console.log('Requête Ajax exécutée');
 					$('.reset-complet')
 					$(document).click(function (){
-						document.location.href="http://localhost/git/art_management/admin/gestion_user.php";
+						document.location.href="http://localhost/git/art_management/admin/artiste.php";
 					});	
 				}		
 			});
 		
 		});	
+	});
+});
+
+$(document).ready(function () {
+	$('.btn_affiche_trad_artiste').click(function (){
+		var id = $(this).parent().parent().attr('id').substr(1);
+
+		var nom = $('#n'+id+' .td_nom').html();
+		var description_anglais = $('#n'+id+' textarea[name="description_anglais"]').val();
+		var description_allemand = $('#n'+id+' textarea[name="description_allemand"]').val();
+		var description_russe = $('#n'+id+' textarea[name="description_russe"]').val();
+		var description_chinois = $('#n'+id+' textarea[name="description_chinois"]').val();
+		var activitees_anglais = $('#n'+id+' input[name="activitees_anglais"]').val();
+		var activitees_allemand = $('#n'+id+' input[name="activitees_allemand"]').val();
+		var activitees_russe = $('#n'+id+' input[name="activitees_russe"]').val();
+		var activitees_chinois = $('#n'+id+' input[name="activitees_chinois"]').val();
+		
+		$('.nom_artiste').html(nom);
+		
+		$('#formCreateArtiste').toggle(false);
+		$('#formModifArtiste').toggle(false);
+		$('#formTradArtiste').toggle(true);
+		
+		
+		$("#formTradArtiste textarea[name='description_anglais']").val(description_anglais);
+		$("#formTradArtiste textarea[name='description_allemand']").val(description_allemand);
+		$("#formTradArtiste textarea[name='description_russe']").val(description_russe);
+		$("#formTradArtiste textarea[name='description_chinois']").val(description_chinois);
+		$("#formTradArtiste input[name='activitees_anglais']").val(activitees_anglais);
+		$("#formTradArtiste input[name='activitees_allemand']").val(activitees_allemand);
+		$("#formTradArtiste input[name='activitees_russe']").val(activitees_russe);
+		$("#formTradArtiste input[name='activitees_chinois']").val(activitees_chinois);
+		$("#formTradArtiste input[name='id_artiste']").val(id);
+	});
+});
+
+$(document).ready(function () {
+	$('#btn_modif_trad_artiste').click(function(){
+		
+		var id_artiste = $("#formTradArtiste input[name='id_artiste']").val();
+		var description_anglais = $("#formTradArtiste textarea[name='description_anglais']").val();
+		var description_allemand = $("#formTradArtiste textarea[name='description_allemand']").val();
+		var description_russe = $("#formTradArtiste textarea[name='description_russe']").val();
+		var description_chinois = $("#formTradArtiste textarea[name='description_chinois']").val();
+		var activitees_anglais = $("#formTradArtiste input[name='activitees_anglais']").val();
+		var activitees_allemand = $("#formTradArtiste input[name='activitees_allemand']").val();
+		var activitees_russe = $("#formTradArtiste input[name='activitees_russe']").val();
+		var activitees_chinois = $("#formTradArtiste input[name='activitees_chinois']").val();
+		$(".action").val('traduction');
+		var action = $('#formTradArtiste input[name="action"]').val();
+		$.ajax({
+				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
+				method: 'POST',
+				data: {
+						id_artiste : id_artiste,
+						action : action,
+						description_anglais : description_anglais,
+						description_allemand : description_allemand,
+						description_russe : description_russe,
+						description_chinois : description_chinois,
+						activitees_anglais : activitees_anglais,
+						activitees_allemand : activitees_allemand,
+						activitees_russe : activitees_russe,
+						activitees_chinois: activitees_chinois
+				},
+				success : function (response) {
+						console.log(response);
+						if(response == 'error' ) {
+							// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
+							alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
+							ajaxResponse = false;
+						}
+						else if (response == 'ok') {
+							// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
+							console.log('Cycle achevé et mis à jours');
+							ajaxResponse = true;
+						}
+						else {
+							// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
+							/*actualCycleId = parseInt(response);
+							ajaxResponse = parseInt(response);*/
+
+							ajaxResponse = parseInt(response,10);
+						}
+				},
+				error: function () {
+					alert('Désolé, une erreur est survenue lors de de la requête ajax');
+				},
+				complete : function () {
+					console.log('Requête Ajax exécutée');
+					
+						document.location.href="http://localhost/git/art_management/admin/artiste.php";
+					
+				}		
+		});
 	});
 });
 
