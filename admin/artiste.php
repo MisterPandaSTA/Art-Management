@@ -12,9 +12,6 @@ if($_SESSION['id']){
 	<section class="container-fluid page_content active">
 		<div class="row cadre">
 			<div class="panel panel-default">
-	 		
-		
-			
 				
 	<?php
 
