@@ -146,25 +146,25 @@ class Oeuvre {
     ?><form action="<?php echo $target; ?>" method="post">
     <input type="hidden" name="id_oeuvre" value="<?php echo $this->id_oeuvre; ?>">
 
-    <label for="nom">Nom de l'oeuvre</label>
+    <label for="nom">Nom de l'oeuvre :</label>
     <input type="text" name="nom" value="<?php echo $this->nom; ?>"><br>
 
-    <label for="type_oeuvre">Type de l'oeuvre</label>
+    <label for="type_oeuvre">Type de l'oeuvre :</label>
     <input type="text" name="type_oeuvre" value="<?= $this->type_oeuvre ?>"><br>
 
-    <label for="dimensions">Dimensions</label>
+    <label for="dimensions">Dimensions :</label>
     <input type="text" name="dimensions" value="<?= $this->dimensions ?>"><br>
 
-    <label for="poids">Poids</label>
+    <label for="poids">Poids :</label>
     <input type="text" name="poids" value="<?= $this->poids ?>"><br>
 
-    <label for="description_oeuvre">Description de l'oeuvre</label>
+    <label for="description_oeuvre">Description de l'oeuvre :</label>
     <input type="text" name="description_oeuvre" value="<?= $this->description_oeuvre ?>"><br>
 
-    <label for="date_creation">Date de création</label>
+    <label for="date_creation">Date de création :</label>
     <input type="text" name="date_creation" value="<?= $this->date_creation ?>"><br>
 
-    <label for="livraison">Livraison</label>
+    <label for="livraison">Livraison :</label>
     <input type="text" name="livraison" value="<?= $this->livraison ?>"><br>
 
     <input type="submit" value="<?php echo $submit==''?'Envoyer':$submit; ?>">
@@ -246,71 +246,142 @@ class Oeuvre {
 
     // formulaire de création d'utilisateur
 
-    function formCreate($target){ /*ceci est le formulaire de création de compte*/
+    function formOeuvre($target){ /*ceci est le formulaire de création de compte*/
         ?>
-        <form id="formCreate" action="../admin/creation_oeuvre.php" method="post">
-            <div class="panel-heading">Création de Fiche Artiste</div>
+        <form id="formCreateOeuvre" action="<?php echo $target; ?>" method="post">
+            <div class="panel-heading">Création de Fiche Oeuvre</div>
             <table class="table table-bordered table-striped table-hover">
-            <thead>
-                
-                <th colspan="3"><label for="id_artiste">Choix de l'artiste :</label>
-            <select name="id_artiste" id="id_artiste">
-            <?php
-            $req= sql("SELECT nom, id_artiste FROM artiste ");
-                 
-            foreach ($req as $donnee) {
-                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].'</option>';
-            }?></select>
-            
+                <thead>
+                    <th colspan="3">Identité de l'oeuvre</th>
+                </thead>    
+                <tr>
+                   <td>
+                        <label for"nom">Nom de l'oeuvre :</label>
+                        <input type="text" name="nom" />
+                    </td>
+                    <td>
+                        <label for="id_artiste">Artiste :</label>
+                        <select name="id_artiste" id="id_artiste">
+                            <?php
+                            $req= sql("SELECT nom, id_artiste FROM artiste ");
+                                     
+                            foreach ($req as $donnee) {
+                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].'</option>';
+                            }?>
+                                         
+                        </select> 
+                    </td>
+                    <td>
+                        <label for="date_creation">Date de creation :</label>
+                        <input type="date" name="date_creation" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>    
+                        <label for"type_oeuvre">Type de l'oeuvre :</label>
+                        <input type="text" name="type_oeuvre" />
+                    </td>
+                    <td>
+                        <label for="description_oeuvre">Description de l'oeuvre :</label>
+                        <textarea name="description_oeuvre"></textarea>
+                    </td>
+                </tr>
+            <table class="table table-bordered table-striped table-hover ">
+                <thead>
+                    <th colspan="3">Données de manutentions</th>
+                </thead>
+                <tr>
+                    <td>
+                        <label for="dimensions">Dimensions :</label>
+                        <input type="text" name="dimensions" />
+                    </td>
+                    <td>
+                        <label for="poids">Poids :</label>
+                        <input type="text" name="poids" />
+                    </td>
+                    <td>
+                        <label for="livraison">Livraison :</label>
+                        <input type="text" name="livraison" />
+                    </td>
+                </tr>  
+                <tr>    
+                    <td>
+                        <input id="create" class="btn btn-primary" type="submit" name="submit" value="Créer" />
+                    </td>
+                </tr>
+            </table>    
+        </form>
 
-            
-        <tr>
-           <td>
-                <label for"nom">nom de l'oeuvre :</label>
-                <input type="text" name="nom" />
-            </td>
-            <td>
-                <label for"type_oeuvre">type d'oeuvre :</label>
-                <input type="text" name="type_oeuvre" />
-            </td>
-            <td>
-                <label for="dimensions">dimensions</label>
-                <input type="text" name="dimensions" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="poids">poids</label>
-                <input type="text" name="poids" />
-            </td>
-            <td>
-                <label for="description_oeuvre">description_oeuvre</label>
-                <input type="text" name="description_oeuvre" />
-            </td>
-            <td>
-                <label for="date_creation">date de creation</label>
-                <input type="text" name="date_creation" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="livraison">livraison</label>
-                <input type="text" name="livraison" />
-            </td>
-            <td>
-                <input id="create" type="submit" name="submit" value="Créer" />
-            </td>
-            <td>
-                <form id="formCreate" action="../admin/modifier.php" method="post">
-                <input id="modifier" type="submit" name="submit" value="Modifier" />
-                </form>
-            </td>
-        </tr>
-         </th></thead>
-        </form><?php
+        <div id="formModifOeuvre" class="none_class">
+            <div class="panel-heading">Modifier de fiche de l'oeuvre <span class="nom_oeuvre"></span></div>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <th colspan="3">Identité de l'oeuvre</th>
+                </thead>    
+                <tr>
+                   <td>
+                        <label for"nom">Nom de l'oeuvre :</label>
+                        <input type="text" name="nom" />
+                    </td>
+                    <td>
+                        <label for="id_artiste">Artiste :</label>
+                        <select name="id_artiste" id="id_artiste">
+                            <?php
+                            $req= sql("SELECT nom, id_artiste FROM artiste ");
+                                     
+                            foreach ($req as $donnee) {
+                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].'</option>';
+                            }?>
+                                         
+                        </select> 
+                    </td>
+                    <td>
+                        <label for="date_creation">Date de creation :</label>
+                        <input type="text" name="date_creation" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>    
+                        <label for"type_oeuvre">Type de l'oeuvre :</label>
+                        <input type="text" name="type_oeuvre" />
+                    </td>
+                    <td>
+                        <label for="description_oeuvre">Description de l'oeuvre :</label>
+                        <textarea name="description_oeuvre"></textarea>
+                    </td>
+                        
+                </tr>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <th colspan="3">Données de manutentions</th>
+                </thead>
+                <tr>
+                    <td>
+                        <label for="dimensions">Dimensions :</label>
+                        <input type="text" name="dimensions" />
+                    </td>
+                    <td>
+                        <label for="poids">Poids :</label>
+                        <input type="text" name="poids" />
+                    </td>
+                    <td>
+                        <label for="livraison">Livraison :</label>
+                        <input type="text" name="livraison" />
+                    </td>
+                </tr> 
+                <tr>    
+                    <td>
+                        <a href="#" class="btn btn-warning btn_annuler_oeuvre">annuler</a>
+                        <a href="#" class="btn btn-success" name="submit" value="Modifier">Enregistrer</a>
+                    </td>
+                </tr>
+            </table> 
+        </div>                       
+        <?php
     }
 
- /***** FONCTION SELECT  *****/
+ /*/***** FONCTION SELECT  *****/
+/*   
     function select (){
     $res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  ");
         ?>
@@ -334,4 +405,26 @@ class Oeuvre {
 
             }
         }
-  }          
+  }          */
+
+    function afficheOeuvreModif () {
+        ?><tr class="afficheOeuvreModif"  id="<?php echo "n".$this->getIdOeuvre(); ?>">
+            <td class="td_nom"><?php echo $this->getNom(); ?></td>
+            <td class="td_artiste"><?php echo $this->getNomArtiste(); ?></td>
+            <td class="td_livraison"><?php if($this->getlivraison() == 1) {echo "Oui";} else {echo "Non";} ?></td>
+            <td>    
+                <input type="hidden" name="date_creation" value="<?php echo $this->getDateCreation(); ?>"/>
+                <textarea name="description" class="none_class"><?php echo $this->getDescription(); ?></textarea>
+                <input type="hidden" name="dimensions" value="<?php echo $this->getDimensions(); ?>"/>
+                <input type="hidden" name="poids" value="<?php echo $this->getPoids(); ?>"/>
+                <input type="hidden" name="type_oeuvre" value="<?php echo $this->getTypeOeuvre(); ?>"/>
+                <input class="action" type="hidden" name="action" value="" />
+                <button class="btn_affiche_modifier_oeuvre btn btn-success" name="modifier">Modifier</button>
+            </td>
+            <td>
+             <button class="btn_affiche_trad_oeuvre btn btn-info" name="traduction">Traduction</button>
+            </td>
+          </tr>
+    <?php        
+    }        
+}

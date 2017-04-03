@@ -27,15 +27,10 @@ if(isset($_SESSION['id'])){
 
 			 			<table class="table table-bordered table-striped table-hover">
 							<thead>
-								<th>Nom de l'artiste</th>
 								<th>Nom de l'oeuvre</th>
-								<th>Type d'oeuvre</th>
-								<th>Dimensions</th>
-								<th>Poids</th>
-								<th>Description</th>
-								<th>Date de création</th>
+								<th>Nom de l'artiste</th>
 								<th>Livraison</th>
-								<th colspan="3">Action</th>
+								<th colspan="2">Action</th>
 							</thead>
 
 	<?php

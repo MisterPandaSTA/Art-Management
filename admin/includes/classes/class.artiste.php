@@ -244,10 +244,10 @@ class Artiste {
     function formArtiste($target) {
     ?>
     <form action="<?php echo $target; ?>" id="formCreateArtiste" method="post">
-        <div class="panel-heading">Création de Fiche Artiste</div>
+        <div class="panel-heading">Création de fiche artiste</div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                    <th colspan="3">Identité</th>
+                    <th colspan="3">Identité de l'artiste</th>
                 </thead>
                 <tr>
                     <td>
@@ -268,7 +268,7 @@ class Artiste {
             </table>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                    <th colspan="3">Coordonnées</th>
+                    <th colspan="3">Coordonnées de l'artiste</th>
                 </thead>
                 <tr>
                     <td>
@@ -289,7 +289,7 @@ class Artiste {
             </table>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                    <th colspan="3">Détails</th>
+                    <th colspan="3">Information diverses</th>
                 </thead>
                 <tr>
                     <td>
@@ -314,7 +314,7 @@ class Artiste {
 
             
         <div id="formModifArtiste" class="none_class">
-            <div class="panel-heading">Modifier Fiche Artiste de M. <span class="nom_artiste"></span></div>
+            <div class="panel-heading">Modifier fiche artiste de M. <span class="nom_artiste"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <th colspan="3">Identité</th>
@@ -390,7 +390,7 @@ class Artiste {
 
         </div>
         <div id="formTradArtiste" class="none_class">
-            <div class="panel-heading">Modifier les traductions Fiche Artiste de M. <span class="nom_artiste"></span></div>
+            <div class="panel-heading">Modifier les traductions de la fiche Artiste de M. <span class="nom_artiste"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <th colspan="2">Description :</th>
@@ -461,8 +461,8 @@ class Artiste {
     }
 
      /* formulaire pour les modifs et les actions */
-     function afficheArtisteModif () {
-         ?><tr class="afficheArtisteModif"  id="<?php echo "n".$this->getIdArtiste(); ?>">
+    function afficheArtisteModif () {
+        ?><tr class="afficheArtisteModif"  id="<?php echo "n".$this->getIdArtiste(); ?>">
             <td class="td_nom"><?php echo $this->getNom(); ?></td>
             <td class="td_prenom"><?php echo $this->getPrenom(); ?></td>
             <td class="td_pseudo"><?php echo $this->getPseudo(); ?></td>

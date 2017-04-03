@@ -15,11 +15,11 @@ if(isset($_SESSION['id'])) {
 				
 			<?php
 				$oeuvre=new Oeuvre();
-				$oeuvre->formCreate('');
+				$oeuvre->formOeuvre('oeuvre.php');
 				
 
 			?>
-			</div>
+				</div>
 
 
 
