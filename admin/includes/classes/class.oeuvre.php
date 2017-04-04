@@ -262,11 +262,11 @@ class Oeuvre {
                     <td>
                         <label for="id_artiste">Artiste :</label>
                         <select name="id_artiste" id="id_artiste">
-                            <?php
-                            $req= sql("SELECT nom, id_artiste FROM artiste ");
+                             <?php
+                            $req= sql("SELECT nom, prenom, id_artiste FROM artiste ");
                                      
                             foreach ($req as $donnee) {
-                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].'</option>';
+                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].' '.$donnee['prenom'].'</option>';
                             }?>
                                          
                         </select> 
@@ -281,9 +281,9 @@ class Oeuvre {
                         <label for"type_oeuvre">Type de l'oeuvre :</label>
                         <input type="text" name="type_oeuvre" />
                     </td>
-                    <td>
+                    <td colspan="2">
                         <label for="description_oeuvre">Description de l'oeuvre :</label>
-                        <textarea name="description_oeuvre"></textarea>
+                        <textarea name="description_oeuvre" cols="60"></textarea>
                     </td>
                 </tr>
             <table class="table table-bordered table-striped table-hover ">
@@ -301,12 +301,19 @@ class Oeuvre {
                     </td>
                     <td>
                         <label for="livraison">Livraison :</label>
-                        <input type="text" name="livraison" />
+                        <select name="livraison">
+                            <option value="0">
+                                    Non
+                            </option>
+                            <option value="1">
+                                    Oui
+                            </option>
+                        </select>
                     </td>
                 </tr>  
                 <tr>    
                     <td>
-                        <input id="create" class="btn btn-primary" type="submit" name="submit" value="Créer" />
+                        <input id="btn_oeuvre_create" class="btn btn-primary" type="submit" name="submit" value="Créer" />
                     </td>
                 </tr>
             </table>    
@@ -327,10 +334,10 @@ class Oeuvre {
                         <label for="id_artiste">Artiste :</label>
                         <select name="id_artiste" id="id_artiste">
                             <?php
-                            $req= sql("SELECT nom, id_artiste FROM artiste ");
+                            $req= sql("SELECT nom, prenom, id_artiste FROM artiste ");
                                      
                             foreach ($req as $donnee) {
-                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].'</option>';
+                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].' '.$donnee['prenom'].'</option>';
                             }?>
                                          
                         </select> 
@@ -366,7 +373,14 @@ class Oeuvre {
                     </td>
                     <td>
                         <label for="livraison">Livraison :</label>
-                        <input type="text" name="livraison" />
+                        <select name="livraison">
+                            <option value="0">
+                                    Non
+                            </option>
+                            <option value="1">
+                                    Oui
+                            </option>
+                        </select>
                     </td>
                 </tr> 
                 <tr>    
@@ -407,14 +421,29 @@ class Oeuvre {
         }
   }          */
 
+    static function listGestion($startNb=0, $nbElmts=10){ /*ceci est la liste des formulaires de modification des comptes*/
+        $res = sql("
+            SELECT *
+            FROM Oeuvre
+            ORDER BY nom 
+            LIMIT ".$startNb.",".$nbElmts." ;"
+            );
+        /*print_r($res);*/
+        return $res;
+    }
+
     function afficheOeuvreModif () {
         ?><tr class="afficheOeuvreModif"  id="<?php echo "n".$this->getIdOeuvre(); ?>">
             <td class="td_nom"><?php echo $this->getNom(); ?></td>
-            <td class="td_artiste"><?php echo $this->getNomArtiste(); ?></td>
-            <td class="td_livraison"><?php if($this->getlivraison() == 1) {echo "Oui";} else {echo "Non";} ?></td>
+            <td class="td_artiste"><?php echo $this->getNomArtiste(); ?>
+                <input type="hidden" name="id_artiste" value="<?php echo $this->getIdArtiste(); ?>">
+            </td>
+            <td class="td_livraison"><?php if($this->getLivraison() == 1) {echo "Oui";} else {echo "Non";} ?>
+                <input type="hidden" name="livraison" value="<?php echo $this->getLivraison ?>">
+            </td>
             <td>    
                 <input type="hidden" name="date_creation" value="<?php echo $this->getDateCreation(); ?>"/>
-                <textarea name="description" class="none_class"><?php echo $this->getDescription(); ?></textarea>
+                <textarea name="description" class="none_class"><?php echo $this->getDescriptionOeuvre(); ?></textarea>
                 <input type="hidden" name="dimensions" value="<?php echo $this->getDimensions(); ?>"/>
                 <input type="hidden" name="poids" value="<?php echo $this->getPoids(); ?>"/>
                 <input type="hidden" name="type_oeuvre" value="<?php echo $this->getTypeOeuvre(); ?>"/>

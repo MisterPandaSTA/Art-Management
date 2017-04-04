@@ -11,7 +11,7 @@ if(isset($_SESSION['id'])) {
 	
 	<section class="container-fluid page_content active">
 		<div class="row cadre">
-			<div class="panel-heading">
+			<div class="panel panel-heading">
 				
 			<?php
 				$oeuvre=new Oeuvre();
@@ -19,11 +19,49 @@ if(isset($_SESSION['id'])) {
 				
 
 			?>
+			</div>
+		</div>		
+		<div class="row cadre">	
+				<div class="panel panel-default flex tableau_mise_page">
+			 		<div class="panel-heading">Liste des fiches oeuvres</div>
+			 		<div class="flex">
+			 			<table class="table table-bordered table-striped table-hover double_table">
+							<thead>
+								<th>Nom de l'oeuvre</th>
+								<th>Nom de l'artiste</th>
+								<th>Livraison</th>
+								<th colspan="2">Action</th>
+							</thead>
+							<?php
+							
+							$modif = Oeuvre::listGestion(0, 10);
+							foreach($modif as $form) {
+								$f = new Oeuvre($form['id_oeuvre']);
+								$f->afficheOeuvreModif();
+							}
+						?>
+						</table>
+						<table class="table table-bordered table-striped table-hover double_table">
+							<thead>
+								<th>Nom de l'oeuvre</th>
+								<th>Nom de l'artiste</th>
+								<th>Livraison</th>
+								<th colspan="2">Action</th>
+							</thead>
+							<?php
+							
+							$modif = Oeuvre::listGestion(10, 20);
+							foreach($modif as $form) {
+								$f = new Oeuvre($form['id_oeuvre']);
+								$f->afficheOeuvreModif();
+							}
+						?>
+						</table>
+					</div>
 				</div>
+		</div>	
+	</sections>	
 
-
-
-	
 	<?php
 	if($_SESSION['permission'] == 'inactif'){
 		$texte = "Dashboard > type";

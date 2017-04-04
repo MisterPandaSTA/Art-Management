@@ -305,11 +305,16 @@ class Artiste {
                 <tr>
                     <td colspan="2">
                         <label for="description">Description :</label>
-                        <textarea name="description" value="" col="5"></textarea>
+                        <textarea name="description" value="" cols="120" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="btn btn-primary" id="btn_artiste_create" value="Créer">
                     </td>
                 </tr>
             </table>
-                <input type="submit" class="btn btn-primary" id="btn_artiste_create" value="Créer">
+                
             </form>
 
             
@@ -317,7 +322,7 @@ class Artiste {
             <div class="panel-heading">Modifier fiche artiste de M. <span class="nom_artiste"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                    <th colspan="3">Identité</th>
+                    <th colspan="3">Identité de l'artiste</th>
                 </thead>
                 <tr>
                     <td>
@@ -338,7 +343,7 @@ class Artiste {
             </table>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                    <th colspan="3">Coordonnées</th>
+                    <th colspan="3">Coordonnées de l'artiste</th>
                 </thead>
                 <tr>
                     <td>
@@ -359,7 +364,7 @@ class Artiste {
             </table>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                    <th colspan="3">Détails</th>
+                    <th colspan="3">Information diverses</th>
                 </thead>
                 <tr>
                     <td>
@@ -374,7 +379,8 @@ class Artiste {
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <textarea name="description" value="" col="5"></textarea>
+                        <label for="description">Description :</label>
+                        <textarea name="description" value="" cols="120" rows="5"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -398,23 +404,23 @@ class Artiste {
                 <tr>
                     <td>
                         <label for="description_anglais">Anglais :</label>
-                        <textarea name="description_anglais"><?= $this->description_anglais ?></textarea>
+                        <textarea name="description_anglais" cols="60" rows="3"><?= $this->description_anglais ?></textarea>
                     </td>
 
                     <td>
                         <label for="description_allemand">Allemand :</label>
-                        <textarea name="description_allemand"><?= $this->description_allemand ?></textarea>
+                        <textarea name="description_allemand" cols="60" rows="3"><?= $this->description_allemand ?></textarea>
                     </td>
                 </tr> 
                 <tr>
                     <td>
                         <label for="description_russe">Russe :</label>
-                        <textarea name="description_russe"><?= $this->description_russe ?></textarea>
+                        <textarea name="description_russe" cols="60" rows="3"><?= $this->description_russe ?></textarea>
                     </td>
 
                     <td>
                         <label for="description_chinois">Chinois :</label>
-                        <textarea name="description_chinois"><?= $this->description_chinois ?></textarea> 
+                        <textarea name="description_chinois" cols="60" rows="3"><?= $this->description_chinois ?></textarea> 
                     </td>
                 </tr>
             </table>

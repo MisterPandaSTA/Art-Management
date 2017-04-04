@@ -16,14 +16,6 @@ if(isset($_POST['nom']) && ($_POST['prenom']) && ($_POST['email'])) {
 	$artiste->setDescription($_POST['description']);
 	
 	var_dump($_POST['nom']);
-	/*$artiste->setDescriptionAnglais($_POST['description_anglais']);
-	$artiste->setDescriptionAllemand($_POST['description_allemand']);
-	$artiste->setDescriptionRusse($_POST['description_russe']);
-	$artiste->setDescriptionChinois($_POST['description_chinois']);
-	$artiste->setActiviteesAnglais($_POST['activitees_anglais']);
-	$artiste->setActiviteesAllemand($_POST['activitees_allemand']);
-	$artiste->setActiviteesRusse($_POST['activitees_russe']);
-	$artiste->setActiviteesChinois($_POST['activitees_chinois']);*/
 
 	$insert=$artiste->syncDb();
 

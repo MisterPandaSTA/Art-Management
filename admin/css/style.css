@@ -438,17 +438,18 @@
   display: none;
 }
  
-.tableau_artiste_mise_page {
+/*
+  pour les affichages de modif, donc artiste et oeuvre au moin
+*/
+.tableau_mise_page {
   flex-direction: column;
 }
-
-.tableau_artiste {
-  flex-direction: row;
-}
-
 .double_table {
   max-width: 50%;
 }
+
+
+
 
 /*------------------------ 
     .php ()

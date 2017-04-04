@@ -22,7 +22,7 @@ if(isset($_SESSION['id'])){
 			</div>
 		</div>
 		<div class="row cadre">
-			<div class="panel panel-default flex tableau_artiste_mise_page">
+			<div class="panel panel-default flex tableau_mise_page">
 	 			<div class="panel-heading">Liste des fiches artistes</div>
 		
 				<div class="flex">
