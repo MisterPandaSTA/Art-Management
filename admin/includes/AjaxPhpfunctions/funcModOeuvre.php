@@ -1,14 +1,11 @@
 <?php
+require_once('../classconfig.php');
 
-require_once ('../includes/functions.php');
-require_once ('../includes/config.php');
-require_once ('class/class.oeuvre.php');
+if(isset($_POST['id_oeuvre'])) {
 
-
-if(isset($_GET['id_oeuvre'])) {
-	$oeuvre = new Oeuvre($_GET['id_oeuvre']);
+	$oeuvre = new Oeuvre($_POST['id_oeuvre']);
 	
-	if() {
+	if($_POST['action'] == 'modifier' ){
 
 		$oeuvre = new Oeuvre($_POST['id_oeuvre']);
 		$oeuvre->setIdArtiste($_POST['id_artiste']);
@@ -20,10 +17,12 @@ if(isset($_GET['id_oeuvre'])) {
 		$oeuvre->setDateCreation($_POST['date_creation']);
 		$oeuvre->setLivraison($_POST['livraison']);
 		
-		/*var_dump($oeuvre);*/
+		
 		var_dump($oeuvre);
 		$update=$oeuvre->syncDb();
+	}
 
+	if ($_POST['action'] == 'traduction') {
 
-	
+	}
 }

@@ -17,18 +17,18 @@ class Oeuvre {
         if($id!=0){
             $res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  WHERE id_oeuvre='".$id."'");
             /*var_dump($res);*/
-            $user=$res[0];
+            $oeuvre=$res[0];
             
-            $this->nom_artiste=$user['nom_artiste'];
-            $this->id_oeuvre=$user['id_oeuvre'];
-            $this->id_artiste=$user['id_artiste'];
-            $this->nom=$user['nom'];
-            $this->type_oeuvre=$user['type_oeuvre'];
-            $this->dimensions=$user['dimensions'];
-            $this->poids=$user['poids'];
-            $this->description_oeuvre=$user['description_oeuvre'];
-            $this->date_creation=$user['date_creation'];
-            $this->livraison=$user['livraison'];
+            $this->nom_artiste=$oeuvre['nom_artiste'];
+            $this->id_oeuvre=$oeuvre['id_oeuvre'];
+            $this->id_artiste=$oeuvre['id_artiste'];
+            $this->nom=$oeuvre['nom'];
+            $this->type_oeuvre=$oeuvre['type_oeuvre'];
+            $this->dimensions=$oeuvre['dimensions'];
+            $this->poids=$oeuvre['poids'];
+            $this->description_oeuvre=$oeuvre['description_oeuvre'];
+            $this->date_creation=$oeuvre['date_creation'];
+            $this->livraison=$oeuvre['livraison'];
             
 /*var_dump($user);*/
         }
@@ -138,39 +138,6 @@ class Oeuvre {
     function setLivraison($livraison){
         
         $this->livraison=$livraison;
-    }
-
-    /*  formulaire */
-
-    function form($target,$submit='') {
-    ?><form action="<?php echo $target; ?>" method="post">
-    <input type="hidden" name="id_oeuvre" value="<?php echo $this->id_oeuvre; ?>">
-
-    <label for="nom">Nom de l'oeuvre :</label>
-    <input type="text" name="nom" value="<?php echo $this->nom; ?>"><br>
-
-    <label for="type_oeuvre">Type de l'oeuvre :</label>
-    <input type="text" name="type_oeuvre" value="<?= $this->type_oeuvre ?>"><br>
-
-    <label for="dimensions">Dimensions :</label>
-    <input type="text" name="dimensions" value="<?= $this->dimensions ?>"><br>
-
-    <label for="poids">Poids :</label>
-    <input type="text" name="poids" value="<?= $this->poids ?>"><br>
-
-    <label for="description_oeuvre">Description de l'oeuvre :</label>
-    <input type="text" name="description_oeuvre" value="<?= $this->description_oeuvre ?>"><br>
-
-    <label for="date_creation">Date de création :</label>
-    <input type="text" name="date_creation" value="<?= $this->date_creation ?>"><br>
-
-    <label for="livraison">Livraison :</label>
-    <input type="text" name="livraison" value="<?= $this->livraison ?>"><br>
-
-    <input type="submit" value="<?php echo $submit==''?'Envoyer':$submit; ?>">
-
-    </form><?php   
-
     }
 
     /* insert ou update */
@@ -385,8 +352,11 @@ class Oeuvre {
                 </tr> 
                 <tr>    
                     <td>
+                        <input type="hidden" name="id_oeuvre" value="" />
+                        <input class="action" type="hidden" name="action" value="" />
                         <a href="#" class="btn btn-warning btn_annuler_oeuvre">annuler</a>
-                        <a href="#" class="btn btn-success" name="submit" value="Modifier">Enregistrer</a>
+                        <a href="#" class="btn btn-success" name="submit" value="Modifier" id="btn_oeuvre_modif">Enregistrer</a>
+                        <button class="btn_oeuvre_delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Supprimer</button>
                     </td>
                 </tr>
             </table> 
@@ -439,11 +409,11 @@ class Oeuvre {
                 <input type="hidden" name="id_artiste" value="<?php echo $this->getIdArtiste(); ?>">
             </td>
             <td class="td_livraison"><?php if($this->getLivraison() == 1) {echo "Oui";} else {echo "Non";} ?>
-                <input type="hidden" name="livraison" value="<?php echo $this->getLivraison ?>">
+                <input type="hidden" name="livraison" value="<?php echo $this->getLivraison() ?>">
             </td>
             <td>    
                 <input type="hidden" name="date_creation" value="<?php echo $this->getDateCreation(); ?>"/>
-                <textarea name="description" class="none_class"><?php echo $this->getDescriptionOeuvre(); ?></textarea>
+                <textarea name="description_oeuvre" class="none_class"><?php echo $this->getDescriptionOeuvre(); ?></textarea>
                 <input type="hidden" name="dimensions" value="<?php echo $this->getDimensions(); ?>"/>
                 <input type="hidden" name="poids" value="<?php echo $this->getPoids(); ?>"/>
                 <input type="hidden" name="type_oeuvre" value="<?php echo $this->getTypeOeuvre(); ?>"/>

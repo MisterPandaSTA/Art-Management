@@ -408,74 +408,73 @@ $(document).ready(function () {
 		var dimensions = $('#n'+id+' input[name="dimensions"]').val();
 		var poids = $('#n'+id+' input[name="poids"]').val();
 		var type_oeuvre = $('#n'+id+' input[name="type_oeuvre"]').val();
-		var description = $('#n'+id+' textarea[name="description"]').val();
+		var date_creation = $('#n'+id+' input[name="date_creation"]').val();
 		
-		$('.nom_artiste').html(nom);
+		
+		$('.nom_oeuvre').html(nom_oeuvre);
 
-		$('#formCreateArtiste').toggle(false);
-		$('#formTradArtiste').toggle(false);
-		$('#formModifArtiste').toggle(true);
+		$('#formCreateOeuvre').toggle(false);
+		$('#formTradOeuvre').toggle(false);
+		$('#formModifOeuvre').toggle(true);
 
-		$("#formModifArtiste input[name='nom']").val(nom);
-		$("#formModifArtiste input[name='prenom']").val(prenom);
-		$("#formModifArtiste input[name='pseudo']").val(pseudo);
-		$("#formModifArtiste input[name='email']").val(email);
-		$("#formModifArtiste input[name='telephone']").val(telephone);
-		$("#formModifArtiste input[name='adresse']").val(adresse);
-		$("#formModifArtiste input[name='activitees']").val(activitees);
-		$("#formModifArtiste textarea[name='description']").val(description);
-		$("#formModifArtiste input[name='id_artiste']").val(id);
+		$("#formModifOeuvre input[name='id_oeuvre']").val(id);
+		$("#formModifOeuvre input[name='nom']").val(nom_oeuvre);
+		$("#formModifOeuvre select[name='id_artiste'] option[value="+nom_artiste+"]").prop('selected', true);
+		$("#formModifOeuvre select[name='livraison'] option[value="+livraison+"]").prop('selected', true);
+		$("#formModifOeuvre input[name='dimensions']").val(dimensions);
+		$("#formModifOeuvre input[name='poids']").val(poids);
+		$("#formModifOeuvre input[name='type_oeuvre']").val(type_oeuvre);
+		$("#formModifOeuvre textarea[name='description_oeuvre']").val(description_oeuvre);
+		$("#formModifOeuvre input[name='date_creation']").val(date_creation);
 	}); 
 });	
 
 $(document).ready(function () {
-	$('.btn_annuler_artiste').click(function () {
-		$('#formModifArtiste').toggle(false);
-		$('#formTradArtiste').toggle(false);
-		$('#formCreateArtiste').toggle(true);
+	$('.btn_annuler_oeuvre').click(function () {
+		$('#formModifOeuvre').toggle(false);
+		$('#formTradOeuvre').toggle(false);
+		$('#formCreateOeuvre').toggle(true);
 	});
 });
 
 $(document).ready(function () {
-	$('#btn_artiste_modif').click(function(){
+	$('#btn_oeuvre_modif').click(function(){
 		
-		var nom = $("#formModifArtiste input[name='nom']").val();
-		var prenom = $("#formModifArtiste input[name='prenom']").val();
-		var pseudo = $("#formModifArtiste input[name='pseudo']").val();
-		var email = $("#formModifArtiste input[name='email']").val();
-		var telephone = $("#formModifArtiste input[name='telephone']").val();
-		var adresse = $("#formModifArtiste input[name='adresse']").val();
-		var activitees = $("#formModifArtiste input[name='activitees']").val();
-		var description = $("#formModifArtiste textarea[name='description']").val();
-		var id_artiste = $("#formModifArtiste input[name='id_artiste']").val();
-		
-		$(".action").val('modifier');
-		var action = $("#formModifArtiste input[name='action']").val();
-		
-
+		var nom = $("#formModifOeuvre input[name='nom']").val();
 		console.log(nom);
-		console.log(prenom);
-		console.log(pseudo);
-		console.log(email);
-		console.log(telephone);	
-		console.log(adresse);
-		console.log(activitees);
-		console.log(description);
+		var id_artiste = $("#formModifOeuvre select[name='id_artiste']").val();
+		console.log(id_artiste);
+		var id_oeuvre = $("#formModifOeuvre select[name='id_oeuvre']").val();
+		console.log(id_oeuvre);
+		var date_creation = $("#formModifOeuvre input[name='date_creation']").val();
+		console.log(date_creation);
+		var type_oeuvre = $("#formModifOeuvre input[name='type_oeuvre']").val();
+		console.log(type_oeuvre);
+		var dimensions = $("#formModifOeuvre input[name='dimensions']").val();
+		console.log(dimensions);	
+		var poids = $("#formModifOeuvre input[name='poids']").val();
+		console.log(poids);
+		var livraison = $("#formModifOeuvre select[name='livraison']").val();
+		console.log(livraison);
+		var description_oeuvre = $("#formModifOeuvre textarea[name='description_oeuvre']").val();
+		console.log(description_oeuvre);
+		$(".action").val('modifier');
+		var action = $("#formModifOeuvre input[name='action']").val();
 		console.log(action);
-		console.log(id_artiste);	
+	
 			$.ajax({
-				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
+				url: "includes/AjaxPhpfunctions/funcModOeuvre.php",
 				method: 'POST',
 				data : {
 						nom : nom,
-						prenom : prenom,
-						pseudo : pseudo,
-						email : email,
-						telephone : telephone,
-						adresse : adresse,
-						activitees : activitees,
-						description : description,
 						id_artiste : id_artiste,
+						date_creation : date_creation,
+						type_oeuvre : type_oeuvre,
+						dimensions : dimensions,
+						poids : poids,
+						livraison : livraison,
+						description_oeuvre : description_oeuvre,
+						id_oeuvre : id_oeuvre,
 						action : action
 						
 					},
@@ -506,7 +505,7 @@ $(document).ready(function () {
 					console.log('Requête Ajax exécutée');
 					
 					
-						document.location.href="http://localhost/git/art_management/admin/artiste.php";
+						document.location.href="http://localhost/git/art_management/admin/oeuvre.php";
 					
 				}
 			});		
