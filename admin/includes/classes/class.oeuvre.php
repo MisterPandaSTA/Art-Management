@@ -15,22 +15,22 @@ class Oeuvre {
 
     function __construct($id=0){
         if($id!=0){
-            $res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  WHERE id_oeuvre='".$id."'");
+            $res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  WHERE id_oeuvre='".addslashes($id)."'");
             /*var_dump($res);*/
-            $user=$res[0];
+            $oeuvre=$res[0];
             
-            $this->nom_artiste=$user['nom_artiste'];
-            $this->id_oeuvre=$user['id_oeuvre'];
-            $this->id_artiste=$user['id_artiste'];
-            $this->nom=$user['nom'];
-            $this->type_oeuvre=$user['type_oeuvre'];
-            $this->dimensions=$user['dimensions'];
-            $this->poids=$user['poids'];
-            $this->description_oeuvre=$user['description_oeuvre'];
-            $this->date_creation=$user['date_creation'];
-            $this->livraison=$user['livraison'];
+            $this->nom_artiste=$oeuvre['nom_artiste'];
+            $this->id_oeuvre=$oeuvre['id_oeuvre'];
+            $this->id_artiste=$oeuvre['id_artiste'];
+            $this->nom=$oeuvre['nom'];
+            $this->type_oeuvre=$oeuvre['type_oeuvre'];
+            $this->dimensions=$oeuvre['dimensions'];
+            $this->poids=$oeuvre['poids'];
+            $this->description_oeuvre=$oeuvre['description_oeuvre'];
+            $this->date_creation=$oeuvre['date_creation'];
+            $this->livraison=$oeuvre['livraison'];
             
-/*var_dump($user);*/
+/*var_dump($oeuvre);*/
         }
 
 
@@ -239,8 +239,8 @@ class Oeuvre {
 
      /* suppression d'une oeuvre*/
 
-    function delete(){
-            $res=sql("DELETE FROM oeuvre WHERE id_oeuvre='".$_GET['id_oeuvre']."'");
+    function delete($id){
+            $res=sql("DELETE FROM oeuvre WHERE id_oeuvre='".addslashes($id)."'");
     }
 
 
@@ -386,7 +386,7 @@ class Oeuvre {
                 <tr>    
                     <td>
                         <a href="#" class="btn btn-warning btn_annuler_oeuvre">annuler</a>
-                        <a href="#" class="btn btn-success" name="submit" value="Modifier">Enregistrer</a>
+                        <a href="#" class="btn btn-success" name="modifier" value="Modifier">Enregistrer</a>
                     </td>
                 </tr>
             </table> 
@@ -439,7 +439,7 @@ class Oeuvre {
                 <input type="hidden" name="id_artiste" value="<?php echo $this->getIdArtiste(); ?>">
             </td>
             <td class="td_livraison"><?php if($this->getLivraison() == 1) {echo "Oui";} else {echo "Non";} ?>
-                <input type="hidden" name="livraison" value="<?php echo $this->getLivraison ?>">
+                <input type="hidden" name="livraison" value="<?php echo $this->getLivraison() ?>">
             </td>
             <td>    
                 <input type="hidden" name="date_creation" value="<?php echo $this->getDateCreation(); ?>"/>

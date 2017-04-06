@@ -205,7 +205,7 @@ class User {
         else{ 
             $res = sql("UPDATE utilisateur set nom = '".addslashes($this->nom)."',
                 prenom = '".addslashes($this->prenom)."',
-                email = '".addslashes($this->email)."' WHERE id_utilisateur='".$id."';");
+                email = '".addslashes($this->email)."' WHERE id_utilisateur='".addslashes($id)."';");
             if($res !== FALSE){
 
                 return TRUE;
@@ -227,7 +227,7 @@ class User {
                 prenom = '".addslashes($this->prenom)."',
                 email = '".addslashes($this->email)."',
                 permission = '".addslashes($this->permission)."' 
-                WHERE id_utilisateur='".$id."';"
+                WHERE id_utilisateur='".addslashes($id)."';"
                 );
             if($res !== FALSE){
                 return TRUE;
@@ -277,7 +277,7 @@ class User {
                         return array($id_user, $prenom, $permission);
                 }    
                 else {
-                        $update = sql("UPDATE utilisateur set password = '".user::hashage($newpass)."' WHERE id_utilisateur='".$id."';");
+                        $update = sql("UPDATE utilisateur set password = '".user::hashage($newpass)."' WHERE id_utilisateur='".addslashes($id)."';");
                 }
             }
             
@@ -299,7 +299,7 @@ class User {
             return FALSE;
         }
         else {
-            $res = sql("UPDATE utilisateur set password = '".user::hashage(default_password)."' WHERE id_utilisateur ='".$id."';");
+            $res = sql("UPDATE utilisateur set password = '".user::hashage(default_password)."' WHERE id_utilisateur ='".addslashes($id)."';");
 
             if($res !== FALSE){
                 return TRUE;
@@ -321,7 +321,7 @@ class User {
             return FALSE;
         }
         else {
-            $res = sql("DELETE FROM utilisateur WHERE id_utilisateur ='".$id."';");
+            $res = sql("DELETE FROM utilisateur WHERE id_utilisateur ='".addslashes($id)."';");
 
             if($res !== FALSE){
                 return TRUE;
