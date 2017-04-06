@@ -3,10 +3,10 @@
 require_once('../classconfig.php');
 
 
-if(isset($_POST['nom']) && ($_POST['prenom']) && ($_POST['email'])) {
+if(isset($_POST['nom_artiste']) && ($_POST['prenom']) && ($_POST['email'])) {
 	
 	$artiste= new artiste();
-	$artiste->setNom($_POST['nom']);
+	$artiste->setNomArtiste($_POST['nom_artiste']);
 	$artiste->setPrenom($_POST['prenom']);
 	$artiste->setPseudo($_POST['pseudo']);
 	$artiste->setEmail($_POST['email']);

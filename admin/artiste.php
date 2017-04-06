@@ -58,6 +58,7 @@ if(isset($_SESSION['id'])){
 							$f = new Artiste($form['id_artiste']);
 							$f->afficheArtisteModif();
 						}
+						
 					?></table>
 				</div>
 			</div>

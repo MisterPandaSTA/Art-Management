@@ -55,6 +55,8 @@ if(isset($_SESSION['id'])) {
 								$f = new Oeuvre($form['id_oeuvre']);
 								$f->afficheOeuvreModif();
 							}
+
+							
 						?>
 						</table>
 					</div>

@@ -15,7 +15,7 @@ class Oeuvre {
 
     function __construct($id=0){
         if($id!=0){
-            $res=sql("SELECT artiste.nom as nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  WHERE id_oeuvre='".addslashes($id)."'");
+            $res=sql("SELECT artiste.nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  WHERE id_oeuvre='".addslashes($id)."'");
             /*var_dump($res);*/
             $oeuvre=$res[0];
             
@@ -140,39 +140,6 @@ class Oeuvre {
         $this->livraison=$livraison;
     }
 
-    /*  formulaire */
-
-    function form($target,$submit='') {
-    ?><form action="<?php echo $target; ?>" method="post">
-    <input type="hidden" name="id_oeuvre" value="<?php echo $this->id_oeuvre; ?>">
-
-    <label for="nom">Nom de l'oeuvre :</label>
-    <input type="text" name="nom" value="<?php echo $this->nom; ?>"><br>
-
-    <label for="type_oeuvre">Type de l'oeuvre :</label>
-    <input type="text" name="type_oeuvre" value="<?= $this->type_oeuvre ?>"><br>
-
-    <label for="dimensions">Dimensions :</label>
-    <input type="text" name="dimensions" value="<?= $this->dimensions ?>"><br>
-
-    <label for="poids">Poids :</label>
-    <input type="text" name="poids" value="<?= $this->poids ?>"><br>
-
-    <label for="description_oeuvre">Description de l'oeuvre :</label>
-    <input type="text" name="description_oeuvre" value="<?= $this->description_oeuvre ?>"><br>
-
-    <label for="date_creation">Date de création :</label>
-    <input type="text" name="date_creation" value="<?= $this->date_creation ?>"><br>
-
-    <label for="livraison">Livraison :</label>
-    <input type="text" name="livraison" value="<?= $this->livraison ?>"><br>
-
-    <input type="submit" value="<?php echo $submit==''?'Envoyer':$submit; ?>">
-
-    </form><?php   
-
-    }
-
     /* insert ou update */
 
    function syncDb() {
@@ -263,17 +230,17 @@ class Oeuvre {
                         <label for="id_artiste">Artiste :</label>
                         <select name="id_artiste" id="id_artiste">
                              <?php
-                            $req= sql("SELECT nom, prenom, id_artiste FROM artiste ");
+                            $req= sql("SELECT nom_artiste, prenom, id_artiste FROM artiste ");
                                      
                             foreach ($req as $donnee) {
-                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].' '.$donnee['prenom'].'</option>';
+                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom_artiste'].' '.$donnee['prenom'].'</option>';
                             }?>
                                          
                         </select> 
                     </td>
                     <td>
                         <label for="date_creation">Date de creation :</label>
-                        <input type="date" name="date_creation" />
+                        <input type="text" name="date_creation" placeholder="jj/mm/aaaa"/>
                     </td>
                 </tr>
                 <tr>
@@ -334,17 +301,17 @@ class Oeuvre {
                         <label for="id_artiste">Artiste :</label>
                         <select name="id_artiste" id="id_artiste">
                             <?php
-                            $req= sql("SELECT nom, prenom, id_artiste FROM artiste ");
+                            $req= sql("SELECT nom_artiste, prenom, id_artiste FROM artiste ");
                                      
                             foreach ($req as $donnee) {
-                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom'].' '.$donnee['prenom'].'</option>';
+                                echo '<option value="'.$donnee['id_artiste'].'">'.$donnee['nom_artiste'].' '.$donnee['prenom'].'</option>';
                             }?>
                                          
                         </select> 
                     </td>
                     <td>
                         <label for="date_creation">Date de creation :</label>
-                        <input type="text" name="date_creation" />
+                        <input type="text" name="date_creation" placeholder="jj/mm/aaaa" />
                     </td>
                 </tr>
                 <tr>
@@ -385,8 +352,16 @@ class Oeuvre {
                 </tr> 
                 <tr>    
                     <td>
+                        <input type="hidden" name="id_oeuvre" value="" />
+                        <input class="action" type="hidden" name="action" value="" />
                         <a href="#" class="btn btn-warning btn_annuler_oeuvre">annuler</a>
-                        <a href="#" class="btn btn-success" name="modifier" value="Modifier">Enregistrer</a>
+                        <a href="#" class="btn btn-success" name="modifier" value="Modifier" id="btn_oeuvre_modif">Enregistrer</a>
+                        <button class="btn_oeuvre_delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Supprimer</button>
+
+                    </td>
+                    <td>
+                        <button class="btn_oeuvre_qrcode btn btn-secondary">Créer QRcode</button>
+                        <div id="imagediv"></div>
                     </td>
                 </tr>
             </table> 
@@ -443,7 +418,7 @@ class Oeuvre {
             </td>
             <td>    
                 <input type="hidden" name="date_creation" value="<?php echo $this->getDateCreation(); ?>"/>
-                <textarea name="description" class="none_class"><?php echo $this->getDescriptionOeuvre(); ?></textarea>
+                <textarea name="description_oeuvre" class="none_class"><?php echo $this->getDescriptionOeuvre(); ?></textarea>
                 <input type="hidden" name="dimensions" value="<?php echo $this->getDimensions(); ?>"/>
                 <input type="hidden" name="poids" value="<?php echo $this->getPoids(); ?>"/>
                 <input type="hidden" name="type_oeuvre" value="<?php echo $this->getTypeOeuvre(); ?>"/>

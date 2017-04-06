@@ -8,7 +8,7 @@ if(isset($_POST['id_artiste'])) {
 
 	if($_POST['action'] == 'modifier' ){
 
-		$artiste->setNom($_POST['nom']);
+		$artiste->setNomArtiste($_POST['nom_artiste']);
 		$artiste->setPrenom($_POST['prenom']);
 		$artiste->setPseudo($_POST['pseudo']);
 		$artiste->setEmail($_POST['email']);

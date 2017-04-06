@@ -29,7 +29,7 @@ class Artiste {
             $res=sql("SELECT * FROM artiste WHERE id_artiste='".$id."'");
             $user=$res[0];
             $this->id_artiste=$user['id_artiste'];
-            $this->nom=$user['nom'];
+            $this->nom_artiste=$user['nom_artiste'];
             $this->prenom=$user['prenom'];
             $this->pseudo=$user['pseudo'];
             $this->email=$user['email'];
@@ -61,14 +61,14 @@ class Artiste {
     	$this->id_artiste=$id_artiste;
     }
 
-    function getNom(){
+    function getNomArtiste(){
 
-    	return $this->nom;
+    	return $this->nom_artiste;
     }
 
-    function setNom($nom){
+    function setNomArtiste($nom_artiste){
 
-    	$this->nom=$nom;
+    	$this->nom=$nom_artiste;
     }
 
     function getPrenom(){
@@ -232,7 +232,7 @@ class Artiste {
         $res = sql("
             SELECT *
             FROM artiste
-            ORDER BY nom 
+            ORDER BY nom_artiste 
             LIMIT ".$startNb.",".$nbElmts." ;"
             );
         /*print_r($res);*/
@@ -326,8 +326,8 @@ class Artiste {
                 </thead>
                 <tr>
                     <td>
-                        <label for="nom">Nom :</label>
-                        <input type="text" name="nom" value="">
+                        <label for="nom_artiste">Nom :</label>
+                        <input type="text" name="nom_artiste" value="">
                     </td>
 
                     <td>
@@ -404,23 +404,23 @@ class Artiste {
                 <tr>
                     <td>
                         <label for="description_anglais">Anglais :</label>
-                        <textarea name="description_anglais" cols="60" rows="3"><?= $this->description_anglais ?></textarea>
+                        <textarea name="description_anglais" cols="60" rows="3"></textarea>
                     </td>
 
                     <td>
                         <label for="description_allemand">Allemand :</label>
-                        <textarea name="description_allemand" cols="60" rows="3"><?= $this->description_allemand ?></textarea>
+                        <textarea name="description_allemand" cols="60" rows="3"></textarea>
                     </td>
                 </tr> 
                 <tr>
                     <td>
                         <label for="description_russe">Russe :</label>
-                        <textarea name="description_russe" cols="60" rows="3"><?= $this->description_russe ?></textarea>
+                        <textarea name="description_russe" cols="60" rows="3"></textarea>
                     </td>
 
                     <td>
                         <label for="description_chinois">Chinois :</label>
-                        <textarea name="description_chinois" cols="60" rows="3"><?= $this->description_chinois ?></textarea> 
+                        <textarea name="description_chinois" cols="60" rows="3"></textarea> 
                     </td>
                 </tr>
             </table>
@@ -469,7 +469,7 @@ class Artiste {
      /* formulaire pour les modifs et les actions */
     function afficheArtisteModif () {
         ?><tr class="afficheArtisteModif"  id="<?php echo "n".$this->getIdArtiste(); ?>">
-            <td class="td_nom"><?php echo $this->getNom(); ?></td>
+            <td class="td_nom"><?php echo $this->getNomArtiste(); ?></td>
             <td class="td_prenom"><?php echo $this->getPrenom(); ?></td>
             <td class="td_pseudo"><?php echo $this->getPseudo(); ?></td>
             <td>    
@@ -506,10 +506,10 @@ class Artiste {
     function syncDb() {
         if(empty($this->id_artiste)){
             //Si $this->id est vide, on fait un INSERT
-            $res= sql("INSERT INTO artiste (id_artiste,nom,prenom,pseudo,email,telephone,adresse,activitees,description,description_anglais,description_allemand,description_russe,description_chinois,activitees_anglais,activitees_allemand,activitees_russe,activitees_chinois)
+            $res= sql("INSERT INTO artiste (id_artiste,nom_artiste,prenom,pseudo,email,telephone,adresse,activitees,description,description_anglais,description_allemand,description_russe,description_chinois,activitees_anglais,activitees_allemand,activitees_russe,activitees_chinois)
                       VALUES (
                       NULL,
-                      '".addslashes($this->nom)."',
+                      '".addslashes($this->nom_artiste)."',
                       '".addslashes($this->prenom)."',
                       '".addslashes($this->pseudo)."',
                       '".addslashes($this->email)."',
@@ -537,7 +537,7 @@ class Artiste {
         else {
             //Sinon on fait un UPDATE
                 $res=sql("UPDATE artiste SET 
-                nom = '".addslashes($this->nom)."',
+                nom_artiste = '".addslashes($this->nom_artiste)."',
                 prenom= '".addslashes($this->prenom)."',
                 pseudo= '".addslashes($this->pseudo)."',
                 email= '".addslashes($this->email)."',
