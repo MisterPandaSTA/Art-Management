@@ -287,7 +287,7 @@ class Oeuvre {
         </form>
 
         <div id="formModifOeuvre" class="none_class">
-            <div class="panel-heading">Modifier de fiche de l'oeuvre <span class="nom_oeuvre"></span></div>
+            <div class="panel-heading">Modifier la fiche de l'oeuvre <span class="nom_oeuvre"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <th colspan="3">Identité de l'oeuvre</th>
@@ -359,9 +359,9 @@ class Oeuvre {
                         <button class="btn_oeuvre_delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Supprimer</button>
 
                     </td>
-                    <td>
+                    <td class="flex">
                         <button class="btn_oeuvre_qrcode btn btn-secondary">Créer QRcode</button>
-                        <div id="imagediv"></div>
+                        <div id="imagediv"><a href="" download></div>
                     </td>
                 </tr>
             </table> 
@@ -423,10 +423,10 @@ class Oeuvre {
                 <input type="hidden" name="poids" value="<?php echo $this->getPoids(); ?>"/>
                 <input type="hidden" name="type_oeuvre" value="<?php echo $this->getTypeOeuvre(); ?>"/>
                 <input class="action" type="hidden" name="action" value="" />
-                <button class="btn_affiche_modifier_oeuvre btn btn-success" name="modifier">Modifier</button>
+                <a class="btn_affiche_modifier_oeuvre btn btn-success" href="#hautpage" name="modifier">Modifier</a>
             </td>
             <td>
-             <button class="btn_affiche_trad_oeuvre btn btn-info" name="traduction">Traduction</button>
+             <a class="btn_affiche_trad_oeuvre btn btn-info" name="traduction" href="hautpage">Traduction</a>
             </td>
           </tr>
     <?php        

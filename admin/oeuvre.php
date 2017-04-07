@@ -9,7 +9,7 @@ if(isset($_SESSION['id'])) {
 	require_once('includes/dashhead.php');
 	?>
 	
-	<section class="container-fluid page_content active">
+	<section id="hautpage" class="container-fluid page_content active">
 		<div class="row cadre">
 			<div class="panel panel-heading">
 				

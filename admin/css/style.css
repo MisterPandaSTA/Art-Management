@@ -424,6 +424,9 @@
   oeuvre.php (gestion des oeuvres)
 -------------------------*/
 
+#img_qrcode {
+  width: 100px;
+}
 
 /*------------------------ 
   exposition.php (gestion des expos)

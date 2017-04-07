@@ -3,7 +3,7 @@
 -------------------------*/
 
 function RedirectLogin(){
-        document.location.href="http://localhost/git/art_management/admin/index.php";
+        document.location.href="index.php";
       }
 
 /*------------------------
@@ -63,7 +63,7 @@ $(document).ready(function () {
 -------------------------*/
 
 function RedirectFirstLogin(){
-        document.location.href="http://localhost/git/art_management/admin/user.php";
+        document.location.href="user.php";
       }
 
 /*------------------------ 
@@ -399,16 +399,16 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	$('.btn_affiche_modifier_oeuvre').click(function (){
-		var id = $(this).parent().parent().attr('id').substr(1);
+		var id_oeuvre = $(this).parent().parent().attr('id').substr(1);
 
-		var nom_oeuvre = $('#n'+id+' .td_nom').html();
-		var nom_artiste = $('#n'+id+' input[name="id_artiste"]').val();
-		var livraison = $('#n'+id+' input[name="livraison"]').val();
-		var description_oeuvre = $('#n'+id+' textarea[name="description_oeuvre"]').val();
-		var dimensions = $('#n'+id+' input[name="dimensions"]').val();
-		var poids = $('#n'+id+' input[name="poids"]').val();
-		var type_oeuvre = $('#n'+id+' input[name="type_oeuvre"]').val();
-		var date_creation = $('#n'+id+' input[name="date_creation"]').val();
+		var nom_oeuvre = $('#n'+id_oeuvre+' .td_nom').html();
+		var nom_artiste = $('#n'+id_oeuvre+' input[name="id_artiste"]').val();
+		var livraison = $('#n'+id_oeuvre+' input[name="livraison"]').val();
+		var description_oeuvre = $('#n'+id_oeuvre+' textarea[name="description_oeuvre"]').val();
+		var dimensions = $('#n'+id_oeuvre+' input[name="dimensions"]').val();
+		var poids = $('#n'+id_oeuvre+' input[name="poids"]').val();
+		var type_oeuvre = $('#n'+id_oeuvre+' input[name="type_oeuvre"]').val();
+		var date_creation = $('#n'+id_oeuvre+' input[name="date_creation"]').val();
 		
 		$('.nom_oeuvre').html(nom_oeuvre);
 
@@ -417,7 +417,7 @@ $(document).ready(function () {
 		$('#formModifOeuvre').toggle(true);
 
 
-		$("#formModifOeuvre input[name='id_oeuvre']").val(id);
+		$("#formModifOeuvre input[name='id_oeuvre']").val(id_oeuvre);
 		$("#formModifOeuvre input[name='nom']").val(nom_oeuvre);
 		$("#formModifOeuvre select[name='id_artiste'] option[value="+nom_artiste+"]").prop('selected', true);
 		$("#formModifOeuvre select[name='livraison'] option[value="+livraison+"]").prop('selected', true);
@@ -426,6 +426,9 @@ $(document).ready(function () {
 		$("#formModifOeuvre input[name='type_oeuvre']").val(type_oeuvre);
 		$("#formModifOeuvre textarea[name='description_oeuvre']").val(description_oeuvre);
 		$("#formModifOeuvre input[name='date_creation']").val(date_creation);
+
+		var img = $('<a href="images/qrcode/QRcode'+id_oeuvre+'.svg" download><img id="img_qrcode" src="images/qrcode/QRcode'+id_oeuvre+'.svg" /></a>'); //Equivalent: $(document.createElement('img'))
+		$( "#imagediv a" ).replaceWith(img);
 
 	}); 
 });	
@@ -703,8 +706,8 @@ $(document).ready(function () {
 				complete : function () {
 					console.log('Requête Ajax exécutée');
 					
-					var img = $('<img id="img_qrcode" src="images/qrcode/'+id_oeuvre+'.png">'); //Equivalent: $(document.createElement('img'))
-						img.appendTo('#imagediv');	
+					var img = $('<a href="images/qrcode/QRcode'+id_oeuvre+'.svg" download><img id="img_qrcode" src="images/qrcode/QRcode'+id_oeuvre+'.svg" /></a>'); //Equivalent: $(document.createElement('img'))
+					$( "#imagediv a" ).replaceWith(img);	
 				}		
 			});	
 	});
@@ -819,13 +822,13 @@ $(document).ready(function () {
 		var activitees = $('#n'+id+' input[name="activitees"]').val();
 		var description = $('#n'+id+' textarea[name="description"]').val();
 		
-		$('.nom_artiste').html(nom);
+		$('.nom_artiste').html(nom_artiste);
 
 		$('#formCreateArtiste').toggle(false);
 		$('#formTradArtiste').toggle(false);
 		$('#formModifArtiste').toggle(true);
 
-		$("#formModifArtiste input[name='nom']").val(nom_artiste);
+		$("#formModifArtiste input[name='nom_artiste']").val(nom_artiste);
 		$("#formModifArtiste input[name='prenom']").val(prenom);
 		$("#formModifArtiste input[name='pseudo']").val(pseudo);
 		$("#formModifArtiste input[name='email']").val(email);
@@ -915,7 +918,7 @@ $(document).ready(function () {
 					console.log('Requête Ajax exécutée');
 					
 					
-						document.location.href="http://localhost/git/art_management/admin/artiste.php";
+						document.location.href="artiste.php";
 					
 				}
 			});		
@@ -966,7 +969,7 @@ $(document).ready(function () {
 					console.log('Requête Ajax exécutée');
 					$('.reset-complet')
 					$(document).click(function (){
-						document.location.href="http://localhost/git/art_management/admin/artiste.php";
+						document.location.href="artiste.php";
 					});	
 				}		
 			});

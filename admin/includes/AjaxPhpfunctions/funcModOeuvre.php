@@ -29,8 +29,24 @@ if(isset($_POST['id_oeuvre'])) {
 
 }
 if($_POST['action'] == 'qrcode') {
-	$qrcode = QRcode::png(' '.$_POST['id_oeuvre'].' ','../../images/qrcode/'.$_POST['id_oeuvre'].'.png'); // creates QR-code
+
+
+
+ 	$tempDir = '../../images/qrcode/'; 
+      
+    $dataText   = 'http://10.22.0.219/rechercher.php?id_oeuvre='.$_POST['id_oeuvre'].' '; 
+    
+    $saveToFile = 'QRcode'.$_POST['id_oeuvre'].'.svg'; 
+     
+    // it is saved to file but also returned from function 
+
+    $back_color = 0xFFFFFF;
+	$fore_color = 0x000000;
+	
+	unlink($tempDir.$saveToFile);
+	
+	$svgCode = QRcode::svg($dataText , $tempDir.$saveToFile, 'h', 20, 1, false, $back_color, $fore_color);
 
 	var_dump($_POST['id_oeuvre']);
-	var_dump($qrcode);
+	var_dump($svgCode);
 	}

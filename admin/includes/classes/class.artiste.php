@@ -3,7 +3,7 @@
 class Artiste {
 
 	private $id_artiste;
-	private $nom;
+	private $nom_artiste;
 	private $prenom;
 	private $pseudo;
 	private $email;
@@ -479,7 +479,7 @@ class Artiste {
                 <input type="hidden" name="activitees" value="<?php echo $this->getActivitees(); ?>"/>
                 <textarea name="description" class="none_class"><?php echo $this->getDescription(); ?></textarea>
                 <input class="action" type="hidden" name="action" value="" />
-                <button class="btn_affiche_modifier_artiste btn btn-success" name="modifier">Modifier</button>
+                <a class="btn_affiche_modifier_artiste btn btn-success" name="modifier" href="#hautpage">Modifier</a>
 
             </td>
             <td>
@@ -491,7 +491,7 @@ class Artiste {
                 <input type="hidden" name="activitees_allemand" value="<?= $this->activitees_allemand ?>"> 
                 <input type="hidden" name="activitees_russe" value="<?= $this->activitees_russe ?>">
                 <input type="hidden" name="activitees_chinois" value="<?= $this->activitees_chinois ?>">
-                <button class="btn_affiche_trad_artiste btn btn-info" name="traduction">Traduction</button>
+                <a class="btn_affiche_trad_artiste btn btn-info" name="traduction" href="#hautpage">Traduction</a>
             </td>
             
         </tr>

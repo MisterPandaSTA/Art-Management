@@ -28,7 +28,7 @@
     $PNG_TEMP_DIR = dirname(__FILE__).DIRECTORY_SEPARATOR.'temp'.DIRECTORY_SEPARATOR;
     
     //html PNG location prefix
-    $PNG_WEB_DIR = '../../images/qrcode/';
+    $PNG_WEB_DIR = 'temp/';
 
     include "qrlib.php";    
     

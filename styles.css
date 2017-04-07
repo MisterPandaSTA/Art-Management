@@ -1,0 +1,35 @@
+.margin_img {
+
+	margin-top: 20px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.margin_text {
+
+	margin-top: 20px;
+	text-align: justify;
+}
+
+.padding-30 {
+
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.container {
+
+	background-color: #e8f7eb;
+}
+
+.bg-success {
+
+	background-color: #c7d6c9;
+}
+
+.titre {
+
+	background-color:#57e16f;
+	color:white;
+	margin-bottom: 30px;
+}
