@@ -12,15 +12,56 @@ if(isset($_SESSION['id'])){
 		?>
 		<section class="container-fluid page_content active">
 		<div class="row cadre">
-			<div class="panel panel-default">Ici il y aura des trucs dans la semaine</div>
+			<div class="panel panel-default">Expositions</div>
+			<?php
+			/*$modif = expositions::listGestion(0, 10);
+						foreach($modif as $form) {
+							$f = new expositions($form['id_artiste']);
+							$f->afficheArtisteModif();
+						}*/
+			?>
 		</div>
+		<div class="double_affichage">
+			<div class="row cadre">
+				<div class="panel panel-default">Artistes</div>
+				<?php
+					/*$modif = Artiste::listGestion(0, 6);
+								foreach($modif as $form) {
+									$f = new Artiste($form['id_artiste']);
+									$f->afficheArtisteDash();
+								}*/
+				?>	
+			</div>
 		<?php
 			if($_SESSION['permission'] == 'admin' )
 			{
-				
-				
+			?><div class="row cadre">
+				<div class="panel panel-default">
+					Utilisateurs
+				</div>
+				<?php
+					/*$modif = User::listGestion(0, 6);
+								foreach($modif as $form) {
+									$f = new User($form['id_utilisateur']);
+									$f->afficheUserDash();
+								}*/
+				?>
+
+			</div>	
+			<?php	
 			}
-		?>	
+		?>
+		</div>
+			<div class="row cadre">
+				<div class="panel panel-default">Oeuvres</div>
+					<?php
+					$modif = Oeuvre::listGestion(0, 6);
+								foreach($modif as $form) {
+									$f = new Oeuvre($form['id_oeuvre']);
+									$f->afficheOeuvreDash();
+								}
+			?>
+			</div>	
 		</section>
 		<?php
 	}

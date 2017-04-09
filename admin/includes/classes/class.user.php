@@ -68,21 +68,27 @@ class User {
         if(empty($this->id_utilisateur)) { /*si je n'ai pas d'id alors je créer une nouvelle entré dans la table avec les informations transmisent dans le formulaire*/
         	/*$hash = user::hashage(default_password);*/
             $check = sql("SELECT email FROM utilisateur WHERE email = '".$this->email."'");
-                if()
-            $res = sql("INSERT INTO utilisateur (`nom`, `prenom`, `email`, `password`, `permission`) 
-                VALUES ('".addslashes($this->nom)."',
-                '".addslashes($this->prenom)."',
-    			'".addslashes($this->email)."',
-    			'".$hash."',
-    			'".addslashes($this->permission)."');");
-            
-    		if($res !== FALSE) /*si ça retourne autre chose que FALSE alors je détermine l'ID et je retour TRUE*/{
-    			$this->id_utilisateur = $res;
-    			return TRUE;
-    		}
-    		else /*Sinon je retourne FALSE*/ {
-    			return FALSE;
-    		}
+                var_dump($check);
+                if(empty($check)){
+                    echo 'c\'est bon';
+                    $res = sql("INSERT INTO utilisateur (`nom`, `prenom`, `email`, `password`, `permission`) 
+                        VALUES ('".addslashes($this->nom)."',
+                        '".addslashes($this->prenom)."',
+            			'".addslashes($this->email)."',
+            			'".$hash."',
+            			'".addslashes($this->permission)."');");
+                        if($res !== FALSE) /*si ça retourne autre chose que FALSE alors je détermine l'ID et je retour TRUE*/{
+                            $this->id_utilisateur = $res;
+                            return TRUE;
+                        }
+                        else /*Sinon je retourne FALSE*/ {
+                            return FALSE;
+                        }
+                }
+                else{
+                    echo 'Email déjà utilisé';
+                }
+    		
     	}
     }
 
@@ -91,11 +97,11 @@ class User {
     function formCreate($target){ /*ceci est le formulaire de création de compte*/
     	?><form id="formCreate" action="<?php echo $target; ?>" method="post">
     		<label for"nom">Nom :</label>
-    		<input type="text" name="nom" />
+    		<input type="text" name="nom" require/>
     		<label for"prenom">Prénom :</label>
-    		<input type="text" name="prenom" />
-    		<label for="email">Email</label>
-			<input type="email" name="email" />
+    		<input type="text" name="prenom" require/>
+    		<label for="email" >Email</label>
+			<input type="email" name="email" require/>
             <label for="permission">Permission</label>
                 <select name="permission" id="permission">
                    <option value="inactif">inactif</option>

@@ -486,5 +486,26 @@ class Oeuvre {
             </td>
           </tr>
     <?php        
-    }        
+    }     
+
+     function afficheOeuvreDash () {
+        ?><tr class="afficheOeuvreDash">
+            <td class="td_nom"><?php echo $this->getNom(); ?></td>
+            <td class="td_artiste"><?php echo $this->getNomArtiste(); ?>
+            </td>
+            <td class="td_livraison"><?php if($this->getLivraison() == 1) {echo "Oui";} else {echo "Non";} ?>
+            </td>
+            <td>    
+                <input type="hidden" name="date_creation" value="<?php echo $this->getDateCreation(); ?>"/>
+                <input type="hidden" name="type_oeuvre" value="<?php echo $this->getTypeOeuvre(); ?>"/>
+                <input class="action" type="hidden" name="action" value="" />
+                <a class="btn_affiche_modifier_oeuvre btn btn-success" href="#hautpage" name="modifier">Modifier</a>
+            </td>
+            <td>
+             <a class="btn_affiche_trad_oeuvre btn btn-info" name="traduction" href="hautpage">Traduction</a>
+            </td>
+        </tr>
+    <?php        
+    }   
+
 }

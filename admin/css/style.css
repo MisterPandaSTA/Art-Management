@@ -48,6 +48,10 @@
     partout.php (partout)
 -------------------------*/
 
+.container-fluid {
+  max-width: 100%;
+}
+
 .page_content
 {
   margin-top: 70px;
@@ -63,6 +67,13 @@
   border-radius: 10px 10px 10px 10px;
 }
 
+table tr td {
+  max-width: 200px;
+}
+
+textarea{
+  max-width: 900px;
+}
 
 /*------------------------ 
   dashboard.php (acceuil)
@@ -424,7 +435,7 @@
   oeuvre.php (gestion des oeuvres)
 -------------------------*/
 
-#img_qrcode , #photo {
+#img_qrcode , #photo{
   width: 100px;
 }
 

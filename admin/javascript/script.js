@@ -854,7 +854,7 @@ $(document).ready(function () {
 		$(".action").val('delete');
 		var action = $('#formModifArtiste input[name="action"]').val();
 		var id_artiste = $('#formModifArtiste input[name="id_artiste"]').val();
-		var nom = $("#formModifArtiste input[name='nom']").val();
+		var nom_artiste = $("#formModifArtiste input[name='nom_artiste']").val();
 		$(".nom_artiste").html(nom);
 		console.log(action);
 		$('#requeteAjaxDelete').click(function (){
@@ -899,7 +899,7 @@ $(document).ready(function () {
 		var activitees_russe = $('#n'+id+' input[name="activitees_russe"]').val();
 		var activitees_chinois = $('#n'+id+' input[name="activitees_chinois"]').val();
 		
-		$('.nom_artiste').html(nom);
+		$('.nom_artiste').html(nom_artiste);
 		
 		$('#formCreateArtiste').toggle(false);
 		$('#formModifArtiste').toggle(false);

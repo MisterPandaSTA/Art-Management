@@ -422,23 +422,23 @@ class Artiste {
                 <tr>
                     <td>
                         <label for="description_anglais">Anglais :</label>
-                        <textarea name="description_anglais" cols="60" rows="3"></textarea>
+                        <textarea name="description_anglais" cols="55" rows="3"></textarea>
                     </td>
 
                     <td>
                         <label for="description_allemand">Allemand :</label>
-                        <textarea name="description_allemand" cols="60" rows="3"></textarea>
+                        <textarea name="description_allemand" cols="55" rows="3"></textarea>
                     </td>
                 </tr> 
                 <tr>
                     <td>
                         <label for="description_russe">Russe :</label>
-                        <textarea name="description_russe" cols="60" rows="3"></textarea>
+                        <textarea name="description_russe" cols="55" rows="3"></textarea>
                     </td>
 
                     <td>
                         <label for="description_chinois">Chinois :</label>
-                        <textarea name="description_chinois" cols="60" rows="3"></textarea> 
+                        <textarea name="description_chinois" cols="55" rows="3"></textarea> 
                     </td>
                 </tr>
             </table>
