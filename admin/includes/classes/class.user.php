@@ -67,7 +67,8 @@ class User {
     function createUser($hash){
         if(empty($this->id_utilisateur)) { /*si je n'ai pas d'id alors je créer une nouvelle entré dans la table avec les informations transmisent dans le formulaire*/
         	/*$hash = user::hashage(default_password);*/
-
+            $check = sql("SELECT email FROM utilisateur WHERE email = '".$this->email."'");
+                if()
             $res = sql("INSERT INTO utilisateur (`nom`, `prenom`, `email`, `password`, `permission`) 
                 VALUES ('".addslashes($this->nom)."',
                 '".addslashes($this->prenom)."',

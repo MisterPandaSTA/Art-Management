@@ -11,6 +11,7 @@ class Artiste {
 	private $adresse;
 	private $activitees;
     private $description;
+    private $img_name;
 	
 	private $description_anglais;
 	private $description_allemand;
@@ -27,25 +28,27 @@ class Artiste {
 	function __construct($id=0){
         if($id!=0){
             $res=sql("SELECT * FROM artiste WHERE id_artiste='".$id."'");
-            $user=$res[0];
-            $this->id_artiste=$user['id_artiste'];
-            $this->nom_artiste=$user['nom_artiste'];
-            $this->prenom=$user['prenom'];
-            $this->pseudo=$user['pseudo'];
-            $this->email=$user['email'];
-            $this->telephone=$user['telephone'];
-            $this->adresse=$user['adresse'];
-            $this->activitees=$user['activitees'];
-            $this->description=$user['description'];
+            $artiste=$res[0];
+            $this->id_artiste=$artiste['id_artiste'];
+            $this->nom_artiste=$artiste['nom_artiste'];
+            $this->prenom=$artiste['prenom'];
+            $this->pseudo=$artiste['pseudo'];
+
+            $this->email=$artiste['email'];
+            $this->telephone=$artiste['telephone'];
+            $this->adresse=$artiste['adresse'];
+            $this->activitees=$artiste['activitees'];
+            $this->description=$artiste['description'];
+            $this->img_name=$artiste['img_name'];
             
-            $this->description_anglais=$user['description_anglais'];
-            $this->description_allemand=$user['description_allemand'];
-            $this->description_russe=$user['description_russe'];
-            $this->description_chinois=$user['description_chinois'];
-            $this->activitees_anglais=$user['activitees_anglais'];
-            $this->activitees_allemand=$user['activitees_allemand'];
-            $this->activitees_russe=$user['activitees_russe'];
-            $this->activitees_chinois=$user['activitees_chinois'];
+            $this->description_anglais=$artiste['description_anglais'];
+            $this->description_allemand=$artiste['description_allemand'];
+            $this->description_russe=$artiste['description_russe'];
+            $this->description_chinois=$artiste['description_chinois'];
+            $this->activitees_anglais=$artiste['activitees_anglais'];
+            $this->activitees_allemand=$artiste['activitees_allemand'];
+            $this->activitees_russe=$artiste['activitees_russe'];
+            $this->activitees_chinois=$artiste['activitees_chinois'];
         }
     }
 
@@ -68,7 +71,7 @@ class Artiste {
 
     function setNomArtiste($nom_artiste){
 
-    	$this->nom=$nom_artiste;
+    	$this->nom_artiste=$nom_artiste;
     }
 
     function getPrenom(){
@@ -139,6 +142,16 @@ class Artiste {
     function setActivitees($activitees){
 
         $this->activitees=$activitees;
+    }
+
+     function getImgName(){
+
+        return $this->img_name;
+    }
+
+    function setImgName($imgName){
+
+        $this->img_name=$imgName;
     }
 
     function getDescriptionAnglais(){
@@ -251,8 +264,8 @@ class Artiste {
                 </thead>
                 <tr>
                     <td>
-                        <label for="nom">Nom :</label>
-                            <input type="text" name="nom" value="">
+                        <label for="nom_artiste">Nom :</label>
+                            <input type="text" name="nom_artiste" value="">
                         </td>
 
                         <td>
@@ -299,7 +312,7 @@ class Artiste {
                     
                     <td>
                         <label for="photo">Photo : </label>
-                        <input type="file" name="photo">
+                        <input type="file" name="photo" accept="image/*">
                     </td>
                 </tr>
                 <tr>
@@ -318,7 +331,7 @@ class Artiste {
             </form>
 
             
-        <div id="formModifArtiste" class="none_class">
+        <form id="formModifArtiste" class="none_class">
             <div class="panel-heading">Modifier fiche artiste de M. <span class="nom_artiste"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
@@ -372,9 +385,14 @@ class Artiste {
                         <input type="text" name="activitees" value="">
                     </td>
                     
-                    <td>
-                        <label for="photo">Photo : </label>
-                        <input type="file" name="photo">
+                    <td class="flex">
+                        <div>
+                            <label for="photo">Changer de photo: </label>
+                            <input type="file" name="photo" accept="image/*">
+                        </div>
+                        <div id="img_actuel">
+                            <img id="photo"/>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -393,9 +411,9 @@ class Artiste {
                     </td> 
                 </tr>
             </table>
+        </form>
 
-        </div>
-        <div id="formTradArtiste" class="none_class">
+        <from id="formTradArtiste" class="none_class">
             <div class="panel-heading">Modifier les traductions de la fiche Artiste de M. <span class="nom_artiste"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
@@ -459,7 +477,7 @@ class Artiste {
                     </td>
                 </tr>
             </table>
-
+        </from>    
 
         <?php
 
@@ -478,6 +496,7 @@ class Artiste {
                 <input type="hidden" name="adresse" value="<?php echo $this->getAdresse(); ?>"/>
                 <input type="hidden" name="activitees" value="<?php echo $this->getActivitees(); ?>"/>
                 <textarea name="description" class="none_class"><?php echo $this->getDescription(); ?></textarea>
+                <input type="hidden" name="photo" value="<?php echo $this->getImgName(); ?>">
                 <input class="action" type="hidden" name="action" value="" />
                 <a class="btn_affiche_modifier_artiste btn btn-success" name="modifier" href="#hautpage">Modifier</a>
 
@@ -506,7 +525,24 @@ class Artiste {
     function syncDb() {
         if(empty($this->id_artiste)){
             //Si $this->id est vide, on fait un INSERT
-            $res= sql("INSERT INTO artiste (id_artiste,nom_artiste,prenom,pseudo,email,telephone,adresse,activitees,description,description_anglais,description_allemand,description_russe,description_chinois,activitees_anglais,activitees_allemand,activitees_russe,activitees_chinois)
+            $res= sql("INSERT INTO artiste (id_artiste,
+                nom_artiste,
+                prenom,
+                pseudo,
+                email,
+                telephone,
+                adresse,
+                activitees,
+                description,
+                img_name,
+                description_anglais,
+                description_allemand,
+                description_russe,
+                description_chinois,
+                activitees_anglais,
+                activitees_allemand,
+                activitees_russe,
+                activitees_chinois)
                       VALUES (
                       NULL,
                       '".addslashes($this->nom_artiste)."',
@@ -517,6 +553,7 @@ class Artiste {
                       '".addslashes($this->adresse)."',
                       '".addslashes($this->activitees)."',
                       '".addslashes($this->description)."',
+                      '".addslashes($this->img_name)."',
                       '".addslashes($this->description_anglais)."',
                       '".addslashes($this->description_allemand)."',
                       '".addslashes($this->description_russe)."',
@@ -545,6 +582,7 @@ class Artiste {
                 adresse = '".addslashes($this->adresse)."',
                 activitees = '".addslashes($this->activitees)."',
                 description = '".addslashes($this->description)."',
+                 img_name = '".addslashes($this->img_name)."',
                 description_anglais = '".addslashes($this->description_anglais)."',
                 description_allemand = '".addslashes($this->description_allemand)."',
                 description_russe = '".addslashes($this->description_russe)."',

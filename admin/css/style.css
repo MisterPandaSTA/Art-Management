@@ -424,7 +424,7 @@
   oeuvre.php (gestion des oeuvres)
 -------------------------*/
 
-#img_qrcode {
+#img_qrcode , #photo {
   width: 100px;
 }
 

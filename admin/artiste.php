@@ -7,6 +7,8 @@ if(isset($_SESSION['id'])){
 	$texte = "Dashboard > Gestion des Artistes";
 	$desc = "Vous pouvez gérer les fiches artistes.";
 	require_once('includes/dashhead.php');
+
+
 	
 	?>
 	<section class="container-fluid page_content active">
@@ -14,7 +16,10 @@ if(isset($_SESSION['id'])){
 			<div class="panel panel-default">
 				
 	<?php
-
+	if(isset($_FILES['photo'])){
+		echo 'ya un truc ici';
+		move_uploaded_file($_FILES['photo']['tmp_name'],'../../images/'.($_POST['nom_artiste']).($_POST['prenom']).'.jpg');
+	}
 					$artiste= new artiste();
 					$artiste->formArtiste('artiste.php');
 	?>

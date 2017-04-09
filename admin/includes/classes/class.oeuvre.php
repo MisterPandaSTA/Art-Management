@@ -4,6 +4,7 @@ class Oeuvre {
     
     private $id_oeuvre;
     private $nom;
+    private $img_name;
     private $type_oeuvre;
     private $dimensions;
     private $poids;
@@ -15,7 +16,7 @@ class Oeuvre {
 
     function __construct($id=0){
         if($id!=0){
-            $res=sql("SELECT artiste.nom_artiste, oeuvre.nom, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  WHERE id_oeuvre='".addslashes($id)."'");
+            $res=sql("SELECT artiste.nom_artiste, oeuvre.nom, oeuvre.img_name, type_oeuvre, oeuvre.id_artiste, id_oeuvre, dimensions, poids, description_oeuvre, date_creation, livraison  FROM oeuvre INNER JOIN artiste ON oeuvre.id_artiste=artiste.id_artiste  WHERE id_oeuvre='".addslashes($id)."'");
             /*var_dump($res);*/
             $oeuvre=$res[0];
             
@@ -23,6 +24,7 @@ class Oeuvre {
             $this->id_oeuvre=$oeuvre['id_oeuvre'];
             $this->id_artiste=$oeuvre['id_artiste'];
             $this->nom=$oeuvre['nom'];
+            $this->img_name=$oeuvre['img_name'];
             $this->type_oeuvre=$oeuvre['type_oeuvre'];
             $this->dimensions=$oeuvre['dimensions'];
             $this->poids=$oeuvre['poids'];
@@ -78,6 +80,16 @@ class Oeuvre {
     function setNomArtiste($nomArtiste){
 
         $this->nom_artiste=$nomArtiste;
+    }
+
+    function getImgName(){
+
+        return $this->img_name;
+    }
+
+    function setImgName($imgName){
+
+        $this->img_name=$imgName;
     }
     
     function getTypeOeuvre(){
@@ -145,12 +157,20 @@ class Oeuvre {
    function syncDb() {
         if(empty($this->id_oeuvre)){
             //Si $this->id est vide, on fait un INSERT
-            $res= sql("INSERT INTO oeuvre (id_oeuvre,id_artiste,nom,type_oeuvre,dimensions,poids,
-                description_oeuvre,date_creation,livraison)
+            $res= sql("INSERT INTO oeuvre (id_oeuvre,
+                id_artiste,
+                nom,
+                type_oeuvre,
+                dimensions,
+                poids,
+                description_oeuvre,
+                date_creation,
+                livraison)
                       VALUES (
                       NULL,
                       '".addslashes($this->id_artiste)."',
                       '".addslashes($this->nom)."',
+                      '".addslashes($this->img_name)."',
                       '".addslashes($this->type_oeuvre)."',
                       '".addslashes($this->dimensions)."',
                       '".addslashes($this->poids)."',
@@ -171,6 +191,7 @@ class Oeuvre {
                 $res=sql("UPDATE oeuvre SET 
                 id_artiste='".addslashes($this->id_artiste)."',
                 nom = '".addslashes($this->nom)."',
+                img_name = '".addslashes($this->img_name)."',
                 type_oeuvre= '".addslashes($this->type_oeuvre)."',
                 dimensions= '".addslashes($this->dimensions)."',
                 poids= '".addslashes($this->poids)."',
@@ -253,6 +274,13 @@ class Oeuvre {
                         <textarea name="description_oeuvre" cols="60"></textarea>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <label for="photo">Photo : </label>
+                        <input type="file" name="photo" accept="image/*" value="">
+                    </td>
+                </tr>
+            </table> 
             <table class="table table-bordered table-striped table-hover ">
                 <thead>
                     <th colspan="3">Données de manutentions</th>
@@ -286,7 +314,7 @@ class Oeuvre {
             </table>    
         </form>
 
-        <div id="formModifOeuvre" class="none_class">
+        <form id="formModifOeuvre" class="none_class">
             <div class="panel-heading">Modifier la fiche de l'oeuvre <span class="nom_oeuvre"></span></div>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
@@ -321,10 +349,16 @@ class Oeuvre {
                     </td>
                     <td>
                         <label for="description_oeuvre">Description de l'oeuvre :</label>
-                        <textarea name="description_oeuvre"></textarea>
+                        <textarea name="description_oeuvre" cols="60"></textarea>
                     </td>
-                        
                 </tr>
+                <tr>
+                    <td>
+                        <label for="photo">Photo : </label>
+                        <input type="file" name="photo" accept="image/*" value="" >
+                    </td>
+                </tr>
+            </table>    
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <th colspan="3">Données de manutentions</th>
@@ -359,13 +393,34 @@ class Oeuvre {
                         <button class="btn_oeuvre_delete btn btn-danger" id="btn-modal" data-toggle= "modal" data-target= ".delete-pass-modal">Supprimer</button>
 
                     </td>
+                </tr>
+            </table> 
+        </form>
+        <form id="qrcode_photo" class="none_class">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <th colspan="2">Qrcode et photo</th>
+                </thead>
+                <tr>    
                     <td class="flex">
-                        <button class="btn_oeuvre_qrcode btn btn-secondary">Créer QRcode</button>
-                        <div id="imagediv"><a href="" download></div>
+                        <div>
+                            <button class="btn_oeuvre_qrcode btn btn-secondary">Créer QRcode</button>
+                        </div>
+
+                        <div id="imagediv"><a href="" download></a></div>
+                    </td>
+                    <td class="flex">
+                        <div>
+                            <label for="photo">Changer de photo: </label>
+                            <input type="file" name="photo" accept="image/*">
+                        </div>
+                        <div id="img_actuel">
+                            <img id="photo"/>
+                        </div>
                     </td>
                 </tr>
             </table> 
-        </div>                       
+        </form>                        
         <?php
     }
 
@@ -419,6 +474,7 @@ class Oeuvre {
             <td>    
                 <input type="hidden" name="date_creation" value="<?php echo $this->getDateCreation(); ?>"/>
                 <textarea name="description_oeuvre" class="none_class"><?php echo $this->getDescriptionOeuvre(); ?></textarea>
+                <input type="hidden" name="photo"accept="image/*" value="<?php echo $this->getImgName(); ?>">
                 <input type="hidden" name="dimensions" value="<?php echo $this->getDimensions(); ?>"/>
                 <input type="hidden" name="poids" value="<?php echo $this->getPoids(); ?>"/>
                 <input type="hidden" name="type_oeuvre" value="<?php echo $this->getTypeOeuvre(); ?>"/>

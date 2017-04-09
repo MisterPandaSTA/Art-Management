@@ -335,13 +335,16 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-	$('#btn_oeuvre_create').click(function(){
+	$('#btn_oeuvre_create').click(function(e){
+		e.preventDefault(e);
 		var nom = $("#formCreateOeuvre input[name='nom']").val();
 		console.log(nom);
 		var id_artiste = $("#formCreateOeuvre select[name='id_artiste']").val();
 		console.log(id_artiste);
 		var date_creation = $("#formCreateOeuvre input[name='date_creation']").val();
 		console.log(date_creation);
+		var img_name = $("#formCreateOeuvre input[name='photo']").val();
+		console.log(img_name);
 		var type_oeuvre = $("#formCreateOeuvre input[name='type_oeuvre']").val();
 		console.log(type_oeuvre);
 		var dimensions = $("#formCreateOeuvre input[name='dimensions']").val();
@@ -359,6 +362,7 @@ $(document).ready(function () {
 						nom : nom,
 						id_artiste : id_artiste,
 						date_creation : date_creation,
+						img_name : img_name,
 						type_oeuvre : type_oeuvre,
 						dimensions : dimensions,
 						poids : poids,
@@ -368,29 +372,13 @@ $(document).ready(function () {
 					},
 				success : function (response) {
 					console.log(response);
-					if(response == 'error' ) {
-						// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
-						alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
-						ajaxResponse = false;
-					}
-					else if (response == 'ok') {
-						// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
-						console.log('Cycle achevé et mis à jours');
-						ajaxResponse = true;
-					}
-					else {
-						// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
-						/*actualCycleId = parseInt(response);
-						ajaxResponse = parseInt(response);*/
-
-						ajaxResponse = parseInt(response,10);
-					}
 				},
 				error: function () {
-					alert('Désolé, une erreur est survenue lors de de la requête ajax');
+					console.log('Désolé, une erreur est survenue lors de de la requête ajax');
 				},
 				complete : function () {
 					console.log('Requête Ajax exécutée');
+					document.location.href="oeuvre.php";
 				}
 			});	
 		
@@ -399,12 +387,14 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	$('.btn_affiche_modifier_oeuvre').click(function (){
+
 		var id_oeuvre = $(this).parent().parent().attr('id').substr(1);
 
 		var nom_oeuvre = $('#n'+id_oeuvre+' .td_nom').html();
 		var nom_artiste = $('#n'+id_oeuvre+' input[name="id_artiste"]').val();
 		var livraison = $('#n'+id_oeuvre+' input[name="livraison"]').val();
 		var description_oeuvre = $('#n'+id_oeuvre+' textarea[name="description_oeuvre"]').val();
+		var img_name = $('#n'+id_oeuvre+' input[name="photo"]').val();
 		var dimensions = $('#n'+id_oeuvre+' input[name="dimensions"]').val();
 		var poids = $('#n'+id_oeuvre+' input[name="poids"]').val();
 		var type_oeuvre = $('#n'+id_oeuvre+' input[name="type_oeuvre"]').val();
@@ -415,12 +405,13 @@ $(document).ready(function () {
 		$('#formCreateOeuvre').toggle(false);
 		$('#formTradOeuvre').toggle(false);
 		$('#formModifOeuvre').toggle(true);
-
+		$('#qrcode_photo').toggle(true);
 
 		$("#formModifOeuvre input[name='id_oeuvre']").val(id_oeuvre);
 		$("#formModifOeuvre input[name='nom']").val(nom_oeuvre);
 		$("#formModifOeuvre select[name='id_artiste'] option[value="+nom_artiste+"]").prop('selected', true);
 		$("#formModifOeuvre select[name='livraison'] option[value="+livraison+"]").prop('selected', true);
+		$("#formCreateOeuvre input[name='photo']").val(img_name);
 		$("#formModifOeuvre input[name='dimensions']").val(dimensions);
 		$("#formModifOeuvre input[name='poids']").val(poids);
 		$("#formModifOeuvre input[name='type_oeuvre']").val(type_oeuvre);
@@ -436,14 +427,15 @@ $(document).ready(function () {
 $(document).ready(function () {
 	$('.btn_annuler_oeuvre').click(function () {
 		$('#formModifOeuvre').toggle(false);
+		$('#qrcode_photo').toggle(false);
 		$('#formTradOeuvre').toggle(false);
 		$('#formCreateOeuvre').toggle(true);
 	});
 });
 
 $(document).ready(function () {
-	$('#btn_oeuvre_modif').click(function(){
-		
+	$('#btn_oeuvre_modif').click(function(e){
+		e.preventDefault();
 		var nom = $("#formModifOeuvre input[name='nom']").val();
 		console.log(nom);
 		var id_artiste = $("#formModifOeuvre select[name='id_artiste']").val();
@@ -454,8 +446,10 @@ $(document).ready(function () {
 		console.log(date_creation);
 		var type_oeuvre = $("#formModifOeuvre input[name='type_oeuvre']").val();
 		console.log(type_oeuvre);
+		var img_name = $("#formCreateOeuvre input[name='photo']").val();
+		console.log(img_name);
 		var dimensions = $("#formModifOeuvre input[name='dimensions']").val();
-		console.log(dimensions);	
+		console.log(dimensions);
 		var poids = $("#formModifOeuvre input[name='poids']").val();
 		console.log(poids);
 		var livraison = $("#formModifOeuvre select[name='livraison']").val();
@@ -474,6 +468,7 @@ $(document).ready(function () {
 						id_artiste : id_artiste,
 						date_creation : date_creation,
 						type_oeuvre : type_oeuvre,
+						img_name : img_name,
 						dimensions : dimensions,
 						poids : poids,
 						livraison : livraison,
@@ -484,32 +479,15 @@ $(document).ready(function () {
 					},
 				success : function (response) {
 					console.log(response);
-					if(response == 'error' ) {
-						// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
-						alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
-						ajaxResponse = false;
-					}
-					else if (response == 'ok') {
-						// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
-						console.log('Cycle achevé et mis à jours');
-						ajaxResponse = true;
-					}
-					else {
-						// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
-						/*actualCycleId = parseInt(response);
-						ajaxResponse = parseInt(response);*/
-
-						ajaxResponse = parseInt(response,10);
-					}
 				},
 				error: function () {
-					alert('Désolé, une erreur est survenue lors de de la requête ajax');
+					console.log('Désolé, une erreur est survenue lors de de la requête ajax');
 				},
 				complete : function () {
 					console.log('Requête Ajax exécutée');
 					
 					
-						document.location.href="http://localhost/git/art_management/admin/oeuvre.php";
+					document.location.href="oeuvre.php";
 					
 				}
 			});		
@@ -518,49 +496,32 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-	$(".btn_artiste_delete").click(function (){
+	$(".btn_oeuvre_delete").click(function (){
 		$(".action").val('delete');
-		var action = $('#formModifArtiste input[name="action"]').val();
-		var id_artiste = $('#formModifArtiste input[name="id_artiste"]').val();
-		var nom = $("#formModifArtiste input[name='nom']").val();
+		var action = $('#formModifOeuvre input[name="action"]').val();
+		var id_artiste = $('#formModifOeuvre input[name="id_oeuvre"]').val();
+		var nom = $("#formModifOeuvre input[name='nom']").val();
 		$(".nom_artiste").html(nom);
 		console.log(action);
 		$('#requeteAjaxDelete').click(function (){
 			$.ajax({
-				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
+				url: "includes/AjaxPhpfunctions/funcModOeuvre.php",
 				method: 'POST',
 				data: {
-						id_artiste : id_artiste,
+						id_oeuvre : id_oeuvre,
 						action : action
 				},
 				success : function (response) {
 						console.log(response);
-						if(response == 'error' ) {
-							// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
-							alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
-							ajaxResponse = false;
-						}
-						else if (response == 'ok') {
-							// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
-							console.log('Cycle achevé et mis à jours');
-							ajaxResponse = true;
-						}
-						else {
-							// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
-							/*actualCycleId = parseInt(response);
-							ajaxResponse = parseInt(response);*/
-
-							ajaxResponse = parseInt(response,10);
-						}
 				},
 				error: function () {
-					alert('Désolé, une erreur est survenue lors de de la requête ajax');
+					console.log('Désolé, une erreur est survenue lors de de la requête ajax');
 				},
 				complete : function () {
 					console.log('Requête Ajax exécutée');
 					$('.reset-complet')
 					$(document).click(function (){
-						document.location.href="http://localhost/git/art_management/admin/artiste.php";
+						document.location.href="oeuvre.php";
 					});	
 				}		
 			});
@@ -569,7 +530,7 @@ $(document).ready(function () {
 	});
 });
 
-$(document).ready(function () {
+/*$(document).ready(function () {
 	$('.btn_affiche_trad_artiste').click(function (){
 		var id = $(this).parent().parent().attr('id').substr(1);
 
@@ -647,7 +608,7 @@ $(document).ready(function () {
 							// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
 							/*actualCycleId = parseInt(response);
 							ajaxResponse = parseInt(response);*/
-
+/*
 							ajaxResponse = parseInt(response,10);
 						}
 				},
@@ -662,7 +623,7 @@ $(document).ready(function () {
 				}		
 		});
 	});
-});
+});*/
 
 $(document).ready(function () {
 	$(".btn_oeuvre_qrcode").click(function (){
@@ -682,23 +643,6 @@ $(document).ready(function () {
 				},
 				success : function (response) {
 						console.log(response);
-						if(response == 'error' ) {
-							// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
-							alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
-							ajaxResponse = false;
-						}
-						else if (response == 'ok') {
-							// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
-							console.log('Cycle achevé et mis à jours');
-							ajaxResponse = true;
-						}
-						else {
-							// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
-							/*actualCycleId = parseInt(response);
-							ajaxResponse = parseInt(response);*/
-
-							ajaxResponse = parseInt(response,10);
-						}
 				},
 				error: function () {
 					alert('Désolé, une erreur est survenue lors de de la requête ajax');
@@ -746,10 +690,10 @@ $(document).ready(function () {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------
 -------------------------*/
-$(document).ready(function () {
+/*$(document).ready(function () {
 	$('#btn_artiste_create').click(function(){
 		var nom_artiste = $("#formCreateArtiste input[name='nom_artiste']").val();
-		console.log(nom);
+		console.log(nom_artiste);
 		var prenom = $("#formCreateArtiste input[name='prenom']").val();
 		console.log(prenom);
 		var pseudo = $("#formCreateArtiste input[name='pseudo']").val();
@@ -764,6 +708,8 @@ $(document).ready(function () {
 		console.log(activitees);
 		var description = $("#formCreateArtiste textarea[name='description']").val();
 		console.log(description);
+		var img_name = $("#formCreateArtiste input[name='photo']").val();
+		console.log(img_name);
 			$.ajax({
 				url: "includes/AjaxPhpfunctions/funcCreateArtiste.php",
 				method: 'POST',
@@ -775,28 +721,12 @@ $(document).ready(function () {
 						telephone : telephone,
 						adresse : adresse,
 						activitees : activitees,
-						description : description
+						description : description,
+						img_name : img_name
 						
 					},
 				success : function (response) {
 					console.log(response);
-					if(response == 'error' ) {
-						// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
-						alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
-						ajaxResponse = false;
-					}
-					else if (response == 'ok') {
-						// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
-						console.log('Cycle achevé et mis à jours');
-						ajaxResponse = true;
-					}
-					else {
-						// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
-						/*actualCycleId = parseInt(response);
-						ajaxResponse = parseInt(response);*/
-
-						ajaxResponse = parseInt(response,10);
-					}
 				},
 				error: function () {
 					alert('Désolé, une erreur est survenue lors de de la requête ajax');
@@ -806,6 +736,35 @@ $(document).ready(function () {
 				}
 			});	
 		
+	});
+});*/
+
+$(document).ready(function () {
+	$('#btn_artiste_create').click(function(e){
+		e.preventDefault();
+		var form = $('#formCreateArtiste').get(0);
+		var formData = new FormData(form);// get the form data
+		// on envoi formData vers mail.php
+		$.ajax({
+			type		: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+			url		: 'includes/AjaxPhpfunctions/funcCreateArtiste.php', // the url where we want to POST
+			data		: formData, // our data object
+			dataType	: 'json', // what type of data do we expect back from the server
+			processData: false,
+			contentType: false,
+			success : function (response) {
+				console.log(response);
+			},
+			error: function () {
+				console.log('Désolé, une erreur est survenue lors de de la requête ajax');
+			},
+			complete : function () {
+				console.log('Requête Ajax exécutée');
+
+				document.location.href="artiste.php";
+			}
+
+		});
 	});
 });
 
@@ -821,8 +780,13 @@ $(document).ready(function () {
 		var adresse = $('#n'+id+' input[name="adresse"]').val();
 		var activitees = $('#n'+id+' input[name="activitees"]').val();
 		var description = $('#n'+id+' textarea[name="description"]').val();
-		
+		var img_name = $('#n'+id+' input[name="photo"]').val();
+
+		console.log(img_name);
+
 		$('.nom_artiste').html(nom_artiste);
+		var img = $('<img id="photo" src="images/artiste/'+img_name+'" />'); //Equivalent: $(document.createElement('img'))
+		$("#img_actuel #photo").replaceWith(img);
 
 		$('#formCreateArtiste').toggle(false);
 		$('#formTradArtiste').toggle(false);
@@ -837,6 +801,10 @@ $(document).ready(function () {
 		$("#formModifArtiste input[name='activitees']").val(activitees);
 		$("#formModifArtiste textarea[name='description']").val(description);
 		$("#formModifArtiste input[name='id_artiste']").val(id);
+		$("#formCreateArtiste input[name='photo']").val(photo);
+
+		
+
 	}); 
 });	
 
@@ -848,80 +816,35 @@ $(document).ready(function () {
 	});
 });
 
+
+
 $(document).ready(function () {
-	$('#btn_artiste_modif').click(function(){
-		
-		var nom_artiste = $("#formModifArtiste input[name='nom_artiste']").val();
-		var prenom = $("#formModifArtiste input[name='prenom']").val();
-		var pseudo = $("#formModifArtiste input[name='pseudo']").val();
-		var email = $("#formModifArtiste input[name='email']").val();
-		var telephone = $("#formModifArtiste input[name='telephone']").val();
-		var adresse = $("#formModifArtiste input[name='adresse']").val();
-		var activitees = $("#formModifArtiste input[name='activitees']").val();
-		var description = $("#formModifArtiste textarea[name='description']").val();
-		var id_artiste = $("#formModifArtiste input[name='id_artiste']").val();
-		
+	$('#btn_artiste_modif').click(function(e){
+		e.preventDefault();
 		$(".action").val('modifier');
-		var action = $("#formModifArtiste input[name='action']").val();
-		
+		var form = $('#formModifArtiste').get(0);
+		var formData = new FormData(form);// get the form data
+		// on envoi formData vers mail.php
+		$.ajax({
+			type		: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+			url		: 'includes/AjaxPhpfunctions/funcModArtiste.php', // the url where we want to POST
+			data		: formData, // our data object
+			dataType	: 'json', // what type of data do we expect back from the server
+			processData: false,
+			contentType: false,
+			success : function (response) {
+				console.log(response);
+			},
+			error: function () {
+				console.log('Désolé, une erreur est survenue lors de de la requête ajax');
+			},
+			complete : function () {
+				console.log('Requête Ajax exécutée');
 
-		console.log(nom_artiste);
-		console.log(prenom);
-		console.log(pseudo);
-		console.log(email);
-		console.log(telephone);	
-		console.log(adresse);
-		console.log(activitees);
-		console.log(description);
-		console.log(action);
-		console.log(id_artiste);	
-			$.ajax({
-				url: "includes/AjaxPhpfunctions/funcModArtiste.php",
-				method: 'POST',
-				data : {
-						nom_artiste : nom_artiste,
-						prenom : prenom,
-						pseudo : pseudo,
-						email : email,
-						telephone : telephone,
-						adresse : adresse,
-						activitees : activitees,
-						description : description,
-						id_artiste : id_artiste,
-						action : action
-						
-					},
-				success : function (response) {
-					console.log(response);
-					if(response == 'error' ) {
-						// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
-						alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
-						ajaxResponse = false;
-					}
-					else if (response == 'ok') {
-						// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
-						console.log('Cycle achevé et mis à jours');
-						ajaxResponse = true;
-					}
-					else {
-						// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
-						/*actualCycleId = parseInt(response);
-						ajaxResponse = parseInt(response);*/
+				document.location.href="artiste.php";
+			}
 
-						ajaxResponse = parseInt(response,10);
-					}
-				},
-				error: function () {
-					alert('Désolé, une erreur est survenue lors de de la requête ajax');
-				},
-				complete : function () {
-					console.log('Requête Ajax exécutée');
-					
-					
-						document.location.href="artiste.php";
-					
-				}
-			});		
+		});
 	});
 });
 
@@ -944,23 +867,7 @@ $(document).ready(function () {
 				},
 				success : function (response) {
 						console.log(response);
-						if(response == 'error' ) {
-							// le code PHP retourne 'error', c'est-à-dire que la requête SQL ne s'est pas exécuté correctement 
-							alert('Désolé, une erreur est survenue lors de l\'enregistrement du cycle en base de données');
-							ajaxResponse = false;
-						}
-						else if (response == 'ok') {
-							// si on reçoit ok, nous étions alors en mode 'done' et tout s'est bien déroulé 
-							console.log('Cycle achevé et mis à jours');
-							ajaxResponse = true;
-						}
-						else {
-							// Dans le dernier cas, nous devons recevons l'id du cycle nouvellement créé. Nous l'attrinuons à la variable actualCycleId sous forme d'entier
-							/*actualCycleId = parseInt(response);
-							ajaxResponse = parseInt(response);*/
-
-							ajaxResponse = parseInt(response,10);
-						}
+						
 				},
 				error: function () {
 					alert('Désolé, une erreur est survenue lors de de la requête ajax');
