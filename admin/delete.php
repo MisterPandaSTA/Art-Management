@@ -1,4 +1,4 @@
-<?php
+<?php	
 
 require_once('includes/classconfig.php');
 
@@ -11,14 +11,22 @@ if($_SESSION['id']){
 	
 	<section class="container-fluid page_content active">
 		<div class="row cadre">
-		
-	<?php
-		/*Oeuvre::affichage();*/
-		$exposition=new Exposition();
-		$exposition->affichage();
 
+	<!-- contenue -->
+
+
+		<?php
+
+		if(isset($_GET['id_exposition'])) {
+			$exposition = new Exposition($_GET['id_exposition']);
+			$exposition->delete();
+
+			
+		}
+
+		header("location:exposition.php");
 	?>
-		</div>
+	</div>
 	<?php
 	if($_SESSION['permission'] == 'inactif'){
 		$texte = "Dashboard > type";
@@ -50,3 +58,6 @@ else {
 	require_once('footer.php');
 
 ?>
+
+
+

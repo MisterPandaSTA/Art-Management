@@ -1,4 +1,5 @@
-<?php
+
+<?php	
 
 require_once('includes/classconfig.php');
 
@@ -11,14 +12,31 @@ if($_SESSION['id']){
 	
 	<section class="container-fluid page_content active">
 		<div class="row cadre">
-		
-	<?php
-		/*Oeuvre::affichage();*/
-		$exposition=new Exposition();
-		$exposition->affichage();
 
+	<?php
+
+		if(isset($_GET['id_exposition'])) {
+			$exposition = new Exposition($_GET['id_exposition']);
+			$exposition->form('modifier.php','mettre à jour');
+		}
+
+		if(isset($_POST['theme']) && $_POST['theme'] != '' && $_POST['id_exposition'] !='') {
+
+			$exposition = new Exposition($_POST['id_exposition']);
+			$exposition->setIdArtiste($_POST['id_artiste']);
+			$exposition->setTheme($_POST['theme']);
+			$exposition->setDateDebut($_POST['date_debut']);
+			$exposition->setDateFin($_POST['date_fin']);
+			
+			
+
+			$update=$exposition->syncDb();
+
+
+			if ($update==TRUE) {header("location:exposition.php");}
+		}
 	?>
-		</div>
+	</div>
 	<?php
 	if($_SESSION['permission'] == 'inactif'){
 		$texte = "Dashboard > type";
@@ -50,3 +68,4 @@ else {
 	require_once('footer.php');
 
 ?>
+

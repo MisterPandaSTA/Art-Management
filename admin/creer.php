@@ -11,14 +11,31 @@ if($_SESSION['id']){
 	
 	<section class="container-fluid page_content active">
 		<div class="row cadre">
-		
 	<?php
-		/*Oeuvre::affichage();*/
-		$exposition=new Exposition();
-		$exposition->affichage();
+	if(empty($_GET['id_exposition'])){
+		$exposition= new Exposition();
+		$exposition->form('creer.php','creer fiche');
+	}
+
+	if(isset($_POST['theme'])) {
+
+		$exposition->setIdArtiste($_POST['id_artiste']);
+		$exposition->setDateDebut($_POST['date_debut']);
+		$exposition->setDateFin($_POST['date_fin']);
+		$exposition->setTheme(addslashes($_POST['theme']));
+		
+
+
+
+		$insert=$exposition->syncDb();
+		
+		if ($insert==TRUE) {header("location:exposition.php");}
+	}
+
+
 
 	?>
-		</div>
+	</div>
 	<?php
 	if($_SESSION['permission'] == 'inactif'){
 		$texte = "Dashboard > type";
@@ -50,3 +67,4 @@ else {
 	require_once('footer.php');
 
 ?>
+

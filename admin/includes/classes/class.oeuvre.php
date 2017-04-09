@@ -274,12 +274,6 @@ class Oeuvre {
                         <textarea name="description_oeuvre" cols="60"></textarea>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <label for="photo">Photo : </label>
-                        <input type="file" name="photo" accept="image/*" value="">
-                    </td>
-                </tr>
             </table> 
             <table class="table table-bordered table-striped table-hover ">
                 <thead>
@@ -306,7 +300,11 @@ class Oeuvre {
                         </select>
                     </td>
                 </tr>  
-                <tr>    
+                <tr>
+                    <td>
+                        <label for="photo">Photo : </label>
+                        <input type="file" name="photo" accept="image/*" value="">
+                    </td>    
                     <td>
                         <input id="btn_oeuvre_create" class="btn btn-primary" type="submit" name="submit" value="Créer" />
                     </td>

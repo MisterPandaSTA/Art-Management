@@ -1,4 +1,4 @@
-<?php
+<?php	
 
 require_once('includes/classconfig.php');
 
@@ -11,14 +11,17 @@ if($_SESSION['id']){
 	
 	<section class="container-fluid page_content active">
 		<div class="row cadre">
-		
+
 	<?php
-		/*Oeuvre::affichage();*/
-		$exposition=new Exposition();
-		$exposition->affichage();
+
+
+		$exposition=new Exposition($_GET['id_exposition']);
+		echo 'Nom de l\'artiste : '.$exposition->getNomArtiste().'<br> thème de l\'exposition : '.$exposition->getTheme().'<br> Date de début : 
+		'.$exposition->getDateDebut().'<br> Date de fin : '.$exposition->getDateFin().'<br>';  
+
 
 	?>
-		</div>
+	</div>
 	<?php
 	if($_SESSION['permission'] == 'inactif'){
 		$texte = "Dashboard > type";
@@ -50,3 +53,4 @@ else {
 	require_once('footer.php');
 
 ?>
+
