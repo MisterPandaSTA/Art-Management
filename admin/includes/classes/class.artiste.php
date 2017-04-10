@@ -610,7 +610,29 @@ class Artiste {
             $res=sql("DELETE FROM artiste WHERE id_artiste='".$id_artiste."'");
     }
 
+    static function listGestionDash($startNb=0, $nbElmts=6){ /*ceci est la liste des formulaires de modification des comptes*/
+        $res = sql("
+            SELECT *
+            FROM artiste
+            ORDER BY id_artiste DESC
+            LIMIT ".$startNb.",".$nbElmts." ;"
+            );
+        /*print_r($res);*/
+        return $res;
+    }
 
+    function afficheArtisteDash () {
+        ?><tr class="afficheOeuvreDash">
+            <td><?php echo $this->getNomArtiste(); ?></td>
+            <td><?php echo $this->getPrenom(); ?>
+                </td>
+            <td><?php echo $this->getPseudo(); ?></td>  
 
-
+            <td><?php echo $this->getEmail(); ?></td>
+            <td><?php echo $this->getActivitees(); ?></td>
+                    
+        </tr>
+           
+    <?php        
+    }   
 }

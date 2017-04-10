@@ -34,7 +34,7 @@ if(isset($_SESSION['id'])) {
 							</thead>
 							<?php
 							
-							$modif = Oeuvre::listGestion(0, 10);
+							$modif = Oeuvre::listGestion(0, 10, 'nom');
 							foreach($modif as $form) {
 								$f = new Oeuvre($form['id_oeuvre']);
 								$f->afficheOeuvreModif();

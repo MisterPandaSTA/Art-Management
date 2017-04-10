@@ -179,5 +179,27 @@ class Exposition {
             $res=sql("DELETE FROM exposition WHERE id_exposition='".addslashes($_GET['id_exposition'])."'");
     }
 
+    static function listGestionDash($startNb=0, $nbElmts=6){ /*ceci est la liste des formulaires de modification des comptes*/
+        $res = sql("
+            SELECT *
+            FROM exposition
+            ORDER BY id_exposition DESC
+            LIMIT ".$startNb.",".$nbElmts." ;"
+            );
+        /*print_r($res);*/
+        return $res;
+    }
 
+    function afficheExpositionDash () {
+        ?><tr class="afficheOeuvreDash">
+            <td><?php echo $this->getTheme(); ?>
+                </td>
+            <td><?php echo $this->getNomArtiste(); ?></td>
+            <td><?= $this->date_debut ?></td>  
+
+            <td><?= $this->date_fin ?></td>                  
+        </tr>
+           
+    <?php        
+    }   
 }

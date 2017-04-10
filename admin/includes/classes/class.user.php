@@ -339,4 +339,28 @@ class User {
         }
     }
 
+    static function listGestionDash($startNb=0, $nbElmts=6){ /*ceci est la liste des formulaires de modification des comptes*/
+        $res = sql("
+            SELECT *
+            FROM utilisateur
+            ORDER BY id_utilisateur DESC
+            LIMIT ".$startNb.",".$nbElmts." ;"
+            );
+        /*print_r($res);*/
+        return $res;
+    }
+
+    function afficheUtilisateurDash () {
+        ?><tr class="afficheOeuvreDash">
+            <td><?php echo $this->getNom(); ?></td>
+            <td><?php echo $this->getPrenom(); ?>
+                </td>
+            <td><?php echo $this->getEmail(); ?></td>  
+
+            <td><?php echo $this->getPermission(); ?></td>       
+        </tr>
+           
+    <?php        
+    }
+
 }

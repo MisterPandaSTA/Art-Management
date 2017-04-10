@@ -12,55 +12,86 @@ if(isset($_SESSION['id'])){
 		?>
 		<section class="container-fluid page_content active">
 		<div class="row cadre">
-			<div class="panel panel-default">Expositions</div>
+			<div class="panel panel-default"><a href="oeuvre.php" class='btn btn-primary'>Gestion des Expositions</a></div>
+				<table class="table table-bordered table-striped table-hover">
+            		<thead>
+                		<th>Thème</th>
+                		<th>Artiste</th>
+                		<th>Date de Début</th>
+                		<th>Date de fin</th>
+            		</thead>
 			<?php
-			/*$modif = expositions::listGestion(0, 10);
+			$modif = exposition::listGestionDash(0, 5);
 						foreach($modif as $form) {
-							$f = new expositions($form['id_artiste']);
-							$f->afficheArtisteModif();
-						}*/
+							$f = new exposition($form['id_exposition']);
+							$f->afficheExpositionDash();
+						}
 			?>
+			</table>
 		</div>
 		<div class="double_affichage">
 			<div class="row cadre">
-				<div class="panel panel-default">Artistes</div>
+				<div class="panel panel-default"><a href="oeuvre.php" class='btn btn-primary'>Gestion des Artistes</a></div>
+				<table class="table table-bordered table-striped table-hover">
+            		<thead>
+                		<th>Nom</th>
+                		<th>Prenom</th>
+                		<th>Pseudo</th>
+                		<th>Email</th>
+                		<th>Activitées</th>
+            		</thead>
 				<?php
-					/*$modif = Artiste::listGestion(0, 6);
+					$modif = Artiste::listGestionDash(0, 5);
 								foreach($modif as $form) {
 									$f = new Artiste($form['id_artiste']);
 									$f->afficheArtisteDash();
-								}*/
-				?>	
+								}
+				?>
+				</table>	
 			</div>
 		<?php
 			if($_SESSION['permission'] == 'admin' )
 			{
 			?><div class="row cadre">
-				<div class="panel panel-default">
-					Utilisateurs
-				</div>
+				<div class="panel panel-default"><a href="oeuvre.php" class='btn btn-primary'>Gestion des Utilisateurs</a></div>
+				<table class="table table-bordered table-striped table-hover">
+            		<thead>
+                		<th>Nom</th>
+                		<th>Prenom</th>
+                		<th>Email</th>
+                		<th>Permission</th>
+            		</thead>
 				<?php
-					/*$modif = User::listGestion(0, 6);
+					$modif = User::listGestion(0, 5);
 								foreach($modif as $form) {
 									$f = new User($form['id_utilisateur']);
-									$f->afficheUserDash();
-								}*/
+									$f->afficheUtilisateurDash();
+								}
 				?>
-
+				</table>
 			</div>	
 			<?php	
 			}
 		?>
 		</div>
 			<div class="row cadre">
-				<div class="panel panel-default">Oeuvres</div>
+				<div class="panel panel-default"><a href="oeuvre.php" class='btn btn-primary'>Gestion des Oeuvres</a></div>
+				<table class="table table-bordered table-striped table-hover">
+            		<thead>
+                		<th>Nom de l'oeuvre</th>
+                		<th>Artiste</th>
+                		<th>livraison</th>
+                		<th>date de création</th>
+                		<th>type d'oeuvre</th>
+            		</thead>
 					<?php
-					$modif = Oeuvre::listGestion(0, 6);
+					$modif = Oeuvre::listGestionDash(0, 5);
 								foreach($modif as $form) {
 									$f = new Oeuvre($form['id_oeuvre']);
 									$f->afficheOeuvreDash();
 								}
 			?>
+				</table>
 			</div>	
 		</section>
 		<?php
